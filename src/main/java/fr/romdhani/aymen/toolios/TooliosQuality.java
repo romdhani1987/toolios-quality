@@ -26,7 +26,7 @@ public class TooliosQuality {
 
             UserAccount userAccount = (UserAccount) session.createQuery(
                     "from UserAccount").list().get(0);
-
+            System.out.println("Persisted UserAccount: " + userAccount.getComputers());
             Computer computer = new Computer();
             computer.setName("Goujon");
             computer.setOs("Unix");
@@ -46,7 +46,7 @@ public class TooliosQuality {
         List<UserAccount> userss = application.getAllUserAccounts();
         System.out.println("List of all persisted users >>>");
         for (UserAccount user : userss) {
-            System.out.println("Persisted UserAccount: " + user.toString());
+            System.out.println("Persisted UserAccount: " + user.getComputers());
         }
 
         /*

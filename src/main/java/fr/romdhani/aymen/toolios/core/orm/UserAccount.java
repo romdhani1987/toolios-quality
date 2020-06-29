@@ -355,6 +355,14 @@ public class UserAccount implements Serializable {
         }
     }
 
+    public List<Computer> getComputers() {
+        return computers;
+    }
+
+    public void setComputers(List<Computer> computers) {
+        this.computers = computers;
+    }
+
     public String toString() {
         return String.valueOf(getId());
     }
