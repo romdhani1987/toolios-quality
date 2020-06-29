@@ -4,10 +4,8 @@ import java.util.List;
 
 import fr.romdhani.aymen.toolios.core.orm.Computer;
 import fr.romdhani.aymen.toolios.core.orm.UserAccount;
-import fr.romdhani.aymen.toolios.dal.ExecutionContext;
+import fr.romdhani.aymen.toolios.core.dal.ExecutionContext;
 import org.hibernate.Session;
-
-import org.hibernate.Transaction;
 
 /**
  * Class used to perform CRUD operation on database with Hibernate API's
