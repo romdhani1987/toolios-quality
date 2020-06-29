@@ -3,6 +3,7 @@ package fr.romdhani.aymen.toolios.core.orm;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -78,6 +79,9 @@ public class UserAccount implements Serializable {
     @org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})
     @JoinColumns(value = {@JoinColumn(name = "group_id", referencedColumnName = "id")})
     private fr.romdhani.aymen.toolios.core.orm.UserGroup group;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userAccount")
+    private List<Computer> computers;
 
     @ManyToMany(targetEntity = fr.romdhani.aymen.toolios.core.orm.UserOrder.class)
     @org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})

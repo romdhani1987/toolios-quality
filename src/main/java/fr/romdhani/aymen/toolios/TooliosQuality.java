@@ -2,35 +2,43 @@ package fr.romdhani.aymen.toolios;
 
 import java.util.List;
 
+import fr.romdhani.aymen.toolios.core.orm.Computer;
 import fr.romdhani.aymen.toolios.core.orm.UserAccount;
 import fr.romdhani.aymen.toolios.dal.ExecutionContext;
 import org.hibernate.Session;
 
-import fr.romdhani.aymen.toolios.core.orm.Student;
 import org.hibernate.Transaction;
 
 /**
  * Class used to perform CRUD operation on database with Hibernate API's
  */
-public class HibernateStandAloneDemo {
+public class TooliosQuality {
 
     @SuppressWarnings("unused")
     public static void main(String[] args) {
 
-        HibernateStandAloneDemo application = new HibernateStandAloneDemo();
+        TooliosQuality application = new TooliosQuality();
+
 
         /*
          * Save few objects with hibernate
          */
         ExecutionContext executionContext = ExecutionContext.getInstance();
         executionContext.tryInTransaction(session -> {
-            System.out.println("test");
-            UserAccount userAccount = new UserAccount();
-            userAccount.setF_name("aymen");
-            userAccount.setL_name("romdhani");
-            userAccount.setLogin("aromdhani");
-            session.save(userAccount);
+
+
+
+            Computer computer = new Computer();
+            computer.setName("Goujon");
+            computer.setOs("Windows");
+            computer.setRam("8 Gbyte");
+            computer.setShifting(false);
+
+
+            session.save(computer);
+
         });
+
 
         /*
          * Retrieve all saved objects
@@ -38,7 +46,7 @@ public class HibernateStandAloneDemo {
         List<UserAccount> students = application.getAllUserAccounts();
         System.out.println("List of all persisted users >>>");
         for (UserAccount student : students) {
-            System.out.println("Persisted UserAccount :" + student);
+            System.out.println("Persisted UserAccount: " + student.toString());
         }
 
         /*

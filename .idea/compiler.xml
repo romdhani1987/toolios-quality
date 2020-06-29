@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="toolios" target="1.5" />
+      <module name="toolios" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>
