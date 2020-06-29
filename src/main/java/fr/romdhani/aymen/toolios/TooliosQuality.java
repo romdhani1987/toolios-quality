@@ -26,15 +26,17 @@ public class TooliosQuality {
         ExecutionContext executionContext = ExecutionContext.getInstance();
         executionContext.tryInTransaction(session -> {
 
-
+            UserAccount userAccount = (UserAccount) session.createQuery(
+                    "from UserAccount").list().get(0);
 
             Computer computer = new Computer();
             computer.setName("Goujon");
-            computer.setOs("Windows");
+            computer.setOs("Unix");
             computer.setRam("8 Gbyte");
             computer.setShifting(false);
+            computer.setUserAccount(userAccount);
 
-
+            session.save(userAccount);
             session.save(computer);
 
         });
@@ -43,10 +45,10 @@ public class TooliosQuality {
         /*
          * Retrieve all saved objects
          */
-        List<UserAccount> students = application.getAllUserAccounts();
+        List<UserAccount> userss = application.getAllUserAccounts();
         System.out.println("List of all persisted users >>>");
-        for (UserAccount student : students) {
-            System.out.println("Persisted UserAccount: " + student.toString());
+        for (UserAccount user : userss) {
+            System.out.println("Persisted UserAccount: " + user.toString());
         }
 
         /*
@@ -67,38 +69,6 @@ public class TooliosQuality {
         for (UserAccount userAccount : remaingStudents) {
             System.out.println("Persisted UserAccount :" + userAccount);
         }
-    }
-
-    /**
-     * This method saves an user  object in database
-     */
-    public int saveUserAccount(String firstName, String lastName, String login) {
-        Transaction tx = null;
-        Session session = null;
-        try {
-            // create session
-            session = HibernateUtil.getSessionFactory().openSession();
-            tx = session.beginTransaction();
-            UserAccount student = new UserAccount();
-            student.setF_name(firstName);
-            student.setL_name(lastName);
-            student.setLogin(login);
-            session.save(student);
-            // do something
-            if (!tx.wasCommitted()) {
-                tx.commit();
-            }
-        } catch (Exception exp) {
-            tx.rollback();
-            // close session
-            try {
-                if (session != null && session.isOpen()) session.close();
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-            return -1;
-        }
-        return 1;
     }
 
     /**
