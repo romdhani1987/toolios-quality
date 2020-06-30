@@ -6,14 +6,14 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MenuToolbar extends JToolBar {
+public class TooliosMenubar extends JMenuBar {
     private List<JMenu> listMenu = new ArrayList<>();
 
-    public MenuToolbar(List<JMenu> listMenu) {
+    public TooliosMenubar(List<JMenu> listMenu) {
         this.listMenu = listMenu;
     }
 
-    public MenuToolbar() {
+    public TooliosMenubar() {
         super();
         initComponents();
         validateMenu();
@@ -32,7 +32,6 @@ public class MenuToolbar extends JToolBar {
         listMenu.add(settingsFile);
         JMenu menuHelp = new JMenu("Help");
         listMenu.add(menuHelp);
-
     }
 
     public void validateMenu() {
