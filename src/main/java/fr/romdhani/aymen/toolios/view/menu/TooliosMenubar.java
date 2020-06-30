@@ -22,10 +22,10 @@ public class TooliosMenubar extends JMenuBar {
     }
 
     public void initComponents() {
-        JMenu menuConnection = new JMenu("Connection");
-        listMenu.add(menuConnection);
         JMenu menuFile = new JMenu("File");
         listMenu.add(menuFile);
+        JMenu menuConnection = new JMenu("Connection");
+        listMenu.add(menuConnection);
         JMenu settingsFile = new JMenu("Settings");
         listMenu.add(settingsFile);
         JMenu menuHelp = new JMenu("Help");

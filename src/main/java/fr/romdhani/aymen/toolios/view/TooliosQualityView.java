@@ -38,6 +38,8 @@ public class TooliosQualityView extends JFrame {
         getContentPane().add(easTPanel, BorderLayout.EAST);
         getContentPane().add(westPanel, BorderLayout.WEST);
         getContentPane().add(footerPanel, BorderLayout.SOUTH);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setDefaultLookAndFeelDecorated(true);
     }
 
     public MainPanel getMainPanel() {
