@@ -1,7 +1,5 @@
 package fr.romdhani.aymen.toolios.view.menu;
 
-import net.miginfocom.swing.MigLayout;
-
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
