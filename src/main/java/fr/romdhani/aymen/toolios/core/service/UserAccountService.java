@@ -2,6 +2,7 @@ package fr.romdhani.aymen.toolios.core.service;
 
 import fr.romdhani.aymen.toolios.core.dal.UserAccountDao;
 import fr.romdhani.aymen.toolios.core.orm.UserAccount;
+
 import java.util.List;
 
 public class UserAccountService {

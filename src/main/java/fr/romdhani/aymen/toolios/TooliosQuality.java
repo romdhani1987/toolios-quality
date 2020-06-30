@@ -1,12 +1,9 @@
 package fr.romdhani.aymen.toolios;
 
-import java.util.List;
-
-import fr.romdhani.aymen.toolios.core.orm.Computer;
 import fr.romdhani.aymen.toolios.core.orm.UserAccount;
-import fr.romdhani.aymen.toolios.core.dal.ExecutionContext;
 import fr.romdhani.aymen.toolios.core.service.UserAccountService;
-import org.hibernate.Session;
+
+import java.util.List;
 
 /**
  * Class used to perform CRUD operation on database with Hibernate API's

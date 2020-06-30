@@ -1,8 +1,6 @@
 package fr.romdhani.aymen.toolios.core.service;
 
-import fr.romdhani.aymen.toolios.core.dal.ComputerDao;
 import fr.romdhani.aymen.toolios.core.dal.ScreenDao;
-import fr.romdhani.aymen.toolios.core.orm.Computer;
 import fr.romdhani.aymen.toolios.core.orm.Screen;
 
 import java.util.List;
@@ -53,6 +51,7 @@ public class ScreenService {
         screenDao.deleteAll();
         screenDao.closeCurrentSessionwithTransaction();
     }
+
     public ScreenDao screenDao() {
         return screenDao;
     }
