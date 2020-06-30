@@ -1,4 +1,4 @@
-package fr.romdhani.aymen.toolios;
+package fr.romdhani.aymen.toolios.utils;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;

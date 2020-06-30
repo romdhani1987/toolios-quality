@@ -1,7 +1,7 @@
 package fr.romdhani.aymen.toolios.core.dal;
 
 
-import fr.romdhani.aymen.toolios.HibernateUtil;
+import fr.romdhani.aymen.toolios.utils.HibernateUtil;
 import fr.romdhani.aymen.toolios.core.orm.UserAccount;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
