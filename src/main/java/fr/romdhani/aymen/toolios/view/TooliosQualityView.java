@@ -1,4 +1,7 @@
 package fr.romdhani.aymen.toolios.view;
 
-public class TooliosQualityView {
+import javax.swing.*;
+
+public class TooliosQualityView extends JFrame {
+
 }
