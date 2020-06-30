@@ -30,7 +30,7 @@ public class TooliosQuality {
         */
         System.out.println("*** Start Toolios-Quality ***");
         TooliosQualityView tooliosQualityView = new TooliosQualityView("Toolios-Quality");
-        tooliosQualityView.setPreferredSize(new Dimension(800, 600));
+        tooliosQualityView.setPreferredSize(new Dimension(1024, 800));
         tooliosQualityView.pack();
         tooliosQualityView.setVisible(true);
     }
