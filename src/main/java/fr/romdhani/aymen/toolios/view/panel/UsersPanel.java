@@ -1,6 +1,7 @@
 package fr.romdhani.aymen.toolios.view.panel;
 
 
+import fr.romdhani.aymen.toolios.controller.UserController;
 import fr.romdhani.aymen.toolios.view.buttons.TooliosButton;
 import fr.romdhani.aymen.toolios.view.table.model.UserModelObject;
 import net.miginfocom.swing.MigLayout;
@@ -15,6 +16,7 @@ public class UsersPanel extends JPanel {
     private TooliosButton editButton;
     private TooliosButton removeButton;
     private TooliosButton updateButton;
+    private UserController userController;
 
     private void initComponents() {
         setLayout(new MigLayout());
@@ -33,8 +35,9 @@ public class UsersPanel extends JPanel {
         this.add(buttonsPanel, "grow,span,push");
     }
 
-    public UsersPanel() {
+    public UsersPanel(UserController userController) {
         super();
+        this.userController = userController;
         initComponents();
     }
 

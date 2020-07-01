@@ -1,5 +1,7 @@
 package fr.romdhani.aymen.toolios.view.panel;
 
+import fr.romdhani.aymen.toolios.controller.UserController;
+import fr.romdhani.aymen.toolios.core.service.UserAccountService;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -10,7 +12,6 @@ public class MainPanel extends JPanel {
     private ScreensPanel screensPanel;
     private UsersPanel usersPanel;
     private OthersEquipementPanel othersEquipementPanel;
-
     public MainPanel() {
         super();
         initComponents();
@@ -21,7 +22,8 @@ public class MainPanel extends JPanel {
         tabbedPane = new JTabbedPane();
         computersPanel = new ComputersPanel();
         screensPanel = new ScreensPanel();
-        usersPanel = new UsersPanel();
+        UserAccountService userAccountService = new UserAccountService();
+        usersPanel = new UserController(userAccountService).getUsersPanel();
         othersEquipementPanel = new OthersEquipementPanel();
         tabbedPane.add("Users", usersPanel);
         tabbedPane.add("Computers", computersPanel);
