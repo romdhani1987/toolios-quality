@@ -1,5 +1,7 @@
 package fr.romdhani.aymen.toolios.view.panel;
 
+import net.miginfocom.swing.MigLayout;
+
 import javax.swing.*;
 
 public class MainPanel extends JPanel {
@@ -15,16 +17,17 @@ public class MainPanel extends JPanel {
     }
 
     private void initComponents() {
+        setLayout(new MigLayout());
         tabbedPane = new JTabbedPane();
         computersPanel = new ComputersPanel();
         screensPanel = new ScreensPanel();
         usersPanel = new UsersPanel();
         othersEquipementPanel = new OthersEquipementPanel();
-        add("Users", usersPanel);
-        add("Computers", computersPanel);
-        add("Screens", screensPanel);
-        add("other equipments", othersEquipementPanel);
-        add(tabbedPane);
+        tabbedPane.add("Users", usersPanel);
+        tabbedPane.add("Computers", computersPanel);
+        tabbedPane.add("Screens", screensPanel);
+        tabbedPane.add("Other equipments", othersEquipementPanel);
+        add(tabbedPane, "grow,span, push");
     }
 
     public JTabbedPane getTabbedPane() {
