@@ -3,6 +3,7 @@ package fr.romdhani.aymen.toolios.view.panel;
 
 import fr.romdhani.aymen.toolios.controller.UserController;
 import fr.romdhani.aymen.toolios.view.buttons.TooliosButton;
+import fr.romdhani.aymen.toolios.view.dialog.NewUserDialog;
 import fr.romdhani.aymen.toolios.view.table.model.UserModelObject;
 import net.miginfocom.swing.MigLayout;
 
@@ -23,6 +24,9 @@ public class UsersPanel extends JPanel {
         userModelObject = new UserModelObject();
         usersTable = new JTable(userModelObject);
         addButton = new TooliosButton("Add");
+        addButton.addActionListener(e -> {
+            addUser();
+        });
         editButton = new TooliosButton("Edit");
         removeButton = new TooliosButton("Remove");
         updateButton = new TooliosButton("Update");
@@ -33,6 +37,12 @@ public class UsersPanel extends JPanel {
         buttonsPanel.add(updateButton);
         this.add(new JScrollPane(usersTable), "grow,span, push");
         this.add(buttonsPanel, "grow,span,push");
+    }
+
+    private void addUser() {
+        JDialog userDialog = new NewUserDialog();
+        userDialog.pack();
+        userDialog.setVisible(true);
     }
 
     public UsersPanel(UserController userController) {
