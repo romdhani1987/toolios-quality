@@ -1,11 +1,8 @@
 package fr.romdhani.aymen.toolios;
 
-import fr.romdhani.aymen.toolios.core.orm.UserAccount;
-import fr.romdhani.aymen.toolios.core.service.UserAccountService;
 import fr.romdhani.aymen.toolios.view.TooliosQualityView;
 
 import java.awt.*;
-import java.util.List;
 
 /**
  * Class used to perform CRUD operation on database with Hibernate API's

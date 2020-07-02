@@ -1,18 +1,22 @@
 package fr.romdhani.aymen.toolios.view.menu;
 
+import fr.romdhani.aymen.toolios.controller.MenuController;
+
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TooliosMenubar extends JMenuBar {
     private List<JMenu> listMenu = new ArrayList<>();
+    private MenuController menuController;
 
     public TooliosMenubar(List<JMenu> listMenu) {
         this.listMenu = listMenu;
     }
 
-    public TooliosMenubar() {
+    public TooliosMenubar(MenuController menuController) {
         super();
+        this.menuController = menuController;
         initComponents();
         validateMenu();
     }
@@ -27,6 +31,7 @@ public class TooliosMenubar extends JMenuBar {
         menuFile.add(openMenuItem);
         JMenuItem closeMenuItem = new JMenuItem("Exit");
         menuFile.add(closeMenuItem);
+        closeMenuItem.addActionListener(e -> close());
         JMenuItem exportMenuItem = new JMenuItem("Export");
         menuFile.add(exportMenuItem);
         JMenuItem saveAsMenuItem = new JMenuItem("Save as");
@@ -42,6 +47,10 @@ public class TooliosMenubar extends JMenuBar {
         JMenuItem helpMenuItem = new JMenuItem("?");
         menuHelp.add(helpMenuItem);
         listMenu.add(menuHelp);
+    }
+
+    private void close() {
+        menuController.close();
     }
 
     public void validateMenu() {

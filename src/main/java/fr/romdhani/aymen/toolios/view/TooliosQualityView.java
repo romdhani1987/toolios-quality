@@ -1,7 +1,11 @@
 package fr.romdhani.aymen.toolios.view;
 
+import fr.romdhani.aymen.toolios.controller.MenuController;
 import fr.romdhani.aymen.toolios.view.menu.TooliosMenubar;
-import fr.romdhani.aymen.toolios.view.panel.*;
+import fr.romdhani.aymen.toolios.view.panel.EasTPanel;
+import fr.romdhani.aymen.toolios.view.panel.FooterPanel;
+import fr.romdhani.aymen.toolios.view.panel.MainPanel;
+import fr.romdhani.aymen.toolios.view.panel.WestPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,7 +32,8 @@ public class TooliosQualityView extends JFrame {
     }
 
     private void initComponents() {
-        menuToolbar = new TooliosMenubar();
+        MenuController menuController = new MenuController();
+        menuToolbar = menuController.getTooliosMenubar();
         mainPanel = new MainPanel();
         footerPanel = new FooterPanel();
         easTPanel = new EasTPanel();

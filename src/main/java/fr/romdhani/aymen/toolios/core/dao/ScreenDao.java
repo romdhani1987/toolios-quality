@@ -1,9 +1,9 @@
 package fr.romdhani.aymen.toolios.core.dao;
 
 
-import fr.romdhani.aymen.toolios.utils.HibernateUtil;
 import fr.romdhani.aymen.toolios.core.orm.Computer;
 import fr.romdhani.aymen.toolios.core.orm.Screen;
+import fr.romdhani.aymen.toolios.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
