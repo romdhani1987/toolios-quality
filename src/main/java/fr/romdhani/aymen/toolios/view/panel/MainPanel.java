@@ -23,13 +23,17 @@ public class MainPanel extends JPanel {
     private void initComponents() {
         setLayout(new MigLayout());
         tabbedPane = new JTabbedPane();
+        // users
+        UserAccountService userAccountService = new UserAccountService();
+        usersPanel = new UserController(userAccountService).getUsersPanel();
+        // computers
         ComputerService computerService = new ComputerService();
         ComputerController computerController = new ComputerController(computerService);
         computersPanel = computerController.getComputersPanel();
+        //Screens
         screensPanel = new ScreensPanel();
-        UserAccountService userAccountService = new UserAccountService();
-        usersPanel = new UserController(userAccountService).getUsersPanel();
         othersEquipementPanel = new OthersEquipementPanel();
+        // others Equipements
         tabbedPane.add("Users", usersPanel);
         tabbedPane.add("Computers", computersPanel);
         tabbedPane.add("Screens", screensPanel);
