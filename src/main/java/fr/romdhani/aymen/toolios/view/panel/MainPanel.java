@@ -28,12 +28,11 @@ public class MainPanel extends JPanel {
         usersPanel = new UserController(userAccountService).getUsersPanel();
         // computers
         ComputerService computerService = new ComputerService();
-        ComputerController computerController = new ComputerController(computerService);
-        computersPanel = computerController.getComputersPanel();
+        computersPanel = new ComputerController(computerService).getComputersPanel();
         //Screens
         screensPanel = new ScreensPanel();
         othersEquipementPanel = new OthersEquipementPanel();
-        // others Equipements
+        // other Equipments
         tabbedPane.add("Users", usersPanel);
         tabbedPane.add("Computers", computersPanel);
         tabbedPane.add("Screens", screensPanel);
