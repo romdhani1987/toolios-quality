@@ -37,22 +37,12 @@ public class ComputerDao implements DaoInterface<Computer, String> {
         return currentSession;
     }
 
-    public void persist(UserAccount entity) {
+    public void persist(Computer entity) {
         getCurrentSession().save(entity);
     }
 
-    public void update(UserAccount entity) {
-        getCurrentSession().update(entity);
-    }
-
-    @Override
-    public void persist(Computer entity) {
-
-    }
-
-    @Override
     public void update(Computer entity) {
-
+        getCurrentSession().update(entity);
     }
 
     public Computer findById(String id) {
@@ -60,12 +50,7 @@ public class ComputerDao implements DaoInterface<Computer, String> {
         return computer;
     }
 
-    @Override
     public void delete(Computer entity) {
-
-    }
-
-    public void delete(UserAccount entity) {
         getCurrentSession().delete(entity);
     }
 
