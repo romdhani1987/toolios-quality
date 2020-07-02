@@ -1,9 +1,9 @@
 package fr.romdhani.aymen.toolios.core.service;
 
-import fr.romdhani.aymen.toolios.core.dal.ComputerDao;
+import fr.romdhani.aymen.toolios.core.dao.ComputerDao;
 import fr.romdhani.aymen.toolios.core.orm.Computer;
-
 import java.util.List;
+
 
 public class ComputerService {
 
@@ -14,45 +14,45 @@ public class ComputerService {
     }
 
     public void persist(Computer entity) {
-        computerDao.openCurrentSessionwithTransaction();
+        computerDao.getSessionwithTransaction();
         computerDao.persist(entity);
-        computerDao.closeCurrentSessionwithTransaction();
+        computerDao.commitTransaction();
     }
 
     public void update(Computer entity) {
-        computerDao.openCurrentSessionwithTransaction();
+        computerDao.getSessionwithTransaction();
         computerDao.update(entity);
-        computerDao.closeCurrentSessionwithTransaction();
+        computerDao.commitTransaction();
     }
 
     public Computer findById(String id) {
-        computerDao.openCurrentSession();
+        computerDao.getSessionwithTransaction();
         Computer computer = computerDao.findById(id);
-        computerDao.closeCurrentSession();
+        computerDao.commitTransaction();
         return computer;
     }
 
     public void delete(String id) {
-        computerDao.openCurrentSessionwithTransaction();
+        computerDao.getSessionwithTransaction();
         Computer computer = computerDao.findById(id);
         computerDao.delete(computer);
-        computerDao.closeCurrentSessionwithTransaction();
+        computerDao.commitTransaction();
     }
 
     public List<Computer> findAll() {
-        computerDao.openCurrentSession();
+        computerDao.getSessionwithTransaction();
         List<Computer> computers = computerDao.findAll();
-        computerDao.closeCurrentSession();
+        computerDao.commitTransaction();
         return computers;
     }
 
     public void deleteAll() {
-        computerDao.openCurrentSessionwithTransaction();
+        computerDao.getSessionwithTransaction();
         computerDao.deleteAll();
-        computerDao.closeCurrentSessionwithTransaction();
+        computerDao.commitTransaction();
     }
 
-    public ComputerDao computerDao () {
+    public ComputerDao computerDao() {
         return computerDao;
     }
 }

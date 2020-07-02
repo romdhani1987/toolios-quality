@@ -1,4 +1,4 @@
-package fr.romdhani.aymen.toolios.core.dal;
+package fr.romdhani.aymen.toolios.core.dao;
 
 import java.io.Serializable;
 import java.util.List;

@@ -1,4 +1,4 @@
-package fr.romdhani.aymen.toolios.core.dal;
+package fr.romdhani.aymen.toolios.core.dao;
 
 import fr.romdhani.aymen.toolios.utils.HibernateUtil;
 import org.hibernate.Session;

@@ -1,9 +1,9 @@
 package fr.romdhani.aymen.toolios.core.service;
 
-import fr.romdhani.aymen.toolios.core.dal.UserAccountDao;
+import fr.romdhani.aymen.toolios.core.dao.UserAccountDao;
 import fr.romdhani.aymen.toolios.core.orm.UserAccount;
-
 import java.util.List;
+
 
 public class UserAccountService {
 
@@ -14,42 +14,42 @@ public class UserAccountService {
     }
 
     public void persist(UserAccount entity) {
-        userAccountDao.openCurrentSessionwithTransaction();
+        userAccountDao.getSessionwithTransaction();
         userAccountDao.persist(entity);
-        userAccountDao.closeCurrentSessionwithTransaction();
+        userAccountDao.commitTransaction();
     }
 
     public void update(UserAccount entity) {
-        userAccountDao.openCurrentSessionwithTransaction();
+        userAccountDao.getSessionwithTransaction();
         userAccountDao.update(entity);
-        userAccountDao.closeCurrentSessionwithTransaction();
+        userAccountDao.commitTransaction();
     }
 
     public UserAccount findById(String id) {
-        userAccountDao.openCurrentSession();
+        userAccountDao.getSessionwithTransaction();
         UserAccount userAccount = userAccountDao.findById(id);
-        userAccountDao.closeCurrentSession();
+        userAccountDao.commitTransaction();
         return userAccount;
     }
 
     public void delete(String id) {
-        userAccountDao.openCurrentSessionwithTransaction();
+        userAccountDao.getSessionwithTransaction();
         UserAccount userAccount = userAccountDao.findById(id);
         userAccountDao.delete(userAccount);
-        userAccountDao.closeCurrentSessionwithTransaction();
+        userAccountDao.commitTransaction();
     }
 
     public List<UserAccount> findAll() {
-        userAccountDao.openCurrentSession();
+        userAccountDao.getSessionwithTransaction();
         List<UserAccount> users = userAccountDao.findAll();
-        userAccountDao.closeCurrentSession();
+        userAccountDao.commitTransaction();
         return users;
     }
 
     public void deleteAll() {
-        userAccountDao.openCurrentSessionwithTransaction();
+        userAccountDao.getSessionwithTransaction();
         userAccountDao.deleteAll();
-        userAccountDao.closeCurrentSessionwithTransaction();
+        userAccountDao.commitTransaction();
     }
 
     public UserAccountDao UserAccountDao() {

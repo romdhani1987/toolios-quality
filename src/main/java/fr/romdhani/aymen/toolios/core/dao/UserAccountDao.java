@@ -1,13 +1,12 @@
-package fr.romdhani.aymen.toolios.core.dal;
+package fr.romdhani.aymen.toolios.core.dao;
 
-
-import fr.romdhani.aymen.toolios.utils.HibernateUtil;
 import fr.romdhani.aymen.toolios.core.orm.UserAccount;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import java.util.List;
+
+import static fr.romdhani.aymen.toolios.utils.HibernateUtil.getSession;
 
 
 public class UserAccountDao implements DaoInterface<UserAccount, String> {
@@ -19,44 +18,19 @@ public class UserAccountDao implements DaoInterface<UserAccount, String> {
     public UserAccountDao() {
     }
 
-    public Session openCurrentSession() {
-        currentSession = getSessionFactory().openSession();
-        return currentSession;
-    }
-
-    public Session openCurrentSessionwithTransaction() {
-        currentSession = getSessionFactory().openSession();
+    public Session getSessionwithTransaction() {
+        currentSession = getSession();
         currentTransaction = currentSession.beginTransaction();
         return currentSession;
     }
 
-    public void closeCurrentSession() {
-        currentSession.close();
-    }
-
-    public void closeCurrentSessionwithTransaction() {
+    public void commitTransaction() {
         currentTransaction.commit();
-        currentSession.close();
-    }
-
-    private static SessionFactory getSessionFactory() {
-        return HibernateUtil.getSessionFactory();
     }
 
     public Session getCurrentSession() {
+        currentSession = getSession();
         return currentSession;
-    }
-
-    public void setCurrentSession(Session currentSession) {
-        this.currentSession = currentSession;
-    }
-
-    public Transaction getCurrentTransaction() {
-        return currentTransaction;
-    }
-
-    public void setCurrentTransaction(Transaction currentTransaction) {
-        this.currentTransaction = currentTransaction;
     }
 
     public void persist(UserAccount entity) {

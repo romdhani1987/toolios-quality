@@ -1,8 +1,9 @@
-package fr.romdhani.aymen.toolios.core.dal;
+package fr.romdhani.aymen.toolios.core.dao;
 
 
 import fr.romdhani.aymen.toolios.utils.HibernateUtil;
 import fr.romdhani.aymen.toolios.core.orm.Computer;
+import fr.romdhani.aymen.toolios.core.orm.Screen;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -10,13 +11,13 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 
-public class ComputerDao implements DaoInterface<Computer, String> {
+public class ScreenDao implements DaoInterface<Screen, String> {
 
     private Session currentSession;
 
     private Transaction currentTransaction;
 
-    public ComputerDao() {
+    public ScreenDao() {
     }
 
     public Session openCurrentSession() {
@@ -59,34 +60,34 @@ public class ComputerDao implements DaoInterface<Computer, String> {
         this.currentTransaction = currentTransaction;
     }
 
-    public void persist(Computer entity) {
+    public void persist(Screen entity) {
         getCurrentSession().save(entity);
     }
 
-    public void update(Computer entity) {
+    public void update(Screen entity) {
         getCurrentSession().update(entity);
     }
 
     @Override
-    public Computer findById(String id) {
-        Computer computer = (Computer) getCurrentSession().get(Computer.class, id);
-        return computer;
+    public Screen findById(String id) {
+        Screen screen = (Screen) getCurrentSession().get(Computer.class, id);
+        return screen;
     }
 
-    public void delete(Computer entity) {
+    public void delete(Screen entity) {
         getCurrentSession().delete(entity);
     }
 
     @SuppressWarnings("unchecked")
-    public List<Computer> findAll() {
-        List<Computer> computers = (List<Computer>) getCurrentSession().createQuery("from Computer").list();
-        return computers;
+    public List<Screen> findAll() {
+        List<Screen> screens = (List<Screen>) getCurrentSession().createQuery("from Screen").list();
+        return screens;
     }
 
     @Override
     public void deleteAll() {
-        List<Computer> entityList = findAll();
-        for (Computer entity : entityList) {
+        List<Screen> entityList = findAll();
+        for (Screen entity : entityList) {
             delete(entity);
         }
     }
