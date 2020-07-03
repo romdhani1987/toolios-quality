@@ -2,6 +2,7 @@ package fr.romdhani.aymen.toolios.view.panel;
 
 
 import fr.romdhani.aymen.toolios.controller.UserController;
+import fr.romdhani.aymen.toolios.core.orm.UserAccount;
 import fr.romdhani.aymen.toolios.view.buttons.TooliosButton;
 import fr.romdhani.aymen.toolios.view.dialog.NewUserDialog;
 import fr.romdhani.aymen.toolios.view.table.model.UserModelObject;
@@ -40,10 +41,14 @@ public class UsersPanel extends JPanel {
     }
 
     private void addUser() {
-        JDialog userDialog = new NewUserDialog();
+        NewUserDialog userDialog = new NewUserDialog();
         userDialog.setModal(true);
         userDialog.setLocationRelativeTo(null);
         userDialog.setVisible(true);
+        if (userDialog.getUserAccountSupplierValid().get() != null) {
+            UserAccount user = userDialog.getUserAccountSupplierValid().get();
+            System.out.println(user.toString());
+        }
     }
 
     public UsersPanel(UserController userController) {

@@ -363,9 +363,13 @@ public class UserAccount implements Serializable {
         this.computers = computers;
     }
 
+    @Override
     public String toString() {
-        return String.valueOf(getId());
+        return "UserAccount{" +
+                "login='" + login + '\'' +
+                ", f_name='" + f_name + '\'' +
+                ", l_name='" + l_name + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
-
-
 }
