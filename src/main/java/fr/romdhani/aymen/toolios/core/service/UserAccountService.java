@@ -26,17 +26,18 @@ public class UserAccountService {
         userAccountDao.commitTransaction();
     }
 
-    public UserAccount findById(String id) {
+    public UserAccount findById(Long id) {
         userAccountDao.getSessionwithTransaction();
         UserAccount userAccount = userAccountDao.findById(id);
         userAccountDao.commitTransaction();
         return userAccount;
     }
 
-    public void delete(String id) {
+    public void delete(Long id) {
         userAccountDao.getSessionwithTransaction();
         UserAccount userAccount = userAccountDao.findById(id);
         userAccountDao.delete(userAccount);
+        System.out.println("found: "+userAccount.toString());
         userAccountDao.commitTransaction();
     }
 

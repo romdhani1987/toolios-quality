@@ -21,6 +21,7 @@ public class MainPanel extends JPanel {
     }
 
     private void initComponents() {
+
         setLayout(new MigLayout());
         tabbedPane = new JTabbedPane();
         // users
@@ -31,8 +32,9 @@ public class MainPanel extends JPanel {
         computersPanel = new ComputerController(computerService).getComputersPanel();
         //Screens
         screensPanel = new ScreensPanel();
-        othersEquipementPanel = new OthersEquipementPanel();
         // other Equipments
+        othersEquipementPanel = new OthersEquipementPanel();
+
         tabbedPane.add("Users", usersPanel);
         tabbedPane.add("Computers", computersPanel);
         tabbedPane.add("Screens", screensPanel);
@@ -40,43 +42,4 @@ public class MainPanel extends JPanel {
         add(tabbedPane, "grow,span, push");
     }
 
-    public JTabbedPane getTabbedPane() {
-        return tabbedPane;
-    }
-
-    public void setTabbedPane(JTabbedPane tabbedPane) {
-        this.tabbedPane = tabbedPane;
-    }
-
-    public ComputersPanel getComputersPanel() {
-        return computersPanel;
-    }
-
-    public void setComputersPanel(ComputersPanel computersPanel) {
-        this.computersPanel = computersPanel;
-    }
-
-    public ScreensPanel getScreensPanel() {
-        return screensPanel;
-    }
-
-    public void setScreensPanel(ScreensPanel screensPanel) {
-        this.screensPanel = screensPanel;
-    }
-
-    public UsersPanel getUsersPanel() {
-        return usersPanel;
-    }
-
-    public void setUsersPanel(UsersPanel usersPanel) {
-        this.usersPanel = usersPanel;
-    }
-
-    public OthersEquipementPanel getOthersEquipementPanel() {
-        return othersEquipementPanel;
-    }
-
-    public void setOthersEquipementPanel(OthersEquipementPanel othersEquipementPanel) {
-        this.othersEquipementPanel = othersEquipementPanel;
-    }
 }

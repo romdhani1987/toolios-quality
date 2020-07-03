@@ -13,17 +13,8 @@ public class UserController {
         usersPanel = new UsersPanel(this);
         usersPanel.getUserModelObject().addAllUsers(userAccountService.findAll());
     }
-
     public UsersPanel getUsersPanel() {
         return usersPanel;
-    }
-
-    public void setUsersPanel(UsersPanel usersPanel) {
-        this.usersPanel = usersPanel;
-    }
-
-    public UserAccountService getUserAccountService() {
-        return userAccountService;
     }
 
     public void setUserAccountService(UserAccountService userAccountService) {
@@ -32,5 +23,13 @@ public class UserController {
 
     public void addUserToDb(UserAccount user) {
         userAccountService.persist(user);
+    }
+
+    public void deleteUserFromDb(UserAccount user) {
+        userAccountService.delete(user.getId());
+    }
+
+    public void deleteAllUserFromDb() {
+        userAccountService.deleteAll();
     }
 }

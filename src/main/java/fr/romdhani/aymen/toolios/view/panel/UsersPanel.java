@@ -30,6 +30,9 @@ public class UsersPanel extends JPanel {
         });
         editButton = new TooliosButton("Edit");
         removeButton = new TooliosButton("Remove");
+        removeButton.addActionListener(e -> {
+            deleteUser();
+        });
         updateButton = new TooliosButton("Update");
         JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttonsPanel.add(addButton);
@@ -38,6 +41,19 @@ public class UsersPanel extends JPanel {
         buttonsPanel.add(updateButton);
         this.add(new JScrollPane(usersTable), "grow,span, push");
         this.add(buttonsPanel, "grow,span,push");
+    }
+
+    private void deleteUser() {
+        int row = usersTable.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(this, "No user were selected to remove!", "Remove user", 1);
+        } else {
+
+            int modelRow = usersTable.convertRowIndexToModel(row);
+            UserAccount user = userModelObject.getUser(modelRow);
+            System.out.println("user to remove : " + user);
+            userController.deleteUserFromDb(user);
+        }
     }
 
     private void addUser() {

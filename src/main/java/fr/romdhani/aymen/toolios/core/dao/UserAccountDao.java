@@ -9,7 +9,7 @@ import java.util.List;
 import static fr.romdhani.aymen.toolios.utils.HibernateUtil.getSession;
 
 
-public class UserAccountDao implements DaoInterface<UserAccount, String> {
+public class UserAccountDao implements DaoInterface<UserAccount, Long> {
 
     private Session currentSession;
 
@@ -41,7 +41,7 @@ public class UserAccountDao implements DaoInterface<UserAccount, String> {
         getCurrentSession().update(entity);
     }
 
-    public UserAccount findById(String id) {
+    public UserAccount findById(Long id) {
         UserAccount userAccount = (UserAccount) getCurrentSession().get(UserAccount.class, id);
         return userAccount;
     }

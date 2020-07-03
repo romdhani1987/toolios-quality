@@ -73,4 +73,7 @@ public class UserModelObject extends AbstractTableModel {
         users.remove(rowIndex);
         fireTableRowsDeleted(rowIndex, rowIndex);
     }
+    public UserAccount getUser(int i){
+        return users.get(i);
+    }
 }
