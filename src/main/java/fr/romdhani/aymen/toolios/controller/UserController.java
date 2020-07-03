@@ -1,5 +1,6 @@
 package fr.romdhani.aymen.toolios.controller;
 
+import fr.romdhani.aymen.toolios.core.orm.UserAccount;
 import fr.romdhani.aymen.toolios.core.service.UserAccountService;
 import fr.romdhani.aymen.toolios.view.panel.UsersPanel;
 
@@ -27,5 +28,9 @@ public class UserController {
 
     public void setUserAccountService(UserAccountService userAccountService) {
         this.userAccountService = userAccountService;
+    }
+
+    public void addUserToDb(UserAccount user) {
+        userAccountService.persist(user);
     }
 }

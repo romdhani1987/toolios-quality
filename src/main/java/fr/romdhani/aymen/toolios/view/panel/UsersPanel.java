@@ -48,6 +48,7 @@ public class UsersPanel extends JPanel {
         if (userDialog.getUserAccountSupplierValid().get() != null) {
             UserAccount user = userDialog.getUserAccountSupplierValid().get();
             System.out.println(user.toString());
+            userController.addUserToDb(user);
         }
     }
 
