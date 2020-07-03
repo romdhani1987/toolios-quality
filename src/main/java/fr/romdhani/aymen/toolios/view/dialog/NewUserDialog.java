@@ -88,7 +88,9 @@ public class NewUserDialog extends JDialog {
         userPanel.add(phoneTextField, "grow,push, wrap");
 
         userPanel.add(creationLabel);
-        userPanel.add(creationTextField, "grow,push, wrap");
+        userPanel.add(creationTextField, "grow,push, wrap ");
+        //Adress
+        userPanel.add(new JLabel("Address"), "grow,push, wrap ");
 
         userPanel.add(streetLabel);
         userPanel.add(streetTextField, "grow,push, wrap");
@@ -102,6 +104,8 @@ public class NewUserDialog extends JDialog {
         userPanel.add(countryLabel);
         userPanel.add(countryTextField, "grow,push, wrap");
 
+        userPanel.add(new JLabel(), "grow,push, wrap ");
+        //
         userPanel.add(functionLabel);
         userPanel.add(functionTextField, "grow,push, wrap");
 
@@ -110,10 +114,7 @@ public class NewUserDialog extends JDialog {
 
         userPanel.add(groupLabel);
         userPanel.add(groupTextField, "grow,push, wrap");
-
-
         cancelButton.addActionListener(e -> {
-
             int response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.YES_OPTION) {
