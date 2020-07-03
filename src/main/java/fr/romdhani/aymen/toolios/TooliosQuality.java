@@ -27,6 +27,7 @@ public class TooliosQuality {
         */
         System.out.println("*** Start Toolios-Quality ***");
         TooliosQualityView tooliosQualityView = new TooliosQualityView("Toolios-Quality");
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         tooliosQualityView.setPreferredSize(new Dimension(1024, 800));
         tooliosQualityView.pack();
         tooliosQualityView.setVisible(true);

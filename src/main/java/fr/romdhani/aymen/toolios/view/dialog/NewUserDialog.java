@@ -131,7 +131,12 @@ public class NewUserDialog extends JDialog {
             String email = emailLabel.getText();
             String phone = phoneTextField.getText();
             String creationMode = creationTextField.getText();
-            String address = streetTextField.getText();
+
+            String street = streetTextField.getText();
+            String code = codeTextField.getText();
+            String city = cityTextField.getText();
+            String country = countryTextField.getText();
+
             String roles = rolesTextField.getText();
             String group = groupTextField.getText();
             UserAccount userAccount = new UserAccount();
@@ -141,11 +146,12 @@ public class NewUserDialog extends JDialog {
             userAccount.setEmail(email);
             userAccount.setPhone_number(phone);
             userAccount.setCreation_mode(creationMode);
+
             Address adress = new Address();
-            adress.setStreet(streetTextField.getText());
-            adress.setCity(cityTextField.getText());
-            adress.setCode(codeTextField.getText());
-            adress.setCountry(countryTextField.getText());
+            adress.setStreet(street);
+            adress.setCity(city);
+            adress.setCode(code);
+            adress.setCountry(country);
             userAccount.setAddress(adress);
             userAccount.setCreation_mode(creationMode);
             userAccount.setCreation_mode(creationMode);
