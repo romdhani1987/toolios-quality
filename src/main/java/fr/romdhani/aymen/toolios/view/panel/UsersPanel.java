@@ -41,7 +41,7 @@ public class UsersPanel extends JPanel {
 
     private void addUser() {
         JDialog userDialog = new NewUserDialog();
-        userDialog.pack();
+        userDialog.setLocationRelativeTo(null);
         userDialog.setVisible(true);
     }
 
