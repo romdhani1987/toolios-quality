@@ -34,12 +34,11 @@ public class UserAccountDao implements DaoInterface<UserAccount, Long> {
         return currentSession;
     }
 
-    public void closeSession() {
-
-    }
-
     public void persist(UserAccount entity) {
-        getCurrentSession().save(entity);
+        currentTransaction = currentSession.getTransaction();
+        currentTransaction.begin();
+        currentSession.save(entity);
+        currentTransaction.commit();
     }
 
     public void update(UserAccount entity) {

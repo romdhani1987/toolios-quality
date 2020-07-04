@@ -44,16 +44,20 @@ public class UsersPanel extends JPanel {
     }
 
     private void deleteUser() {
-        int row = usersTable.getSelectedRow();
-        if (row < 0) {
-            JOptionPane.showMessageDialog(this, "No user were selected to remove!", "Remove user", 1);
-        } else {
-
-            int modelRow = usersTable.convertRowIndexToModel(row);
-            UserAccount user = userModelObject.getUser(modelRow);
-            System.out.println("user to remove : " + user);
-            userController.deleteUserFromDb(user);
+        int response = JOptionPane.showConfirmDialog(null, "Do you want really to delete this user account?", "Confirm",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.YES_OPTION) {
+            int row = usersTable.getSelectedRow();
+            if (row < 0) {
+                JOptionPane.showMessageDialog(this, "No user were selected to remove!", "Remove user", 1);
+            } else {
+                int modelRow = usersTable.convertRowIndexToModel(row);
+                UserAccount user = userModelObject.getUser(modelRow);
+                System.out.println("user to remove : " + user);
+                userController.deleteUserFromDb(user);
+            }
         }
+
     }
 
     private void addUser() {
