@@ -64,13 +64,17 @@ public class UsersPanel extends JPanel {
         userDialog.setModal(true);
         userDialog.setLocationRelativeTo(null);
         userDialog.setVisible(true);
+        JOptionPane d = new JOptionPane();
         if (userDialog.getUserAccountSupplierValid().get() != null) {
             UserAccount user = userDialog.getUserAccountSupplierValid().get();
-            System.out.println(user.toString());
-            userController.addUserToDb(user);
+            if (userController.addUserToDb(user)) {
+                JOptionPane.showMessageDialog(null, "The use has been added successfully", "Confirm", 2);
+            } else {
+                d.showMessageDialog(this, "Failed to delete this user",
+                        "Delete user", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
-
     public UsersPanel(UserController userController) {
         super();
         this.userController = userController;

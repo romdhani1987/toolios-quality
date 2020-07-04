@@ -45,7 +45,6 @@ public class UserAccountDao implements DaoInterface<UserAccount, Long> {
         currentTransaction.begin();
         currentSession.save(entity);
         currentTransaction.commit();
-
     }
 
     public void update(UserAccount entity) {

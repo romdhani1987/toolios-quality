@@ -14,9 +14,16 @@ public class UserAccountService {
         userAccountDao = new UserAccountDao();
     }
 
-    public void persist(UserAccount entity) {
-        userAccountDao.persist(entity);
+    public boolean persist(UserAccount entity) {
+        try {
+            userAccountDao.persist(entity);
+            return true;
+        } catch (Exception e) {
+            System.err.println(e);
+            return false;
+        }
     }
+
 
     public void update(UserAccount entity) {
         userAccountDao.update(entity);
@@ -29,7 +36,7 @@ public class UserAccountService {
 
     public void delete(Long id) {
         UserAccount userAccount = userAccountDao.findById(id);
-        System.out.println("found user: "+userAccount.toString());
+        System.out.println("found user: " + userAccount.toString());
         userAccountDao.delete(userAccount);
     }
 
@@ -38,7 +45,8 @@ public class UserAccountService {
         return users;
     }
 
-    public void deleteAll() { ;
+    public void deleteAll() {
+        ;
         userAccountDao.deleteAll();
     }
 

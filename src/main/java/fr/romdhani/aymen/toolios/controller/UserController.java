@@ -21,8 +21,8 @@ public class UserController {
         this.userAccountService = userAccountService;
     }
 
-    public void addUserToDb(UserAccount user) {
-        userAccountService.persist(user);
+    public boolean addUserToDb(UserAccount user) {
+        return userAccountService.persist(user);
     }
 
     public void deleteUserFromDb(UserAccount user) {
