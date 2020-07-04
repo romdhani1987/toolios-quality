@@ -10,7 +10,7 @@ public class Address implements Serializable {
 	public Address() {
 	}
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
 	@Column(name="street", nullable=true, length=250)

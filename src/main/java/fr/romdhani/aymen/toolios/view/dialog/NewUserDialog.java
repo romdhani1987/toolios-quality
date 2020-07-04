@@ -157,12 +157,12 @@ public class NewUserDialog extends JDialog {
         String roles = rolesTextField.getText();
         String group = groupTextField.getText();
         UserAccount userAccount = new UserAccount();
-        userAccount.setF_name(firstName);
-        userAccount.setL_name(lastName);
+        userAccount.setFirstName(firstName);
+        userAccount.setLastName(lastName);
         userAccount.setLogin(login);
         userAccount.setEmail(email);
-        userAccount.setPhone_number(phone);
-        userAccount.setCreation_mode(creationMode);
+        userAccount.setPhoneNumber(phone);
+        userAccount.setCreationMode(creationMode);
 
         Address adress = new Address();
         adress.setStreet(street);

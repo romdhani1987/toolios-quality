@@ -57,7 +57,6 @@ public class UsersPanel extends JPanel {
                 userController.deleteUserFromDb(user);
             }
         }
-
     }
 
     private void addUser() {

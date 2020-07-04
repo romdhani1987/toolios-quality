@@ -34,15 +34,15 @@ public class UserModelObject extends AbstractTableModel {
             case 1:
                 return users.get(rowIndex).getLogin();
             case 2:
-                return users.get(rowIndex).getF_name();
+                return users.get(rowIndex).getFirstName();
             case 3:
-                return users.get(rowIndex).getL_name();
+                return users.get(rowIndex).getLastName();
             case 4:
                 return users.get(rowIndex).getEmail();
             case 5:
-                return users.get(rowIndex).getPhone_number();
+                return users.get(rowIndex).getPhoneNumber();
             case 6:
-                return users.get(rowIndex).getCreation_mode();
+                return users.get(rowIndex).getCreationMode();
             case 7:
                 return users.get(rowIndex).getAddress();
             case 8:

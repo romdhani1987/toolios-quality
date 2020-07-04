@@ -60,30 +60,30 @@ public class UserAccount implements Serializable {
     @Column(name = "serialized_properties", nullable = true)
     private String serialized_properties;
 
-    @ManyToOne(targetEntity = fr.romdhani.aymen.toolios.core.orm.Address.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Address.class, fetch = FetchType.LAZY)
     @org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})
     @JoinColumns(value = {@JoinColumn(name = "address_id", referencedColumnName = "id")})
-    private fr.romdhani.aymen.toolios.core.orm.Address address;
+    private Address address;
 
-    @ManyToOne(targetEntity = fr.romdhani.aymen.toolios.core.orm.UserFunction.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = UserFunction.class, fetch = FetchType.LAZY)
     @org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})
     @JoinColumns(value = {@JoinColumn(name = "function_id", referencedColumnName = "id")})
-    private fr.romdhani.aymen.toolios.core.orm.UserFunction function;
+    private UserFunction function;
 
-    @ManyToOne(targetEntity = fr.romdhani.aymen.toolios.core.orm.UserRoles.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = UserRoles.class, fetch = FetchType.LAZY)
     @org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})
     @JoinColumns(value = {@JoinColumn(name = "roles_id", referencedColumnName = "id")})
-    private fr.romdhani.aymen.toolios.core.orm.UserRoles roles;
+    private UserRoles roles;
 
-    @ManyToOne(targetEntity = fr.romdhani.aymen.toolios.core.orm.UserGroup.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = UserGroup.class, fetch = FetchType.LAZY)
     @org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})
     @JoinColumns(value = {@JoinColumn(name = "group_id", referencedColumnName = "id")})
-    private fr.romdhani.aymen.toolios.core.orm.UserGroup group;
+    private UserGroup group;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "userAccount")
     private List<Computer> computers;
 
-    @ManyToMany(targetEntity = fr.romdhani.aymen.toolios.core.orm.UserOrder.class)
+    @ManyToMany(targetEntity = UserOrder.class)
     @org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})
     @JoinTable(name = "user_account_order_map", schema = "public", joinColumns = {@JoinColumn(name = "user_account_id")}, inverseJoinColumns = {@JoinColumn(name = "user_order_id")})
     @org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)
@@ -125,19 +125,19 @@ public class UserAccount implements Serializable {
         return login;
     }
 
-    public void setF_name(String value) {
+    public void setFirstName(String value) {
         this.f_name = value;
     }
 
-    public String getF_name() {
+    public String getFirstName() {
         return f_name;
     }
 
-    public void setL_name(String value) {
+    public void setLastName(String value) {
         this.l_name = value;
     }
 
-    public String getL_name() {
+    public String getLastName() {
         return l_name;
     }
 
@@ -149,98 +149,97 @@ public class UserAccount implements Serializable {
         return email;
     }
 
-    public void setPhone_number(String value) {
+    public void setPhoneNumber(String value) {
         this.phone_number = value;
     }
 
-    public String getPhone_number() {
+    public String getPhoneNumber() {
         return phone_number;
     }
 
-    public void setPassword_hash(String value) {
+    public void setPasswordHash(String value) {
         this.password_hash = value;
     }
 
-    public String getPassword_hash() {
+    public String getPasswordHash() {
         return password_hash;
     }
 
-    public void setCreation_mode(String value) {
+    public void setCreationMode(String value) {
         this.creation_mode = value;
     }
 
-    public String getCreation_mode() {
+    public String getCreationMode() {
         return creation_mode;
     }
 
-    public void setSerialized_properties(String value) {
+    public void setSerializedProperties(String value) {
         this.serialized_properties = value;
     }
 
-    public String getSerialized_properties() {
+    public String getSerializedProperties() {
         return serialized_properties;
     }
 
-    private void setORM_User_order(Set value) {
+    private void setORMUserOrder(Set value) {
         this.ORM_user_order = value;
     }
 
-    private Set getORM_User_order() {
+    private Set getORMUserOrder() {
         return ORM_user_order;
     }
 
 
-    public void setORM_Project(Set value) {
+    public void setORMProject(Set value) {
         this.ORM_project = value;
     }
 
-    private Set getORM_Project() {
+    private Set getORMProject() {
         return ORM_project;
     }
 
 
-    public void setAddress(fr.romdhani.aymen.toolios.core.orm.Address value) {
+    public void setAddress(Address value) {
         address = value;
 
     }
 
-    public fr.romdhani.aymen.toolios.core.orm.Address getAddress() {
+    public Address getAddress() {
         return address;
     }
 
     /**
      * This method is for internal use only.
      */
-    private void setORM_Address(fr.romdhani.aymen.toolios.core.orm.Address value) {
+    private void setORMAddress(Address value) {
         this.address = value;
     }
 
-    private fr.romdhani.aymen.toolios.core.orm.Address getORM_Address() {
+    private Address getORMAddress() {
         return address;
     }
 
-    public void setFunction(fr.romdhani.aymen.toolios.core.orm.UserFunction value) {
+    public void setFunction(UserFunction value) {
         function = value;
     }
 
-    public fr.romdhani.aymen.toolios.core.orm.UserFunction getFunction() {
+    public UserFunction getFunction() {
         return function;
     }
 
     /**
      * This method is for internal use only.
      */
-    private void setORM_Function(fr.romdhani.aymen.toolios.core.orm.UserFunction value) {
+    private void setORMFunction(UserFunction value) {
         this.function = value;
     }
 
-    private fr.romdhani.aymen.toolios.core.orm.UserFunction getORM_Function() {
+    private UserFunction getORMFunction() {
         return function;
     }
 
-    public void setRoles(fr.romdhani.aymen.toolios.core.orm.UserRoles value) {
-        roles = value
-        ;
+    public void setRoles(UserRoles value) {
+        roles = value;
 
     }
 
@@ -251,66 +250,66 @@ public class UserAccount implements Serializable {
     /**
      * This method is for internal use only.
      */
-    private void setORM_Roles(fr.romdhani.aymen.toolios.core.orm.UserRoles value) {
+    private void setORMRoles(UserRoles value) {
         this.roles = value;
     }
 
-    private fr.romdhani.aymen.toolios.core.orm.UserRoles getORM_Roles() {
+    private UserRoles getORMRoles() {
         return roles;
     }
 
-    public void setGroup(fr.romdhani.aymen.toolios.core.orm.UserGroup value) {
+    public void setGroup(UserGroup value) {
         group = value;
 
     }
 
-    public fr.romdhani.aymen.toolios.core.orm.UserGroup getGroup() {
+    public UserGroup getGroup() {
         return group;
     }
 
     /**
      * This method is for internal use only.
      */
-    private void setORM_Group(fr.romdhani.aymen.toolios.core.orm.UserGroup value) {
+    private void setORMGroup(UserGroup value) {
         this.group = value;
     }
 
-    private fr.romdhani.aymen.toolios.core.orm.UserGroup getORM_Group() {
+    private UserGroup getORMGroup() {
         return group;
     }
 
-    private void setORM_User_request(Set value) {
+    private void setORMUserRequest(Set value) {
         this.ORM_user_request = value;
     }
 
-    private Set getORM_User_request() {
+    private Set getORMUserRequest() {
         return ORM_user_request;
     }
 
 
-    private void setORM_Project1(Set value) {
+    private void setORMProject1(Set value) {
         this.ORM_project1 = value;
     }
 
-    private Set getORM_Project1() {
+    private Set getORMProject1() {
         return ORM_project1;
     }
 
     public void addProject(final Project project) {
 
         if (project != null) {
-            Set<Project> projectSet = getORM_Project();
+            Set<Project> projectSet = getORMProject();
             if (projectSet == null) {
                 projectSet = new HashSet<Project>();
 
-                setORM_Project(projectSet);
+                setORMProject(projectSet);
             }
             projectSet.add(project);
         }
     }
 
     public void removeProject(final Project Project) {
-        final Set<Project> projectSet = getORM_Project();
+        final Set<Project> projectSet = getORMProject();
         if (projectSet != null) {
             projectSet.remove(Project);
         }
@@ -318,38 +317,38 @@ public class UserAccount implements Serializable {
 
     public void addOrder(final fr.romdhani.aymen.toolios.core.orm.UserOrder userOrder) {
         if (userOrder != null) {
-            Set<fr.romdhani.aymen.toolios.core.orm.UserOrder> userOrderSet = getORM_User_order();
+            Set<fr.romdhani.aymen.toolios.core.orm.UserOrder> userOrderSet = getORMUserOrder();
             if (userOrderSet == null) {
-                userOrderSet = new HashSet<fr.romdhani.aymen.toolios.core.orm.UserOrder>();
+                userOrderSet = new HashSet<UserOrder>();
 
-                setORM_User_order(userOrderSet);
+                setORMUserOrder(userOrderSet);
             }
             userOrderSet.add(userOrder);
         }
     }
 
-    public void removeOrder(final fr.romdhani.aymen.toolios.core.orm.UserOrder userOrder) {
-        final Set<fr.romdhani.aymen.toolios.core.orm.UserOrder> userOrderSet = getORM_User_order();
+    public void removeOrder(final UserOrder userOrder) {
+        final Set<UserOrder> userOrderSet = getORMUserOrder();
         if (userOrderSet != null) {
             userOrderSet.remove(userOrder);
         }
     }
 
-    public void addRequest(final fr.romdhani.aymen.toolios.core.orm.UserRequest userRequest) {
+    public void addRequest(final UserRequest userRequest) {
 
         if (userRequest != null) {
-            Set<fr.romdhani.aymen.toolios.core.orm.UserRequest> userRequestSet = getORM_User_request();
+            Set<UserRequest> userRequestSet = getORMUserRequest();
             if (userRequest == null) {
-                userRequestSet = new HashSet<fr.romdhani.aymen.toolios.core.orm.UserRequest>();
+                userRequestSet = new HashSet<UserRequest>();
 
-                setORM_User_request(userRequestSet);
+                setORMUserRequest(userRequestSet);
             }
             userRequestSet.add(userRequest);
         }
     }
 
-    public void removeUserRequest(final fr.romdhani.aymen.toolios.core.orm.UserRequest userRequest) {
-        final Set<fr.romdhani.aymen.toolios.core.orm.UserRequest> UserRequestSet = getORM_User_request();
+    public void removeUserRequest(final UserRequest userRequest) {
+        final Set<UserRequest> UserRequestSet = getORMUserRequest();
         if (userRequest != null) {
             UserRequestSet.remove(userRequest);
         }

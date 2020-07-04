@@ -1,5 +1,6 @@
 package fr.romdhani.aymen.toolios.core.dao;
 
+import fr.romdhani.aymen.toolios.core.orm.Address;
 import fr.romdhani.aymen.toolios.core.orm.UserAccount;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -37,8 +38,14 @@ public class UserAccountDao implements DaoInterface<UserAccount, Long> {
     public void persist(UserAccount entity) {
         currentTransaction = currentSession.getTransaction();
         currentTransaction.begin();
+        Address address = entity.getAddress();
+        currentSession.save(address);
+        currentTransaction.commit();
+        currentTransaction = currentSession.getTransaction();
+        currentTransaction.begin();
         currentSession.save(entity);
         currentTransaction.commit();
+
     }
 
     public void update(UserAccount entity) {
