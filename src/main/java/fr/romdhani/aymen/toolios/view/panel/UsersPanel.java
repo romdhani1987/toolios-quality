@@ -29,11 +29,11 @@ public class UsersPanel extends JPanel {
             addUser();
         });
         editButton = new TooliosButton("Edit");
-        removeButton = new TooliosButton("Remove");
+        removeButton = new TooliosButton("Delete");
         removeButton.addActionListener(e -> {
             deleteUser();
         });
-        updateButton = new TooliosButton("Update");
+        updateButton = new TooliosButton("Refresh");
         JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttonsPanel.add(addButton);
         buttonsPanel.add(editButton);
@@ -75,6 +75,7 @@ public class UsersPanel extends JPanel {
             }
         }
     }
+
     public UsersPanel(UserController userController) {
         super();
         this.userController = userController;
