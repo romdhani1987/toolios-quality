@@ -11,7 +11,7 @@ public class UserController {
     public UserController(UserAccountService userAccountService) {
         this.userAccountService = userAccountService;
         usersPanel = new UsersPanel(this);
-        usersPanel.getUserModelObject().addAllUsers(userAccountService.findAll());
+        refresh();
     }
     public UsersPanel getUsersPanel() {
         return usersPanel;
@@ -28,7 +28,9 @@ public class UserController {
     public void deleteUserFromDb(UserAccount user) {
         userAccountService.delete(user.getId());
     }
-
+    public void refresh() {
+        usersPanel.getUserModelObject().addAllUsers(userAccountService.findAll());
+    }
     public void deleteAllUserFromDb() {
         userAccountService.deleteAll();
     }

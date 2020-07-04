@@ -69,11 +69,13 @@ public class UserModelObject extends AbstractTableModel {
         users.add(userAccount);
         fireTableRowsInserted(users.size() - 1, users.size() - 1);
     }
+
     public void removeUser(int rowIndex) {
         users.remove(rowIndex);
         fireTableRowsDeleted(rowIndex, rowIndex);
     }
-    public UserAccount getUser(int i){
+
+    public UserAccount getUser(int i) {
         return users.get(i);
     }
 }
