@@ -16,10 +16,11 @@ public class UserAccountDao implements DaoInterface<UserAccount, Long> {
     private Transaction currentTransaction;
 
     public UserAccountDao() {
+        currentSession = getSession();
+        currentTransaction = currentSession.getTransaction();
     }
 
     public Session getSessionwithTransaction() {
-        currentSession = getSession();
         currentTransaction = currentSession.beginTransaction();
         return currentSession;
     }
@@ -33,6 +34,10 @@ public class UserAccountDao implements DaoInterface<UserAccount, Long> {
         return currentSession;
     }
 
+    public void closeSession() {
+
+    }
+
     public void persist(UserAccount entity) {
         getCurrentSession().save(entity);
     }
@@ -42,17 +47,25 @@ public class UserAccountDao implements DaoInterface<UserAccount, Long> {
     }
 
     public UserAccount findById(Long id) {
-        UserAccount userAccount = (UserAccount) getCurrentSession().get(UserAccount.class, id);
+        currentTransaction = currentSession.getTransaction();
+        currentTransaction.begin();
+        UserAccount userAccount = (UserAccount) currentSession.get(UserAccount.class, id);
+        currentTransaction.commit();
         return userAccount;
     }
 
     public void delete(UserAccount entity) {
-        getCurrentSession().delete(entity);
+        currentTransaction = currentSession.getTransaction();
+        currentTransaction.begin();
+        currentSession.delete(entity);
+        currentTransaction.commit();
     }
 
     @SuppressWarnings("unchecked")
     public List<UserAccount> findAll() {
-        List<UserAccount> users = (List<UserAccount>) getCurrentSession().createQuery("from UserAccount").list();
+        currentTransaction.begin();
+        List<UserAccount> users = (List<UserAccount>) currentSession.createQuery("from UserAccount").list();
+        currentTransaction.commit();
         return users;
     }
 
