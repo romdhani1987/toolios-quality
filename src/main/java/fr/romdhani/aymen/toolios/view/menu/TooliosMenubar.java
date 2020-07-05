@@ -1,6 +1,7 @@
 package fr.romdhani.aymen.toolios.view.menu;
 
 import fr.romdhani.aymen.toolios.controller.MenuController;
+import fr.romdhani.aymen.toolios.view.utils.IconResource;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -27,15 +28,22 @@ public class TooliosMenubar extends JMenuBar {
 
     public void initComponents() {
         JMenu menuFile = new JMenu("File");
+
         JMenuItem openMenuItem = new JMenuItem("Open");
+        openMenuItem.setIcon(IconResource.getImage(IconResource.ICON.LOAD));
         menuFile.add(openMenuItem);
+        menuFile.setIcon(IconResource.getImage(IconResource.ICON.LOAD));
+
         JMenuItem closeMenuItem = new JMenuItem("Exit");
+        closeMenuItem.setIcon(IconResource.getImage(IconResource.ICON.EXIT));
         menuFile.add(closeMenuItem);
         closeMenuItem.addActionListener(e -> close());
+
         JMenuItem exportMenuItem = new JMenuItem("Export");
+        exportMenuItem.setIcon(IconResource.getImage(IconResource.ICON.EXPORT));
         menuFile.add(exportMenuItem);
-        JMenuItem saveAsMenuItem = new JMenuItem("Save as");
-        menuFile.add(saveAsMenuItem);
+
+
         listMenu.add(menuFile);
         JMenu menuConnection = new JMenu("Connection");
         listMenu.add(menuConnection);
@@ -44,7 +52,10 @@ public class TooliosMenubar extends JMenuBar {
         settingsFile.add(dbMenuItem);
         listMenu.add(settingsFile);
         JMenu menuHelp = new JMenu("Help");
-        JMenuItem helpMenuItem = new JMenuItem("?");
+        menuHelp.setIcon(IconResource.getImage(IconResource.ICON.HELP));
+        JMenuItem helpMenuItem = new JMenuItem("Help");
+        helpMenuItem.setIcon(IconResource.getImage(IconResource.ICON.HELP));
+
         menuHelp.add(helpMenuItem);
         listMenu.add(menuHelp);
     }
