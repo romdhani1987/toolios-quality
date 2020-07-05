@@ -69,7 +69,7 @@ public class UsersPanel extends JPanel {
     }
 
     private void deleteUser() {
-        int response = JOptionPane.showConfirmDialog(null, "Do you want really to delete this user account?", "Confirm",
+        int response = JOptionPane.showConfirmDialog(this, "Do you want really to delete this user account?", "Confirm",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.YES_OPTION) {
             int row = usersTable.getSelectedRow();

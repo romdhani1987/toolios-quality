@@ -50,7 +50,11 @@ public class TooliosMenubar extends JMenuBar {
     }
 
     private void close() {
-        menuController.close();
+        int response = JOptionPane.showConfirmDialog(null, "Do you want really to exit Toolios-quality?", "Confirm",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.YES_OPTION) {
+            menuController.close();
+        }
     }
 
     public void validateMenu() {
