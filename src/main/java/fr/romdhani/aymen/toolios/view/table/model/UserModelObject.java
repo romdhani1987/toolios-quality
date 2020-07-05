@@ -9,7 +9,7 @@ import java.util.List;
 public class UserModelObject extends AbstractTableModel {
     private final List<UserAccount> users = new ArrayList<UserAccount>();
 
-    private final String[] header = {"ID", "login", "First name", "Last name", "Email", "Phone number", "creation mode", "Adress", "Function", "Roles", "Group"};
+    private final String[] header = {"ID", "login", "First name", "Last name", "Email", "Phone number", "creation mode", "Address", "Function", "Roles", "Group"};
 
     public UserModelObject() {
         super();
@@ -70,7 +70,7 @@ public class UserModelObject extends AbstractTableModel {
         fireTableRowsInserted(users.size() - 1, users.size() - 1);
     }
 
-    public void removeUser(int rowIndex) {
+    public void deleteUser(int rowIndex) {
         users.remove(rowIndex);
         fireTableRowsDeleted(rowIndex, rowIndex);
     }

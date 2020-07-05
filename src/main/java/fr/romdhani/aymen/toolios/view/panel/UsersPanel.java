@@ -54,7 +54,6 @@ public class UsersPanel extends JPanel {
         } else {
             int modelRow = usersTable.convertRowIndexToModel(row);
             UserAccount user = userModelObject.getUser(modelRow);
-            System.out.println("User to edit : " + user);
             EditUserDialog editUserDialog = new EditUserDialog(user);
             editUserDialog.setModal(true);
             editUserDialog.setLocationRelativeTo(null);
@@ -78,8 +77,8 @@ public class UsersPanel extends JPanel {
             } else {
                 int modelRow = usersTable.convertRowIndexToModel(row);
                 UserAccount user = userModelObject.getUser(modelRow);
-                System.out.println("user to delete : " + user);
                 userController.deleteUserFromDb(user);
+                userModelObject.deleteUser(modelRow);
             }
         }
     }
@@ -93,6 +92,7 @@ public class UsersPanel extends JPanel {
             UserAccount user = userDialog.getUserAccountSupplierValid().get();
             if (userController.addUserToDb(user)) {
                 JOptionPane.showMessageDialog(null, "The use has been added successfully!", "Confirm", 2);
+                userModelObject.addUser(user);
                 userModelObject.fireTableDataChanged();
                 usersTable.repaint();
             } else {
