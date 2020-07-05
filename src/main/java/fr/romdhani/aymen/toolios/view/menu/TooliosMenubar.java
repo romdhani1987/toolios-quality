@@ -33,15 +33,14 @@ public class TooliosMenubar extends JMenuBar {
         openMenuItem.setIcon(IconResource.getImage(IconResource.ICON.LOAD));
         menuFile.add(openMenuItem);
 
-        JMenuItem closeMenuItem = new JMenuItem("Exit");
-        closeMenuItem.setIcon(IconResource.getImage(IconResource.ICON.EXIT));
-        menuFile.add(closeMenuItem);
-        closeMenuItem.addActionListener(e -> close());
-
         JMenuItem exportMenuItem = new JMenuItem("Export");
         exportMenuItem.setIcon(IconResource.getImage(IconResource.ICON.EXPORT));
         menuFile.add(exportMenuItem);
 
+        JMenuItem closeMenuItem = new JMenuItem("Exit");
+        closeMenuItem.setIcon(IconResource.getImage(IconResource.ICON.EXIT));
+        menuFile.add(closeMenuItem);
+        closeMenuItem.addActionListener(e -> close());
 
         listMenu.add(menuFile);
         JMenu menuConnection = new JMenu("Connection");
