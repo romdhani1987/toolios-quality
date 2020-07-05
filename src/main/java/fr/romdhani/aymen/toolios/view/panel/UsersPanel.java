@@ -60,13 +60,10 @@ public class UsersPanel extends JPanel {
             editUserDialog.setLocationRelativeTo(null);
             editUserDialog.setVisible(true);
             UserAccount editedUser = editUserDialog.getUserAccountSupplierValid().get();
-            if (userController.addUserToDb(editedUser)) {
+            if (editedUser != null && userController.addUserToDb(editedUser)) {
                 JOptionPane.showMessageDialog(null, "The use has been edited successfully!", "Confirm", 2);
                 userModelObject.fireTableDataChanged();
                 usersTable.repaint();
-            } else {
-                JOptionPane.showMessageDialog(this, "Failed to add this user!",
-                        "Delete user", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -92,15 +89,14 @@ public class UsersPanel extends JPanel {
         userDialog.setModal(true);
         userDialog.setLocationRelativeTo(null);
         userDialog.setVisible(true);
-        JOptionPane d = new JOptionPane();
         if (userDialog.getUserAccountSupplierValid().get() != null) {
             UserAccount user = userDialog.getUserAccountSupplierValid().get();
             if (userController.addUserToDb(user)) {
-                d.showMessageDialog(null, "The use has been added successfully!", "Confirm", 2);
+                JOptionPane.showMessageDialog(null, "The use has been added successfully!", "Confirm", 2);
                 userModelObject.fireTableDataChanged();
                 usersTable.repaint();
             } else {
-                d.showMessageDialog(this, "Failed to add this user!",
+                JOptionPane.showMessageDialog(this, "Failed to add this user!",
                         "Delete user", JOptionPane.ERROR_MESSAGE);
             }
         }
