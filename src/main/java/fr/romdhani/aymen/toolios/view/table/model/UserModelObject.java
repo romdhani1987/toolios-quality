@@ -9,7 +9,7 @@ import java.util.List;
 public class UserModelObject extends AbstractTableModel {
     private final List<UserAccount> users = new ArrayList<UserAccount>();
 
-    private final String[] header = {"ID", "login", "First name", "Last name", "Email", "Phone number", "creation mode", "Address", "Function", "Roles", "Group"};
+    private final String[] header = {"Id", "Login", "First name", "Last name", "Email", "Phone number", "Creation mode", "Address", "Function", "Roles", "Group"};
 
     public UserModelObject() {
         super();
