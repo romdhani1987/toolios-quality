@@ -91,7 +91,7 @@ public class UsersPanel extends JPanel {
         if (userDialog.getUserAccountSupplierValid().get() != null) {
             UserAccount user = userDialog.getUserAccountSupplierValid().get();
             if (userController.addUserToDb(user)) {
-                JOptionPane.showMessageDialog(null, "The use has been added successfully!", "Confirm", 2);
+                JOptionPane.showMessageDialog(null, "The user has been added successfully!", "Confirm", 2);
                 userModelObject.addUser(user);
                 userModelObject.fireTableDataChanged();
                 usersTable.repaint();

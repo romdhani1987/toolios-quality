@@ -14,43 +14,39 @@ public class ComputerService {
         computerDao = new ComputerDao();
     }
 
-    public void persist(Computer entity) {
-        computerDao.getSessionwithTransaction();
-        computerDao.persist(entity);
-        computerDao.commitTransaction();
+    public boolean persist(Computer entity) {
+        try {
+            computerDao.persist(entity);
+            return true;
+        } catch (Exception e) {
+            System.err.println(e);
+            return false;
+        }
     }
+
 
     public void update(Computer entity) {
-        computerDao.getSessionwithTransaction();
         computerDao.update(entity);
-        computerDao.commitTransaction();
     }
 
-    public Computer findById(String id) {
-        computerDao.getSessionwithTransaction();
+    public Computer findById(Long id) {
         Computer computer = computerDao.findById(id);
-        computerDao.commitTransaction();
         return computer;
     }
 
-    public void delete(String id) {
-        computerDao.getSessionwithTransaction();
+    public void delete(Long id) {
         Computer computer = computerDao.findById(id);
+        System.out.println("found user: " + computer.toString());
         computerDao.delete(computer);
-        computerDao.commitTransaction();
     }
 
     public List<Computer> findAll() {
-        computerDao.getSessionwithTransaction();
         List<Computer> computers = computerDao.findAll();
-        computerDao.commitTransaction();
         return computers;
     }
 
     public void deleteAll() {
-        computerDao.getSessionwithTransaction();
         computerDao.deleteAll();
-        computerDao.commitTransaction();
     }
 
     public ComputerDao computerDao() {

@@ -10,7 +10,7 @@ import java.util.List;
 import static fr.romdhani.aymen.toolios.utils.HibernateUtil.getSession;
 
 
-public class ComputerDao implements DaoInterface<Computer, String> {
+public class ComputerDao implements DaoInterface<Computer, Long> {
 
     private Session currentSession;
     private Transaction currentTransaction;
@@ -42,7 +42,7 @@ public class ComputerDao implements DaoInterface<Computer, String> {
         getCurrentSession().update(entity);
     }
 
-    public Computer findById(String id) {
+    public Computer findById(Long id) {
         Computer computer = (Computer) getCurrentSession().get(Computer.class, id);
         return computer;
     }

@@ -1,11 +1,13 @@
 package fr.romdhani.aymen.toolios.controller;
 
+import fr.romdhani.aymen.toolios.core.orm.Computer;
+import fr.romdhani.aymen.toolios.core.orm.UserAccount;
 import fr.romdhani.aymen.toolios.core.service.ComputerService;
 import fr.romdhani.aymen.toolios.view.panel.ComputersPanel;
 
 public class ComputerController {
     private ComputersPanel computersPanel;
-    private ComputerService userAccountService;
+    private ComputerService computerService;
 
     public ComputersPanel getComputersPanel() {
         return computersPanel;
@@ -15,20 +17,37 @@ public class ComputerController {
         this.computersPanel = computersPanel;
     }
 
-    public ComputerService getUserAccountService() {
-        return userAccountService;
+    public ComputerService getComputerService() {
+        return computerService;
     }
 
-    public void setUserAccountService(ComputerService userAccountService) {
-        this.userAccountService = userAccountService;
+    public void setComputerService(ComputerService computerService) {
+        this.computerService = computerService;
     }
 
     public ComputerController(ComputerService userAccountService) {
-        this.userAccountService = userAccountService;
+        this.computerService = userAccountService;
         initComponents();
     }
+
     private void initComponents() {
-        computersPanel= new ComputersPanel(this);
-        computersPanel.getComputerModelObject().addAllComputers(userAccountService.findAll());
+        computersPanel = new ComputersPanel(this);
+        computersPanel.getComputerModelObject().addAllComputers(computerService.findAll());
+    }
+
+    public boolean addComputerToDb(Computer computer) {
+        return computerService.persist(computer);
+    }
+
+    public void deleteUserFromDb(UserAccount user) {
+        computerService.delete(user.getId());
+    }
+
+    public void refresh() {
+        computersPanel.getComputerModelObject().addAllComputers(computerService.findAll());
+    }
+
+    public void deleteAllUserFromDb() {
+        computerService.deleteAll();
     }
 }

@@ -1,7 +1,9 @@
 package fr.romdhani.aymen.toolios.view.panel;
 
 import fr.romdhani.aymen.toolios.controller.ComputerController;
+import fr.romdhani.aymen.toolios.core.orm.Computer;
 import fr.romdhani.aymen.toolios.view.buttons.TooliosButton;
+import fr.romdhani.aymen.toolios.view.dialog.NewComputerDialog;
 import fr.romdhani.aymen.toolios.view.table.model.ComputerModelObject;
 import net.miginfocom.swing.MigLayout;
 
@@ -50,6 +52,22 @@ public class ComputersPanel extends JPanel {
     }
 
     private void addComputer() {
+        NewComputerDialog newComputerDialog = new NewComputerDialog();
+        newComputerDialog.setModal(true);
+        newComputerDialog.setLocationRelativeTo(null);
+        newComputerDialog.setVisible(true);
+        if (newComputerDialog.getComputerSupplierValid().get() != null) {
+            Computer computer = newComputerDialog.getComputerSupplierValid().get();
+            if (computerController.addComputerToDb(computer)) {
+                JOptionPane.showMessageDialog(null, "The computer has been added successfully!", "Confirm", 2);
+                computerModelObject.addComputer(computer);
+                computerModelObject.fireTableDataChanged();
+                computersTable.repaint();
+            } else {
+                JOptionPane.showMessageDialog(this, "Failed to add this user!",
+                        "Delete user", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
 
     public ComputersPanel(ComputerController computerControllerl) {
