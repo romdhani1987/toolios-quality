@@ -4,6 +4,7 @@ package fr.romdhani.aymen.toolios.view.panel;
 import fr.romdhani.aymen.toolios.controller.UserController;
 import fr.romdhani.aymen.toolios.core.orm.UserAccount;
 import fr.romdhani.aymen.toolios.view.buttons.TooliosButton;
+import fr.romdhani.aymen.toolios.view.dialog.EditUserDialog;
 import fr.romdhani.aymen.toolios.view.dialog.NewUserDialog;
 import fr.romdhani.aymen.toolios.view.table.model.UserModelObject;
 import net.miginfocom.swing.MigLayout;
@@ -29,6 +30,9 @@ public class UsersPanel extends JPanel {
             addUser();
         });
         editButton = new TooliosButton("Edit");
+        editButton.addActionListener(e -> {
+            editUser();
+        });
         removeButton = new TooliosButton("Delete");
         removeButton.addActionListener(e -> {
             deleteUser();
@@ -43,17 +47,41 @@ public class UsersPanel extends JPanel {
         this.add(buttonsPanel, "grow,span,push");
     }
 
+    private void editUser() {
+        int row = usersTable.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(this, "No user were selected to edit!", "Edit user", 1);
+        } else {
+            int modelRow = usersTable.convertRowIndexToModel(row);
+            UserAccount user = userModelObject.getUser(modelRow);
+            System.out.println("User to edit : " + user);
+            EditUserDialog editUserDialog = new EditUserDialog(user);
+            editUserDialog.setModal(true);
+            editUserDialog.setLocationRelativeTo(null);
+            editUserDialog.setVisible(true);
+            UserAccount editedUser = editUserDialog.getUserAccountSupplierValid().get();
+            if (userController.addUserToDb(editedUser)) {
+                JOptionPane.showMessageDialog(null, "The use has been edited successfully!", "Confirm", 2);
+                userModelObject.fireTableDataChanged();
+                usersTable.repaint();
+            } else {
+                JOptionPane.showMessageDialog(this, "Failed to add this user!",
+                        "Delete user", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
     private void deleteUser() {
         int response = JOptionPane.showConfirmDialog(null, "Do you want really to delete this user account?", "Confirm",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.YES_OPTION) {
             int row = usersTable.getSelectedRow();
             if (row < 0) {
-                JOptionPane.showMessageDialog(this, "No user were selected to remove!", "Remove user", 1);
+                JOptionPane.showMessageDialog(this, "No user were selected to delete!", "Delete user", 1);
             } else {
                 int modelRow = usersTable.convertRowIndexToModel(row);
                 UserAccount user = userModelObject.getUser(modelRow);
-                System.out.println("user to remove : " + user);
+                System.out.println("user to delete : " + user);
                 userController.deleteUserFromDb(user);
             }
         }
@@ -68,9 +96,11 @@ public class UsersPanel extends JPanel {
         if (userDialog.getUserAccountSupplierValid().get() != null) {
             UserAccount user = userDialog.getUserAccountSupplierValid().get();
             if (userController.addUserToDb(user)) {
-                JOptionPane.showMessageDialog(null, "The use has been added successfully", "Confirm", 2);
+                d.showMessageDialog(null, "The use has been added successfully!", "Confirm", 2);
+                userModelObject.fireTableDataChanged();
+                usersTable.repaint();
             } else {
-                d.showMessageDialog(this, "Failed to delete this user",
+                d.showMessageDialog(this, "Failed to add this user!",
                         "Delete user", JOptionPane.ERROR_MESSAGE);
             }
         }
