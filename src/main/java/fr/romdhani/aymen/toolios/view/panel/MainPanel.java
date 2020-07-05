@@ -9,7 +9,10 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 
 public class MainPanel extends JPanel {
-    private JTabbedPane tabbedPane;
+    private JTabbedPane devicestabbedPane;
+    private JTabbedPane requestTabbedPane;
+    private JTabbedPane projectTabbedPane;
+    private JTabbedPane mainTabbedPane;
     private ComputersPanel computersPanel;
     private ScreensPanel screensPanel;
     private UsersPanel usersPanel;
@@ -23,7 +26,11 @@ public class MainPanel extends JPanel {
     private void initComponents() {
 
         setLayout(new MigLayout());
-        tabbedPane = new JTabbedPane();
+        mainTabbedPane = new JTabbedPane();
+        projectTabbedPane = new JTabbedPane();
+        requestTabbedPane = new JTabbedPane();
+
+        devicestabbedPane = new JTabbedPane();
         // users
         UserAccountService userAccountService = new UserAccountService();
         usersPanel = new UserController(userAccountService).getUsersPanel();
@@ -35,11 +42,16 @@ public class MainPanel extends JPanel {
         // other Equipments
         othersEquipementPanel = new OthersEquipementPanel();
 
-        tabbedPane.add("Users", usersPanel);
-        tabbedPane.add("Computers", computersPanel);
-        tabbedPane.add("Screens", screensPanel);
-        tabbedPane.add("Other equipments", othersEquipementPanel);
-        add(tabbedPane, "grow,span, push");
+        devicestabbedPane.add("Users", usersPanel);
+        devicestabbedPane.add("Computers", computersPanel);
+        devicestabbedPane.add("Screens", screensPanel);
+        devicestabbedPane.add("Other equipments", othersEquipementPanel);
+
+        mainTabbedPane.add("Admin", devicestabbedPane);
+        mainTabbedPane.add("Projects", projectTabbedPane);
+        mainTabbedPane.add("Requests", requestTabbedPane);
+
+        add(mainTabbedPane, "grow,span, push");
     }
 
 }
