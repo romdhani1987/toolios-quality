@@ -29,7 +29,7 @@ public class ComputerDao implements DaoInterface<Computer, Long> {
         currentTransaction.commit();
     }
 
-    public Session getCurrentSession() {
+    private Session getCurrentSession() {
         currentSession = getSession();
         return currentSession;
     }

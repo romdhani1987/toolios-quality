@@ -32,7 +32,6 @@ public class TooliosMenubar extends JMenuBar {
         JMenuItem openMenuItem = new JMenuItem("Open");
         openMenuItem.setIcon(IconResource.getImage(IconResource.ICON.LOAD));
         menuFile.add(openMenuItem);
-        menuFile.setIcon(IconResource.getImage(IconResource.ICON.LOAD));
 
         JMenuItem closeMenuItem = new JMenuItem("Exit");
         closeMenuItem.setIcon(IconResource.getImage(IconResource.ICON.EXIT));
@@ -51,8 +50,8 @@ public class TooliosMenubar extends JMenuBar {
         JMenuItem dbMenuItem = new JMenuItem("Database settings");
         settingsFile.add(dbMenuItem);
         listMenu.add(settingsFile);
+
         JMenu menuHelp = new JMenu("Help");
-        menuHelp.setIcon(IconResource.getImage(IconResource.ICON.HELP));
         JMenuItem helpMenuItem = new JMenuItem("Help");
         helpMenuItem.setIcon(IconResource.getImage(IconResource.ICON.HELP));
 
