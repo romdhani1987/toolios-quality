@@ -22,9 +22,18 @@ public class ComputersPanel extends JPanel {
         computerModelObject = new ComputerModelObject();
         computersTable = new JTable(computerModelObject);
         addButton = new TooliosButton("Add");
+        addButton.addActionListener(e -> {
+            addComputer();
+        });
         editButton = new TooliosButton("Edit");
-        removeButton = new TooliosButton("Remove");
-        updateButton = new TooliosButton("Update");
+        editButton.addActionListener(e -> {
+            editComputer();
+        });
+        removeButton = new TooliosButton("Delete");
+        removeButton.addActionListener(e -> {
+            deleteComputer();
+        });
+        updateButton = new TooliosButton("Refresh");
         JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttonsPanel.add(addButton);
         buttonsPanel.add(editButton);
@@ -32,6 +41,15 @@ public class ComputersPanel extends JPanel {
         buttonsPanel.add(updateButton);
         this.add(new JScrollPane(computersTable), "grow,span, push");
         this.add(buttonsPanel, "grow,span,push");
+    }
+
+    private void deleteComputer() {
+    }
+
+    private void editComputer() {
+    }
+
+    private void addComputer() {
     }
 
     public ComputersPanel(ComputerController computerControllerl) {
