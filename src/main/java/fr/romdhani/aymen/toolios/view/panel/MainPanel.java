@@ -30,7 +30,7 @@ public class MainPanel extends JPanel {
     private void initComponents() {
         ConnectionDialog connectionDialog = new ConnectionDialog( "Connection");
         connectionDialog.setModal(true);
-        connectionDialog.setSize(new Dimension(300, 250));
+        connectionDialog.setSize(new Dimension(300, 200));
         connectionDialog.setLocationRelativeTo(null);
         connectionDialog.setVisible(true);
         setLayout(new MigLayout());
