@@ -1,10 +1,10 @@
 package fr.romdhani.aymen.toolios.core.dao;
 
 
-
 import fr.romdhani.aymen.toolios.core.orm.Screen;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
 import java.util.List;
 
 import static fr.romdhani.aymen.toolios.utils.HibernateUtil.getSession;

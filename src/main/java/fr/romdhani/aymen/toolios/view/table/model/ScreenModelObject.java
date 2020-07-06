@@ -1,7 +1,6 @@
 package fr.romdhani.aymen.toolios.view.table.model;
 
 import fr.romdhani.aymen.toolios.core.orm.Screen;
-import fr.romdhani.aymen.toolios.core.orm.UserAccount;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;

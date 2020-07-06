@@ -5,7 +5,6 @@ import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
-import java.sql.Timestamp;
 import java.util.function.Supplier;
 
 public class NewComputerDialog extends JDialog {

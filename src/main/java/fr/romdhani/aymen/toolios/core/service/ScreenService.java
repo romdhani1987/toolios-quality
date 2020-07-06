@@ -1,9 +1,7 @@
 package fr.romdhani.aymen.toolios.core.service;
 
 import fr.romdhani.aymen.toolios.core.dao.ScreenDao;
-import fr.romdhani.aymen.toolios.core.dao.UserAccountDao;
 import fr.romdhani.aymen.toolios.core.orm.Screen;
-import fr.romdhani.aymen.toolios.core.orm.UserAccount;
 
 import java.util.List;
 

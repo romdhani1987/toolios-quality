@@ -6,9 +6,11 @@ import fr.romdhani.aymen.toolios.controller.UserController;
 import fr.romdhani.aymen.toolios.core.service.ComputerService;
 import fr.romdhani.aymen.toolios.core.service.ScreenService;
 import fr.romdhani.aymen.toolios.core.service.UserAccountService;
+import fr.romdhani.aymen.toolios.view.dialog.ConnectionDialog;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class MainPanel extends JPanel {
     private JTabbedPane devicestabbedPane;
@@ -26,12 +28,15 @@ public class MainPanel extends JPanel {
     }
 
     private void initComponents() {
-
+        ConnectionDialog connectionDialog = new ConnectionDialog( "Connection");
+        connectionDialog.setModal(true);
+        connectionDialog.setSize(new Dimension(300, 250));
+        connectionDialog.setLocationRelativeTo(null);
+        connectionDialog.setVisible(true);
         setLayout(new MigLayout());
         mainTabbedPane = new JTabbedPane();
         projectTabbedPane = new JTabbedPane();
         requestTabbedPane = new JTabbedPane();
-
         devicestabbedPane = new JTabbedPane();
         // users
         UserAccountService userAccountService = new UserAccountService();

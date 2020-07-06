@@ -1,6 +1,7 @@
 package fr.romdhani.aymen.toolios.view.table.model;
 
 import fr.romdhani.aymen.toolios.core.orm.Product;
+
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;
