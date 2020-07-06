@@ -1,90 +1,75 @@
 package fr.romdhani.aymen.toolios.core.dao;
 
 
-import fr.romdhani.aymen.toolios.core.orm.Computer;
-import fr.romdhani.aymen.toolios.core.orm.Screen;
-import fr.romdhani.aymen.toolios.utils.HibernateUtil;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
+import fr.romdhani.aymen.toolios.core.orm.Screen;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import java.util.List;
 
+import static fr.romdhani.aymen.toolios.utils.HibernateUtil.getSession;
 
-public class ScreenDao implements DaoInterface<Screen, String> {
+
+public class ScreenDao implements DaoInterface<Screen, Long> {
 
     private Session currentSession;
 
     private Transaction currentTransaction;
 
     public ScreenDao() {
+        currentSession = getSession();
+        currentTransaction = currentSession.getTransaction();
     }
 
-    public Session openCurrentSession() {
-        currentSession = getSessionFactory().openSession();
-        return currentSession;
-    }
-
-    public Session openCurrentSessionwithTransaction() {
-        currentSession = getSessionFactory().openSession();
+    public Session getSessionwithTransaction() {
         currentTransaction = currentSession.beginTransaction();
         return currentSession;
     }
 
-    public void closeCurrentSession() {
-        currentSession.close();
-    }
-
-    public void closeCurrentSessionwithTransaction() {
+    public void commitTransaction() {
         currentTransaction.commit();
-        currentSession.close();
-    }
-
-    private static SessionFactory getSessionFactory() {
-        return HibernateUtil.getSessionFactory();
     }
 
     public Session getCurrentSession() {
+        currentSession = getSession();
         return currentSession;
     }
 
-    public void setCurrentSession(Session currentSession) {
-        this.currentSession = currentSession;
-    }
-
-    public Transaction getCurrentTransaction() {
-        return currentTransaction;
-    }
-
-    public void setCurrentTransaction(Transaction currentTransaction) {
-        this.currentTransaction = currentTransaction;
-    }
-
     public void persist(Screen entity) {
-        getCurrentSession().save(entity);
+        currentTransaction = currentSession.getTransaction();
+        currentTransaction.begin();
+        currentSession.save(entity);
+        currentTransaction.commit();
     }
+
 
     public void update(Screen entity) {
         getCurrentSession().update(entity);
     }
 
-    @Override
-    public Screen findById(String id) {
-        Screen screen = (Screen) getCurrentSession().get(Computer.class, id);
+    public Screen findById(Long id) {
+        currentTransaction = currentSession.getTransaction();
+        currentTransaction.begin();
+        Screen screen = (Screen) currentSession.get(Screen.class, id);
+        currentTransaction.commit();
         return screen;
     }
 
     public void delete(Screen entity) {
-        getCurrentSession().delete(entity);
+        currentTransaction = currentSession.getTransaction();
+        currentTransaction.begin();
+        currentSession.delete(entity);
+        currentTransaction.commit();
     }
 
     @SuppressWarnings("unchecked")
     public List<Screen> findAll() {
-        List<Screen> screens = (List<Screen>) getCurrentSession().createQuery("from Screen").list();
+        currentTransaction.begin();
+        List<Screen> screens = (List<Screen>) currentSession.createQuery("from Screen").list();
+        currentTransaction.commit();
         return screens;
     }
 
-    @Override
     public void deleteAll() {
         List<Screen> entityList = findAll();
         for (Screen entity : entityList) {

@@ -1,7 +1,9 @@
 package fr.romdhani.aymen.toolios.core.service;
 
 import fr.romdhani.aymen.toolios.core.dao.ScreenDao;
+import fr.romdhani.aymen.toolios.core.dao.UserAccountDao;
 import fr.romdhani.aymen.toolios.core.orm.Screen;
+import fr.romdhani.aymen.toolios.core.orm.UserAccount;
 
 import java.util.List;
 
@@ -13,46 +15,42 @@ public class ScreenService {
         screenDao = new ScreenDao();
     }
 
-    public void persist(Screen entity) {
-        screenDao.openCurrentSessionwithTransaction();
-        screenDao.persist(entity);
-        screenDao.closeCurrentSessionwithTransaction();
+    public boolean persist(Screen entity) {
+        try {
+            screenDao.persist(entity);
+            return true;
+        } catch (Exception e) {
+            System.err.println(e);
+            return false;
+        }
     }
+
 
     public void update(Screen entity) {
-        screenDao.openCurrentSessionwithTransaction();
         screenDao.update(entity);
-        screenDao.closeCurrentSessionwithTransaction();
     }
 
-    public Screen findById(String id) {
-        screenDao.openCurrentSession();
+    public Screen findById(Long id) {
         Screen screen = screenDao.findById(id);
-        screenDao.closeCurrentSession();
         return screen;
     }
 
-    public void delete(String id) {
-        screenDao.openCurrentSessionwithTransaction();
+    public void delete(Long id) {
         Screen screen = screenDao.findById(id);
+        System.out.println("Screen user: " + screen.toString());
         screenDao.delete(screen);
-        screenDao.closeCurrentSessionwithTransaction();
     }
 
     public List<Screen> findAll() {
-        screenDao.openCurrentSession();
         List<Screen> screens = screenDao.findAll();
-        screenDao.closeCurrentSession();
         return screens;
     }
 
     public void deleteAll() {
-        screenDao.openCurrentSessionwithTransaction();
         screenDao.deleteAll();
-        screenDao.closeCurrentSessionwithTransaction();
     }
 
-    public ScreenDao screenDao() {
+    public ScreenDao UserAccountDao() {
         return screenDao;
     }
 }

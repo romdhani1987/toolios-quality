@@ -1,8 +1,10 @@
 package fr.romdhani.aymen.toolios.view.panel;
 
 import fr.romdhani.aymen.toolios.controller.ComputerController;
+import fr.romdhani.aymen.toolios.controller.ScreenController;
 import fr.romdhani.aymen.toolios.controller.UserController;
 import fr.romdhani.aymen.toolios.core.service.ComputerService;
+import fr.romdhani.aymen.toolios.core.service.ScreenService;
 import fr.romdhani.aymen.toolios.core.service.UserAccountService;
 import net.miginfocom.swing.MigLayout;
 
@@ -38,7 +40,8 @@ public class MainPanel extends JPanel {
         ComputerService computerService = new ComputerService();
         computersPanel = new ComputerController(computerService).getComputersPanel();
         //Screens
-        screensPanel = new ScreensPanel();
+        ScreenService screenService = new ScreenService();
+        screensPanel = new ScreenController(screenService).getScreensPanel();
         // other Equipments
         othersEquipementPanel = new OthersEquipementPanel();
 

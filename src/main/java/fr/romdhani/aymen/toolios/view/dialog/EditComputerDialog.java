@@ -139,7 +139,6 @@ public class EditComputerDialog extends JDialog {
         });
         addButton.addActionListener(e -> {
             addComputer();
-
         });
         JPanel footerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         footerPanel.add(addButton);
