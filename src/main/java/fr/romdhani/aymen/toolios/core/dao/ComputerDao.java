@@ -34,6 +34,10 @@ public class ComputerDao implements DaoInterface<Computer, Long> {
         return currentSession;
     }
 
+    /**
+     * Persisit an entity
+     * @param entity
+     */
     public void persist(Computer entity) {
         currentTransaction = currentSession.getTransaction();
         currentTransaction.begin();
@@ -45,13 +49,27 @@ public class ComputerDao implements DaoInterface<Computer, Long> {
         getCurrentSession().update(entity);
     }
 
+    /**
+     * find a computer
+     *
+     * @param id the id to search
+     * @return
+     */
     public Computer findById(Long id) {
         Computer computer = (Computer) getCurrentSession().get(Computer.class, id);
         return computer;
     }
 
+    /**
+     * Delete the computer from the database
+     *
+     * @param entity
+     */
     public void delete(Computer entity) {
-        getCurrentSession().delete(entity);
+        currentTransaction = currentSession.getTransaction();
+        currentTransaction.begin();
+        currentSession.delete(entity);
+        currentTransaction.commit();
     }
 
     @SuppressWarnings("unchecked")
@@ -60,6 +78,9 @@ public class ComputerDao implements DaoInterface<Computer, Long> {
         return users;
     }
 
+    /**
+     * Delete all rows
+     */
     public void deleteAll() {
         List<Computer> entityList = findAll();
         for (Computer entity : entityList) {

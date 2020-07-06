@@ -2,7 +2,10 @@ package fr.romdhani.aymen.toolios.view.panel;
 
 import fr.romdhani.aymen.toolios.controller.ComputerController;
 import fr.romdhani.aymen.toolios.core.orm.Computer;
+import fr.romdhani.aymen.toolios.core.orm.UserAccount;
 import fr.romdhani.aymen.toolios.view.buttons.TooliosButton;
+import fr.romdhani.aymen.toolios.view.dialog.EditComputerDialog;
+import fr.romdhani.aymen.toolios.view.dialog.EditUserDialog;
 import fr.romdhani.aymen.toolios.view.dialog.NewComputerDialog;
 import fr.romdhani.aymen.toolios.view.table.model.ComputerModelObject;
 import net.miginfocom.swing.MigLayout;
@@ -46,9 +49,40 @@ public class ComputersPanel extends JPanel {
     }
 
     private void deleteComputer() {
+        int response = JOptionPane.showConfirmDialog(this, "Do you want really to delete this computer?", "Confirm",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.YES_OPTION) {
+            int row = computersTable.getSelectedRow();
+            if (row < 0) {
+                JOptionPane.showMessageDialog(this, "No computer were selected to delete!", "Delete computer", 1);
+            } else {
+                int modelRow = computersTable.convertRowIndexToModel(row);
+                Computer computer = computerModelObject.getComputer(modelRow);
+                computerController.deleteComputerFromDb(computer);
+                computerModelObject.removeComputer(modelRow);
+            }
+        }
     }
 
     private void editComputer() {
+
+        int row = computersTable.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(this, "No computer were selected to edit!", "Edit user", 1);
+        } else {
+            int modelRow = computersTable.convertRowIndexToModel(row);
+            Computer computer = computerModelObject.getComputer(modelRow);
+            EditComputerDialog editComputerDialog = new EditComputerDialog(computer);
+            editComputerDialog.setModal(true);
+            editComputerDialog.setLocationRelativeTo(null);
+            editComputerDialog.setVisible(true);
+            Computer computerToEdit = editComputerDialog.getComputerSupplierValid().get();
+            if (computerToEdit != null && computerController.addComputerToDb(computerToEdit)) {
+                JOptionPane.showMessageDialog(null, "The use has been edited successfully!", "Confirm", 2);
+                computerModelObject.fireTableDataChanged();
+                computersTable.repaint();
+            }
+        }
     }
 
     private void addComputer() {

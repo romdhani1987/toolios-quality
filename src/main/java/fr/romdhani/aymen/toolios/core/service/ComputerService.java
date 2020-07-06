@@ -36,7 +36,7 @@ public class ComputerService {
 
     public void delete(Long id) {
         Computer computer = computerDao.findById(id);
-        System.out.println("found user: " + computer.toString());
+        System.out.println("found computer: " + computer.toString());
         computerDao.delete(computer);
     }
 

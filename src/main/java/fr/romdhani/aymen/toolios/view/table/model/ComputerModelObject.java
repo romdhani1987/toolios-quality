@@ -1,6 +1,7 @@
 package fr.romdhani.aymen.toolios.view.table.model;
 
 import fr.romdhani.aymen.toolios.core.orm.Computer;
+import fr.romdhani.aymen.toolios.core.orm.UserAccount;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
@@ -71,5 +72,9 @@ public class ComputerModelObject extends AbstractTableModel {
     public void removeComputer(int rowIndex) {
         computers.remove(rowIndex);
         fireTableRowsDeleted(rowIndex, rowIndex);
+    }
+
+    public Computer getComputer(int i) {
+        return computers.get(i);
     }
 }

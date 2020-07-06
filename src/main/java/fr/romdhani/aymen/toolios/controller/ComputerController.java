@@ -39,8 +39,8 @@ public class ComputerController {
         return computerService.persist(computer);
     }
 
-    public void deleteUserFromDb(UserAccount user) {
-        computerService.delete(user.getId());
+    public void deleteComputerFromDb(Computer computer) {
+        computerService.delete(computer.getId());
     }
 
     public void refresh() {

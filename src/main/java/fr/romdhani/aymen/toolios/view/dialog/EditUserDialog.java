@@ -155,7 +155,7 @@ public class EditUserDialog extends JDialog {
             }
         });
         addButton.addActionListener(e -> {
-            addUser();
+            validUser();
 
         });
         JPanel footerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -165,7 +165,7 @@ public class EditUserDialog extends JDialog {
         add(footerPanel, BorderLayout.PAGE_END);
     }
 
-    private void addUser() {
+    private void validUser() {
         String firstName = fNameTextField.getText();
         String lastName = lNameTextField.getText();
         String login = loginTextField.getText();
