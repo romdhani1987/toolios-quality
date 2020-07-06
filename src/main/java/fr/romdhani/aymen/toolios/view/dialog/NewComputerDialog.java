@@ -155,7 +155,7 @@ public class NewComputerDialog extends JDialog {
         //   Timestamp parchasingDate = Timestamp.valueOf(purchasingDateTextField.getText());
         //  computer.setPurchaseDate(parchasingDate);
         computerSupplierValid = () -> {
-            return (computer);
+            return computer;
         };
         this.dispose();
     }

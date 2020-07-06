@@ -35,7 +35,10 @@ public class ComputerDao implements DaoInterface<Computer, Long> {
     }
 
     public void persist(Computer entity) {
-        getCurrentSession().save(entity);
+        currentTransaction = currentSession.getTransaction();
+        currentTransaction.begin();
+        currentSession.save(entity);
+        currentTransaction.commit();
     }
 
     public void update(Computer entity) {
