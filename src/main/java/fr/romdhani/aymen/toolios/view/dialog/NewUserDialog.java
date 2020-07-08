@@ -9,7 +9,6 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import java.awt.*;
 import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.function.Supplier;

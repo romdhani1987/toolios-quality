@@ -2,10 +2,12 @@ package fr.romdhani.aymen.toolios.view.dialog;
 
 import fr.romdhani.aymen.toolios.controller.UserController;
 import fr.romdhani.aymen.toolios.core.orm.UserAccount;
+import fr.romdhani.aymen.toolios.utils.Hash;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
+import java.nio.charset.StandardCharsets;
 import java.util.function.Supplier;
 
 public class ConnectionDialog extends JDialog {
@@ -72,6 +74,24 @@ public class ConnectionDialog extends JDialog {
 
     private void login() {
         userAccount = userController.findByLogin(loginTextField.getText());
-        System.out.println(userAccount);
+        if (userAccount != null && checkPassword(passwordTextField.getPassword(), userAccount.getPasswordHash().getBytes(StandardCharsets.UTF_8))) {
+            System.out.println(userAccount.getLogin() + ": signed in successfully!");
+            this.dispose();
+        }else {
+            clearFields();
+        }
     }
+
+    private void clearFields() {
+        loginTextField.setText("");
+        passwordTextField.setText("");
+    }
+
+    public boolean checkPassword(char[] password, byte[] passwordBytes) {
+        String enteredPass = new String(password);
+        String codePass = Hash.asIsoString(Hash.sha256(enteredPass + "toolios"));
+        String storedPass = new String(passwordBytes, StandardCharsets.UTF_8);
+        return codePass.equals(storedPass);
+    }
+
 }
