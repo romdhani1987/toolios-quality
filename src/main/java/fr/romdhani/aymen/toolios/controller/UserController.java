@@ -2,7 +2,7 @@ package fr.romdhani.aymen.toolios.controller;
 
 import fr.romdhani.aymen.toolios.core.orm.UserAccount;
 import fr.romdhani.aymen.toolios.core.service.UserAccountService;
-import fr.romdhani.aymen.toolios.view.panel.UsersPanel;
+import fr.romdhani.aymen.toolios.view.panel.user.UsersPanel;
 
 public class UserController {
     private UsersPanel usersPanel;

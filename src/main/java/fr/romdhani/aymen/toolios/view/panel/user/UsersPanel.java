@@ -1,4 +1,4 @@
-package fr.romdhani.aymen.toolios.view.panel;
+package fr.romdhani.aymen.toolios.view.panel.user;
 
 
 import fr.romdhani.aymen.toolios.controller.UserController;

@@ -2,23 +2,29 @@ package fr.romdhani.aymen.toolios.view.dialog;
 
 import fr.romdhani.aymen.toolios.core.orm.Address;
 import fr.romdhani.aymen.toolios.core.orm.UserAccount;
+import fr.romdhani.aymen.toolios.utils.Hash;
+import fr.romdhani.aymen.toolios.utils.StringUtils;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 import java.util.function.Supplier;
 
 public class NewUserDialog extends JDialog {
-    private Supplier<UserAccount> userAccountSupplierValid = () -> {
-        return null;
-    };
+
     private Supplier<UserAccount> userAccountSupplierCancel;
-    JButton addButton = new JButton("Add");
+    JButton addButton = new JButton(" Add ");
     JButton cancelButton = new JButton("Cancel");
     JTextField emailTextField = new JTextField();
     JTextField fNameTextField = new JTextField();
     JTextField lNameTextField = new JTextField();
     JTextField loginTextField = new JTextField();
+    JPasswordField pass1Field = new JPasswordField();
+    JPasswordField pass2Field = new JPasswordField();
     JTextField phoneTextField = new JTextField();
     JTextField creationTextField = new JTextField();
     JTextField streetTextField = new JTextField();
@@ -28,6 +34,11 @@ public class NewUserDialog extends JDialog {
     JTextField functionTextField = new JTextField();
     JTextField rolesTextField = new JTextField();
     JTextField groupTextField = new JTextField();
+    private byte[] passwordBytes;
+    private UserAccount userAccount = null;
+    private Supplier<UserAccount> userAccountSupplierValid = () -> {
+        return userAccount;
+    };
 
     public NewUserDialog() {
         super();
@@ -51,13 +62,15 @@ public class NewUserDialog extends JDialog {
     }
 
     private void initComponents() {
-        setSize(600, 500);
+        setSize(750, 500);
         JPanel userPanel = new JPanel();
         userPanel.setLayout(new MigLayout("", "[:200:]10[:300:]"));
         JLabel fName = new JLabel("First name * ");
         JLabel lName = new JLabel("Last name * ");
         JLabel loginLabel = new JLabel("Login * ");
         JLabel emailLabel = new JLabel("Email * ");
+        JLabel pass1Label = new JLabel("Password * ");
+        JLabel pass2Label = new JLabel("Confirm Password * ");
         JLabel phoneLabel = new JLabel("Phone number ");
         JLabel creationLabel = new JLabel("Creation mode ");
         JLabel streetLabel = new JLabel("Street ");
@@ -70,25 +83,22 @@ public class NewUserDialog extends JDialog {
 
         userPanel.add(fName);
         userPanel.add(fNameTextField, "grow,push, wrap");
-        fNameTextField.addActionListener(e -> {
-            checkFields();
-        });
 
         userPanel.add(lName);
         userPanel.add(lNameTextField, "grow,push, wrap");
-        lNameTextField.addActionListener(e -> {
-            checkFields();
-        });
+
         userPanel.add(loginLabel);
         userPanel.add(loginTextField, "grow,push, wrap");
-        loginTextField.addActionListener(e -> {
-            checkFields();
-        });
+
+        userPanel.add(pass1Label);
+        userPanel.add(pass1Field, "grow,push, wrap");
+
+        userPanel.add(pass2Label);
+        userPanel.add(pass2Field, "grow,push, wrap");
+
         userPanel.add(emailLabel);
         userPanel.add(emailTextField, "grow,push, wrap");
-        emailTextField.addActionListener(e -> {
-            checkFields();
-        });
+
         userPanel.add(phoneLabel);
         userPanel.add(phoneTextField, "grow,push, wrap");
 
@@ -131,17 +141,20 @@ public class NewUserDialog extends JDialog {
             }
         });
         addButton.addActionListener(e -> {
-            addUser();
-
+            try {
+                addUser();
+            } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
+                noSuchAlgorithmException.printStackTrace();
+            }
         });
         JPanel footerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         footerPanel.add(addButton);
         footerPanel.add(cancelButton);
-        add(userPanel, BorderLayout.CENTER);
+        add(new JScrollPane(userPanel), BorderLayout.CENTER);
         add(footerPanel, BorderLayout.PAGE_END);
     }
 
-    private void addUser() {
+    private void addUser() throws NoSuchAlgorithmException {
         String firstName = fNameTextField.getText();
         String lastName = lNameTextField.getText();
         String login = loginTextField.getText();
@@ -156,33 +169,37 @@ public class NewUserDialog extends JDialog {
 
         String roles = rolesTextField.getText();
         String group = groupTextField.getText();
-        UserAccount userAccount = new UserAccount();
-        userAccount.setFirstName(firstName);
-        userAccount.setLastName(lastName);
-        userAccount.setLogin(login);
-        userAccount.setEmail(email);
-        userAccount.setPhoneNumber(phone);
-        userAccount.setCreationMode(creationMode);
+        if (!StringUtils.isNullOrEmpty(firstName) &&
+                !StringUtils.isNullOrEmpty(lastName) &&
+                !StringUtils.isNullOrEmpty(login) && !StringUtils.isNullOrEmpty(email) &&
+                isValidPass(pass1Field.getPassword()) && isValidPass(pass1Field.getPassword()) && samePass()) {
+            userAccount = new UserAccount();
+            userAccount.setFirstName(firstName);
+            userAccount.setLastName(lastName);
+            userAccount.setLogin(login);
+            userAccount.setPasswordHash(getHash());
+            userAccount.setEmail(email);
+            userAccount.setPhoneNumber(phone);
+            userAccount.setCreationMode(creationMode);
 
-        Address adress = new Address();
-        adress.setStreet(street);
-        adress.setCity(city);
-        adress.setCode(code);
-        adress.setCountry(country);
-        userAccount.setAddress(adress);
-        //userAccount.setCreation_mode(creationMode);
-        //userAccount.setGroup();
-        //userAccount
-        userAccountSupplierValid = () -> {
-            return (userAccount);
-        };
-        this.dispose();
+            Address adress = new Address();
+            adress.setStreet(street);
+            adress.setCity(city);
+            adress.setCode(code);
+            adress.setCountry(country);
+            userAccount.setAddress(adress);
+            //userAccount.setCreation_mode(creationMode);
+            //userAccount.setGroup();
+            //userAccount
+            userAccountSupplierValid = () -> {
+                return (userAccount);
+            };
+            this.dispose();
+        } else {
+            System.err.println("Error while trying to add a user");
+        }
     }
 
-    private void checkFields() {
-        addButton.setEnabled(!(fNameTextField.getText().isEmpty() || loginTextField.getText().isEmpty()
-                || lNameTextField.getText().isEmpty() || emailTextField.getText().isEmpty()));
-    }
 
     private boolean checkEmail() {
         if (!emailTextField.getText().matches("[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}") || emailTextField.getText().trim().isEmpty()) {
@@ -192,7 +209,27 @@ public class NewUserDialog extends JDialog {
         }
     }
 
+    public boolean isValidPass(char[] seq) {
+        return seq.length >= 8;
+    }
+
+    private boolean samePass() {
+        return Arrays.equals(pass1Field.getPassword(), pass1Field.getPassword());
+    }
+
     private void cancelActionPerofrmed() {
         this.dispose();
     }
+
+    private String getHash() {
+        return Hash.asIsoString(Hash.sha256(pass1Field.getText() + "toolios"));
+    }
+
+    public boolean checkPassword(char[] password) {
+        String enteredPass = new String(password);
+        String codePass = Hash.asIsoString(Hash.sha256(enteredPass + "toolios"));
+        String storedPass = new String(passwordBytes, StandardCharsets.UTF_8);
+        return codePass.equals(storedPass);
+    }
+
 }
