@@ -28,6 +28,9 @@ public class UserController {
     public void deleteUserFromDb(UserAccount user) {
         userAccountService.delete(user.getId());
     }
+    public UserAccount findByLogin(String login) {
+       return userAccountService.findByLogin(login);
+    }
     public void refresh() {
         usersPanel.getUserModelObject().addAllUsers(userAccountService.findAll());
     }

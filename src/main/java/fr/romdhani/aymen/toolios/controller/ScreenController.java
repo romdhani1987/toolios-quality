@@ -3,7 +3,6 @@ package fr.romdhani.aymen.toolios.controller;
 import fr.romdhani.aymen.toolios.core.orm.Screen;
 import fr.romdhani.aymen.toolios.core.service.ScreenService;
 import fr.romdhani.aymen.toolios.view.panel.ScreensPanel;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class ScreenController implements Controller<Screen> {
         this.screenService = screenService;
     }
 
-    public ScreenController(@NotNull ScreenService screenService) {
+    public ScreenController(ScreenService screenService) {
         this.screenService = screenService;
         screensPanel = new ScreensPanel(this);
     }

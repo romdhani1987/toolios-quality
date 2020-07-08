@@ -21,6 +21,7 @@ public class MainPanel extends JPanel {
     private ScreensPanel screensPanel;
     private UsersPanel usersPanel;
     private OthersEquipementPanel othersEquipementPanel;
+    private UserController userController;
 
     public MainPanel() {
         super();
@@ -28,7 +29,11 @@ public class MainPanel extends JPanel {
     }
 
     private void initComponents() {
-        ConnectionDialog connectionDialog = new ConnectionDialog( "Connection");
+        // Users
+        UserAccountService userAccountService = new UserAccountService();
+        userController = new UserController(userAccountService);
+        ConnectionDialog connectionDialog = new ConnectionDialog("Connection", userController);
+        //
         connectionDialog.setModal(true);
         connectionDialog.setSize(new Dimension(300, 200));
         connectionDialog.setLocationRelativeTo(null);
@@ -38,9 +43,9 @@ public class MainPanel extends JPanel {
         projectTabbedPane = new JTabbedPane();
         requestTabbedPane = new JTabbedPane();
         devicestabbedPane = new JTabbedPane();
-        // users
-        UserAccountService userAccountService = new UserAccountService();
-        usersPanel = new UserController(userAccountService).getUsersPanel();
+
+
+        usersPanel = userController.getUsersPanel();
         // computers
         ComputerService computerService = new ComputerService();
         computersPanel = new ComputerController(computerService).getComputersPanel();

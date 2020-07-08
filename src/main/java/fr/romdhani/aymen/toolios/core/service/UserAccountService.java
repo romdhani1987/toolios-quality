@@ -46,8 +46,10 @@ public class UserAccountService {
     }
 
     public void deleteAll() {
-        ;
         userAccountDao.deleteAll();
+    }
+    public UserAccount findByLogin(String login){
+        return userAccountDao.findByLogin(login);
     }
 
     public UserAccountDao UserAccountDao() {
