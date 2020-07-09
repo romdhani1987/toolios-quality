@@ -13,6 +13,8 @@ import java.util.Optional;
 import java.util.function.Supplier;
 
 public class ConnectionDialog extends JDialog {
+    private static final String ERROR_MESSAGE = "Incorrect login or password!";
+    private JLabel errorMessage;
     private JLabel login;
     private JLabel password;
     private JTextField loginTextField;
@@ -44,6 +46,9 @@ public class ConnectionDialog extends JDialog {
     }
 
     private void initComponents() {
+        errorMessage = new JLabel(ERROR_MESSAGE);
+        errorMessage.setForeground(Color.red);
+        errorMessage.setVisible(false);
         login = new JLabel("Login: ");
         password = new JLabel("Password: ");
         loginTextField = new JTextField();
@@ -61,6 +66,9 @@ public class ConnectionDialog extends JDialog {
         panel.add(loginTextField, "growx,push,wrap");
         panel.add(password);
         panel.add(passwordTextField, "growx,push,wrap");
+        JPanel panelError = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panelError.add(errorMessage);
+        panel.add(panelError, "growx, span 2,wrap");
         JPanel panelButtons = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelButtons.add(loginButton);
         panelButtons.add(clearButton);
@@ -75,13 +83,21 @@ public class ConnectionDialog extends JDialog {
     }
 
     private void login() {
-        userAccount = userController.findByLogin(loginTextField.getText());
-        if (userAccount != null && checkPassword(passwordTextField.getPassword(), userAccount.getPasswordHash().getBytes(StandardCharsets.UTF_8))) {
-            System.out.println(userAccount.getLogin() + ": signed in successfully!");
-            UserSession.getInstance().setCurrentLogin(Optional.ofNullable(userAccount.getLogin()));
-            this.dispose();
-        } else {
+        try {
+            userAccount = userController.findByLogin(loginTextField.getText());
+            if (userAccount != null && checkPassword(passwordTextField.getPassword(), userAccount.getPasswordHash().getBytes(StandardCharsets.UTF_8))) {
+                UserSession.getInstance().setCurrentLogin(Optional.ofNullable(userAccount.getLogin()));
+                errorMessage.setVisible(false);
+                System.out.println(userAccount.getLogin() + ": signed in successfully!");
+                this.dispose();
+            } else {
+                errorMessage.setVisible(true);
+                clearFields();
+            }
+        } catch (Exception e) {
+            errorMessage.setVisible(true);
             clearFields();
+            System.err.println("Error while trying to sign in: " + e);
         }
     }
 

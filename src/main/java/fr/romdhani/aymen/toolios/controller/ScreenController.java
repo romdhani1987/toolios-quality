@@ -2,7 +2,7 @@ package fr.romdhani.aymen.toolios.controller;
 
 import fr.romdhani.aymen.toolios.core.orm.Screen;
 import fr.romdhani.aymen.toolios.core.service.ScreenService;
-import fr.romdhani.aymen.toolios.view.panel.ScreensPanel;
+import fr.romdhani.aymen.toolios.view.panel.informatique.ScreensPanel;
 
 import java.util.List;
 

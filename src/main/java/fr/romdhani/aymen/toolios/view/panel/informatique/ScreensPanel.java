@@ -1,15 +1,16 @@
-package fr.romdhani.aymen.toolios.view.panel;
+package fr.romdhani.aymen.toolios.view.panel.informatique;
 
 import fr.romdhani.aymen.toolios.controller.ScreenController;
 import fr.romdhani.aymen.toolios.controller.user.UserController;
 import fr.romdhani.aymen.toolios.view.buttons.TooliosButton;
+import fr.romdhani.aymen.toolios.view.panel.TooliosView;
 import fr.romdhani.aymen.toolios.view.table.model.ScreenModelObject;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class ScreensPanel extends JPanel {
+public class ScreensPanel extends JPanel implements TooliosView {
 
     private ScreenController screenController;
 

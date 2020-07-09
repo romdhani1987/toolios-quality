@@ -7,6 +7,9 @@ import fr.romdhani.aymen.toolios.core.service.ComputerService;
 import fr.romdhani.aymen.toolios.core.service.ScreenService;
 import fr.romdhani.aymen.toolios.core.service.UserAccountService;
 import fr.romdhani.aymen.toolios.view.dialog.user.ConnectionDialog;
+import fr.romdhani.aymen.toolios.view.panel.equipment.EquipementPanel;
+import fr.romdhani.aymen.toolios.view.panel.informatique.ComputersPanel;
+import fr.romdhani.aymen.toolios.view.panel.informatique.ScreensPanel;
 import fr.romdhani.aymen.toolios.view.panel.user.UsersPanel;
 import net.miginfocom.swing.MigLayout;
 
@@ -21,7 +24,7 @@ public class MainPanel extends JPanel {
     private ComputersPanel computersPanel;
     private ScreensPanel screensPanel;
     private UsersPanel usersPanel;
-    private OthersEquipementPanel othersEquipementPanel;
+    private EquipementPanel othersEquipementPanel;
     private UserController userController;
 
     public MainPanel() {
@@ -54,7 +57,7 @@ public class MainPanel extends JPanel {
         ScreenService screenService = new ScreenService();
         screensPanel = new ScreenController(screenService).getScreensPanel();
         // other Equipments
-        othersEquipementPanel = new OthersEquipementPanel();
+        othersEquipementPanel = new EquipementPanel();
 
         devicestabbedPane.add("Users", usersPanel);
         devicestabbedPane.add("Computers", computersPanel);

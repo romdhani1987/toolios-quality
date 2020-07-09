@@ -6,13 +6,14 @@ import fr.romdhani.aymen.toolios.core.orm.UserAccount;
 import fr.romdhani.aymen.toolios.view.buttons.TooliosButton;
 import fr.romdhani.aymen.toolios.view.dialog.user.EditUserDialog;
 import fr.romdhani.aymen.toolios.view.dialog.user.NewUserDialog;
+import fr.romdhani.aymen.toolios.view.panel.TooliosView;
 import fr.romdhani.aymen.toolios.view.table.model.UserModelObject;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class UsersPanel extends JPanel {
+public class UsersPanel extends JPanel implements TooliosView {
     private JTable usersTable;
     private UserModelObject userModelObject;
     private TooliosButton addButton;
