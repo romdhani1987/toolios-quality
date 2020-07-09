@@ -196,7 +196,7 @@ public class NewUserDialog extends JDialog {
         if (!StringUtils.isNullOrEmpty(firstName) &&
                 !StringUtils.isNullOrEmpty(lastName) &&
                 !StringUtils.isNullOrEmpty(login) && !StringUtils.isNullOrEmpty(email) &&
-                isValidPass(pass1Field.getPassword()) && isValidPass(pass1Field.getPassword()) && samePass() && validatedEmail()) {
+                isValidPass(pass1Field.getPassword()) && isValidPass(pass1Field.getPassword()) && samePass()) {
             userAccount = new UserAccount();
             userAccount.setFirstName(firstName);
             userAccount.setLastName(lastName);

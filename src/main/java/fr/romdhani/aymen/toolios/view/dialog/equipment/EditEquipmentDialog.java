@@ -133,12 +133,7 @@ public class EditEquipmentDialog extends JDialog {
         //
         userPanel.add(functionLabel);
         userPanel.add(functionTextField, "grow,push, wrap");
-
         userPanel.add(rolesLabel);
-        if (userAccount.getRoles() != null)
-            updateField(userAccount.getRoles().getName(), rolesTextField);
-        userPanel.add(rolesTextField, "grow,push, wrap");
-
         userPanel.add(groupLabel);
         if (userAccount.getGroup() != null)
             updateField(userAccount.getGroup().getName(), groupTextField);
