@@ -1,4 +1,4 @@
-package fr.romdhani.aymen.toolios.view.dialog;
+package fr.romdhani.aymen.toolios.view.dialog.informatique;
 
 import fr.romdhani.aymen.toolios.core.orm.Address;
 import fr.romdhani.aymen.toolios.core.orm.UserAccount;
@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.function.Supplier;
 
-public class NewEquipmentDialog extends JDialog {
+public class NewScreenDialog extends JDialog {
     private Supplier<UserAccount> userAccountSupplierValid = () -> {
         return null;
     };
@@ -29,7 +29,7 @@ public class NewEquipmentDialog extends JDialog {
     JTextField rolesTextField = new JTextField();
     JTextField groupTextField = new JTextField();
 
-    public NewEquipmentDialog() {
+    public NewScreenDialog() {
         super();
         initComponents();
     }

@@ -6,7 +6,7 @@ import fr.romdhani.aymen.toolios.controller.user.UserController;
 import fr.romdhani.aymen.toolios.core.service.ComputerService;
 import fr.romdhani.aymen.toolios.core.service.ScreenService;
 import fr.romdhani.aymen.toolios.core.service.UserAccountService;
-import fr.romdhani.aymen.toolios.view.dialog.ConnectionDialog;
+import fr.romdhani.aymen.toolios.view.dialog.user.ConnectionDialog;
 import fr.romdhani.aymen.toolios.view.panel.user.UsersPanel;
 import net.miginfocom.swing.MigLayout;
 

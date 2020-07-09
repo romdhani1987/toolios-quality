@@ -4,8 +4,8 @@ package fr.romdhani.aymen.toolios.view.panel.user;
 import fr.romdhani.aymen.toolios.controller.user.UserController;
 import fr.romdhani.aymen.toolios.core.orm.UserAccount;
 import fr.romdhani.aymen.toolios.view.buttons.TooliosButton;
-import fr.romdhani.aymen.toolios.view.dialog.EditUserDialog;
-import fr.romdhani.aymen.toolios.view.dialog.NewUserDialog;
+import fr.romdhani.aymen.toolios.view.dialog.user.EditUserDialog;
+import fr.romdhani.aymen.toolios.view.dialog.user.NewUserDialog;
 import fr.romdhani.aymen.toolios.view.table.model.UserModelObject;
 import net.miginfocom.swing.MigLayout;
 

@@ -1,4 +1,4 @@
-package fr.romdhani.aymen.toolios.view.dialog;
+package fr.romdhani.aymen.toolios.view.dialog.equipment;
 
 import fr.romdhani.aymen.toolios.core.orm.Address;
 import fr.romdhani.aymen.toolios.core.orm.UserAccount;

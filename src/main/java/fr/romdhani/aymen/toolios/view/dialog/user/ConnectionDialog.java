@@ -1,6 +1,7 @@
-package fr.romdhani.aymen.toolios.view.dialog;
+package fr.romdhani.aymen.toolios.view.dialog.user;
 
 import fr.romdhani.aymen.toolios.controller.user.UserController;
+import fr.romdhani.aymen.toolios.controller.user.UserSession;
 import fr.romdhani.aymen.toolios.core.orm.UserAccount;
 import fr.romdhani.aymen.toolios.utils.Hash;
 import net.miginfocom.swing.MigLayout;
@@ -8,6 +9,7 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import java.awt.*;
 import java.nio.charset.StandardCharsets;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 public class ConnectionDialog extends JDialog {
@@ -76,8 +78,9 @@ public class ConnectionDialog extends JDialog {
         userAccount = userController.findByLogin(loginTextField.getText());
         if (userAccount != null && checkPassword(passwordTextField.getPassword(), userAccount.getPasswordHash().getBytes(StandardCharsets.UTF_8))) {
             System.out.println(userAccount.getLogin() + ": signed in successfully!");
+            UserSession.getInstance().setCurrentLogin(Optional.ofNullable(userAccount.getLogin()));
             this.dispose();
-        }else {
+        } else {
             clearFields();
         }
     }

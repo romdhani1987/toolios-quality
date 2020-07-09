@@ -1,4 +1,4 @@
-package fr.romdhani.aymen.toolios.view.dialog;
+package fr.romdhani.aymen.toolios.view.dialog.informatique;
 
 import fr.romdhani.aymen.toolios.core.orm.Computer;
 import net.miginfocom.swing.MigLayout;

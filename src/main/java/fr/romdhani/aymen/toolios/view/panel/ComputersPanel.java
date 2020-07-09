@@ -3,8 +3,8 @@ package fr.romdhani.aymen.toolios.view.panel;
 import fr.romdhani.aymen.toolios.controller.ComputerController;
 import fr.romdhani.aymen.toolios.core.orm.Computer;
 import fr.romdhani.aymen.toolios.view.buttons.TooliosButton;
-import fr.romdhani.aymen.toolios.view.dialog.EditComputerDialog;
-import fr.romdhani.aymen.toolios.view.dialog.NewComputerDialog;
+import fr.romdhani.aymen.toolios.view.dialog.informatique.EditComputerDialog;
+import fr.romdhani.aymen.toolios.view.dialog.informatique.NewComputerDialog;
 import fr.romdhani.aymen.toolios.view.table.model.ComputerModelObject;
 import net.miginfocom.swing.MigLayout;
 
