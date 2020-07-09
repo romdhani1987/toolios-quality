@@ -1,12 +1,15 @@
 package fr.romdhani.aymen.toolios.controller.user;
 
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class UserSession {
+    private static final String CURRENT_USER = "currentUser";
     private List<AuthorizedAction> authorizedActionList = new ArrayList<>();
     private Optional<String> currentLogin = Optional.empty();
+    private PropertyChangeSupport propertyChangeSupport;
 
     public List<AuthorizedAction> getAuthorizedActionList() {
         return authorizedActionList;
@@ -25,6 +28,7 @@ public class UserSession {
     }
 
     private UserSession() {
+        propertyChangeSupport = new PropertyChangeSupport(this);
     }
 
     private static class UserSessionInstance {
