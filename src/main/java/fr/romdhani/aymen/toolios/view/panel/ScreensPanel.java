@@ -1,7 +1,7 @@
 package fr.romdhani.aymen.toolios.view.panel;
 
 import fr.romdhani.aymen.toolios.controller.ScreenController;
-import fr.romdhani.aymen.toolios.controller.UserController;
+import fr.romdhani.aymen.toolios.controller.user.UserController;
 import fr.romdhani.aymen.toolios.view.buttons.TooliosButton;
 import fr.romdhani.aymen.toolios.view.table.model.ScreenModelObject;
 import net.miginfocom.swing.MigLayout;

@@ -1,4 +1,4 @@
-package fr.romdhani.aymen.toolios.controller;
+package fr.romdhani.aymen.toolios.controller.user;
 
 import fr.romdhani.aymen.toolios.core.orm.UserAccount;
 import fr.romdhani.aymen.toolios.core.service.UserAccountService;

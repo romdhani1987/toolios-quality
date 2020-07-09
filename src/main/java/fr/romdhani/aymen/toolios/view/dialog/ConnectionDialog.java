@@ -1,6 +1,6 @@
 package fr.romdhani.aymen.toolios.view.dialog;
 
-import fr.romdhani.aymen.toolios.controller.UserController;
+import fr.romdhani.aymen.toolios.controller.user.UserController;
 import fr.romdhani.aymen.toolios.core.orm.UserAccount;
 import fr.romdhani.aymen.toolios.utils.Hash;
 import net.miginfocom.swing.MigLayout;
