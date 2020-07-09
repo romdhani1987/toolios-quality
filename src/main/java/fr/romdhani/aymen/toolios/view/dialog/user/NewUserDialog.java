@@ -7,30 +7,34 @@ import fr.romdhani.aymen.toolios.utils.StringUtils;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
+import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Supplier;
 
 public class NewUserDialog extends JDialog {
 
-    JButton addButton = new JButton(" Add ");
-    JButton cancelButton = new JButton("Cancel");
-    JTextField emailTextField = new JTextField();
-    JTextField fNameTextField = new JTextField();
-    JTextField lNameTextField = new JTextField();
-    JTextField loginTextField = new JTextField();
-    JPasswordField pass1Field = new JPasswordField();
-    JPasswordField pass2Field = new JPasswordField();
-    JTextField phoneTextField = new JTextField();
-    JTextField creationTextField = new JTextField();
-    JTextField streetTextField = new JTextField();
-    JTextField cityTextField = new JTextField();
-    JTextField codeTextField = new JTextField();
-    JTextField countryTextField = new JTextField();
-    JTextField functionTextField = new JTextField();
-    JTextField rolesTextField = new JTextField();
-    JTextField groupTextField = new JTextField();
+    private JButton addButton = new JButton(" Add ");
+    private JButton clearButton = new JButton("Clear");
+    private JButton cancelButton = new JButton("Cancel");
+    private JTextField emailTextField = new JTextField();
+    private JTextField fNameTextField = new JTextField();
+    private JTextField lNameTextField = new JTextField();
+    private JTextField loginTextField = new JTextField();
+    private JPasswordField pass1Field = new JPasswordField();
+    private JPasswordField pass2Field = new JPasswordField();
+    private JTextField phoneTextField = new JTextField();
+    private JComboBox<String> creationCBox = new JComboBox();
+    private JTextField streetTextField = new JTextField();
+    private JTextField cityTextField = new JTextField();
+    private JTextField codeTextField = new JTextField();
+    private JTextField countryTextField = new JTextField();
+    private JTextField functionTextField = new JTextField();
+    private JTextField rolesTextField = new JTextField();
+    private JTextField groupTextField = new JTextField();
     private Supplier<UserAccount> userAccountSupplierCancel;
     private UserAccount userAccount = null;
     private Supplier<UserAccount> userAccountSupplierValid = () -> {
@@ -99,8 +103,10 @@ public class NewUserDialog extends JDialog {
         userPanel.add(phoneLabel);
         userPanel.add(phoneTextField, "grow,push, wrap");
 
+        creationCBox.addItem("MANUAL");
+        creationCBox.addItem("AUTOMATIQUE");
         userPanel.add(creationLabel);
-        userPanel.add(creationTextField, "grow,push, wrap ");
+        userPanel.add(creationCBox, "grow,push, wrap ");
         //Adress
         userPanel.add(new JLabel("Address"), "grow,push, wrap ");
 
@@ -144,11 +150,32 @@ public class NewUserDialog extends JDialog {
                 noSuchAlgorithmException.printStackTrace();
             }
         });
+        clearButton.addActionListener(e -> {
+            clearFields();
+        });
         JPanel footerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         footerPanel.add(addButton);
+        footerPanel.add(clearButton);
         footerPanel.add(cancelButton);
         add(new JScrollPane(userPanel), BorderLayout.CENTER);
         add(footerPanel, BorderLayout.PAGE_END);
+    }
+
+    private void clearFields() {
+        List<JTextComponent> list = new ArrayList<>();
+        list.add(fNameTextField);
+        list.add(lNameTextField);
+        list.add(loginTextField);
+        list.add(pass1Field);
+        list.add(pass2Field);
+        list.add(emailTextField);
+        list.add(phoneTextField);
+        list.add(streetTextField);
+        list.add(codeTextField);
+        list.add(cityTextField);
+        list.add(countryTextField);
+        list.forEach(component -> component.setText(""));
+        creationCBox.setSelectedItem(creationCBox.getItemAt(0));
     }
 
     private void addUser() throws NoSuchAlgorithmException {
@@ -157,7 +184,7 @@ public class NewUserDialog extends JDialog {
         String login = loginTextField.getText();
         String email = emailTextField.getText();
         String phone = phoneTextField.getText();
-        String creationMode = creationTextField.getText();
+        String creationMode = (String) creationCBox.getSelectedItem();
 
         String street = streetTextField.getText();
         String code = codeTextField.getText();

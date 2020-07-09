@@ -8,10 +8,8 @@ import java.awt.*;
 import java.util.function.Supplier;
 
 public class NewComputerDialog extends JDialog {
-    private Supplier<Computer> computerSupplierValid = () -> {
-        return null;
-    };
-    private Supplier<Computer> computerSupplierCancel;
+
+
     JButton addButton = new JButton("Add");
     JButton cancelButton = new JButton("Cancel");
     JTextField computerNameTextField = new JTextField();
@@ -26,7 +24,10 @@ public class NewComputerDialog extends JDialog {
     JTextField userTextField = new JTextField();
     JTextField screensTextField = new JTextField();
     JTextField licensesTextField = new JTextField();
-
+    private Supplier<Computer> computerSupplierValid = () -> {
+        return null;
+    };
+    private Supplier<Computer> computerSupplierCancel;
     public NewComputerDialog() {
         super();
         initComponents();
@@ -111,7 +112,7 @@ public class NewComputerDialog extends JDialog {
         userPanel.add(screensTextField, "grow,push, wrap");
 
         cancelButton.addActionListener(e -> {
-            int response = JOptionPane.showConfirmDialog(null, "Do you want to continue? ", "Confirm",
+            int response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.YES_OPTION) {
                 computerSupplierCancel = () -> {
