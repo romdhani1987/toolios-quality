@@ -1,5 +1,6 @@
-package fr.romdhani.aymen.toolios.controller;
+package fr.romdhani.aymen.toolios.controller.informatique;
 
+import fr.romdhani.aymen.toolios.controller.Controller;
 import fr.romdhani.aymen.toolios.core.orm.Screen;
 import fr.romdhani.aymen.toolios.core.service.ScreenService;
 import fr.romdhani.aymen.toolios.view.panel.informatique.ScreensPanel;

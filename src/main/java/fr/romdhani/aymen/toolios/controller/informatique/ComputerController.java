@@ -1,4 +1,4 @@
-package fr.romdhani.aymen.toolios.controller;
+package fr.romdhani.aymen.toolios.controller.informatique;
 
 import fr.romdhani.aymen.toolios.core.orm.Computer;
 import fr.romdhani.aymen.toolios.core.service.ComputerService;

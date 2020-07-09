@@ -1,6 +1,6 @@
 package fr.romdhani.aymen.toolios.view.panel.informatique;
 
-import fr.romdhani.aymen.toolios.controller.ComputerController;
+import fr.romdhani.aymen.toolios.controller.informatique.ComputerController;
 import fr.romdhani.aymen.toolios.core.orm.Computer;
 import fr.romdhani.aymen.toolios.view.buttons.TooliosButton;
 import fr.romdhani.aymen.toolios.view.dialog.informatique.EditComputerDialog;

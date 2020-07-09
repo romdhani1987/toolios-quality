@@ -1,7 +1,7 @@
 package fr.romdhani.aymen.toolios.view.panel;
 
-import fr.romdhani.aymen.toolios.controller.ComputerController;
-import fr.romdhani.aymen.toolios.controller.ScreenController;
+import fr.romdhani.aymen.toolios.controller.informatique.ComputerController;
+import fr.romdhani.aymen.toolios.controller.informatique.ScreenController;
 import fr.romdhani.aymen.toolios.controller.user.UserController;
 import fr.romdhani.aymen.toolios.core.service.ComputerService;
 import fr.romdhani.aymen.toolios.core.service.ScreenService;

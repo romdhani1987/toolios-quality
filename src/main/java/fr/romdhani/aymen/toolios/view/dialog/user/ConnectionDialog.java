@@ -8,6 +8,8 @@ import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -75,8 +77,16 @@ public class ConnectionDialog extends JDialog {
         panel.add(panelButtons, "growx, span 2");
         setLayout(new BorderLayout());
         add(panel, BorderLayout.CENTER);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent windowEvent) {
+                int result = JOptionPane.showConfirmDialog(null, "Do you really want to exit Toolios-quality?" , "Close?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (result == JOptionPane.YES_OPTION) {
+                    System.exit(0);
+                }
+            }
+        });
     }
-
     private void cancel() {
         userAccount = null;
         System.exit(0);

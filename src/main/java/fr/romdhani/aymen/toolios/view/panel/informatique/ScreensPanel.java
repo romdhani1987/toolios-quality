@@ -1,6 +1,6 @@
 package fr.romdhani.aymen.toolios.view.panel.informatique;
 
-import fr.romdhani.aymen.toolios.controller.ScreenController;
+import fr.romdhani.aymen.toolios.controller.informatique.ScreenController;
 import fr.romdhani.aymen.toolios.controller.user.UserController;
 import fr.romdhani.aymen.toolios.view.buttons.TooliosButton;
 import fr.romdhani.aymen.toolios.view.panel.TooliosView;
