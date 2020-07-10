@@ -89,7 +89,7 @@ public class NewComputerDialog extends JDialog {
         JLabel userLabel = new JLabel("User ");
         JLabel screensLabel = new JLabel("Screens ");
         JLabel licensesLabel = new JLabel("Licenses ");
-
+        // Layout
         userPanel.add(computerNameLabel);
         userPanel.add(computerNameTextField, "growx,push, wrap");
         userPanel.add(serialNumberLabel);
