@@ -224,11 +224,6 @@ public class NewUserDialog extends JDialog {
         }
     }
 
-
-    private boolean validatedEmail() {
-        return (emailTextField.getText().matches("[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}"));
-    }
-
     public boolean isValidPass(char[] seq) {
         return seq.length >= 8;
     }
