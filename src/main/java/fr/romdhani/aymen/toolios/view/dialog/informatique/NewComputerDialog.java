@@ -1,33 +1,50 @@
 package fr.romdhani.aymen.toolios.view.dialog.informatique;
 
 import fr.romdhani.aymen.toolios.core.orm.Computer;
+import fr.romdhani.aymen.toolios.utils.StringUtils;
+import fr.romdhani.aymen.toolios.view.commons.DateLabelFormatter;
 import net.miginfocom.swing.MigLayout;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Properties;
 import java.util.function.Supplier;
 
 public class NewComputerDialog extends JDialog {
 
-
-    JButton addButton = new JButton("Add");
-    JButton cancelButton = new JButton("Cancel");
-    JTextField computerNameTextField = new JTextField();
-    JTextField serialNumberTextField = new JTextField();
-    JTextField processorTextField = new JTextField();
-    JTextField ramTextField = new JTextField();
-    JTextField serviceTagTextField = new JTextField();
-    JTextField osTextField = new JTextField();
-    JTextField ageTextField = new JTextField();
-    JCheckBox shiftingTextField = new JCheckBox();
-    JTextField purchasingDateTextField = new JTextField();
-    JTextField userTextField = new JTextField();
-    JTextField screensTextField = new JTextField();
-    JTextField licensesTextField = new JTextField();
+    private static final String osWindows = "Windows";
+    private static final String osUnix = "Unix";
+    private static final String osSolaris = "Solaris";
+    private static final String osMac = "Macintos";
+    private static final String osOther = "Other";
+    private JButton addButton = new JButton("Add");
+    private JButton cancelButton = new JButton("Cancel");
+    private JTextField computerNameTextField = new JTextField();
+    private JTextField serialNumberTextField = new JTextField();
+    private JTextField processorTextField = new JTextField();
+    private JTextField ramTextField = new JTextField();
+    private JTextField serviceTagTextField = new JTextField();
+    private JComboBox<String> osComboBox = new JComboBox();
+    private JTextField ageField = new JTextField();
+    private JCheckBox isShiftingCkBoc = new JCheckBox();
+    private JTextField userTextField = new JTextField();
+    private JTextField screensTextField = new JTextField();
+    private JTextField licensesTextField = new JTextField();
+    private UtilDateModel model = new UtilDateModel();
+    private Computer computer;
     private Supplier<Computer> computerSupplierValid = () -> {
-        return null;
+        return computer;
     };
-    private Supplier<Computer> computerSupplierCancel;
+    private Supplier<Computer> computerSupplierCancel = () -> {
+        return computer;
+    };
+
     public NewComputerDialog() {
         super();
         initComponents();
@@ -57,7 +74,7 @@ public class NewComputerDialog extends JDialog {
         JLabel serialNumberLabel = new JLabel("Serial number * ");
         JLabel processorLabel = new JLabel("Processor * ");
         JLabel ramLabel = new JLabel("Ram * ");
-        JLabel serviceLabel = new JLabel("Service tag ");
+        JLabel serviceLabel = new JLabel("Service tag * ");
         JLabel osLabel = new JLabel("Os ");
         JLabel ageLabel = new JLabel("Age ");
         JLabel shiftingLabel = new JLabel("Shifting ");
@@ -68,39 +85,42 @@ public class NewComputerDialog extends JDialog {
 
         userPanel.add(computerNameLabel);
         userPanel.add(computerNameTextField, "grow,push, wrap");
-        computerNameTextField.addActionListener(e -> {
-            checkFields();
-        });
-
         userPanel.add(serialNumberLabel);
         userPanel.add(serialNumberTextField, "grow,push, wrap");
-        serialNumberTextField.addActionListener(e -> {
-            checkFields();
-        });
+
         userPanel.add(processorLabel);
         userPanel.add(processorTextField, "grow,push, wrap");
-        processorTextField.addActionListener(e -> {
-            checkFields();
-        });
+
         userPanel.add(ramLabel);
         userPanel.add(ramTextField, "grow,push, wrap");
-        ramTextField.addActionListener(e -> {
-            checkFields();
-        });
+
         userPanel.add(serviceLabel);
         userPanel.add(serviceTagTextField, "grow,push, wrap");
 
         userPanel.add(osLabel);
-        userPanel.add(osTextField, "grow,push, wrap ");
+        osComboBox.addItem(osWindows);
+        osComboBox.addItem(osUnix);
+        osComboBox.addItem(osMac);
+        osComboBox.addItem(osSolaris);
+        osComboBox.addItem(osOther);
+        userPanel.add(osComboBox, "grow,push, wrap ");
 
         userPanel.add(ageLabel);
-        userPanel.add(ageTextField, "grow,push, wrap");
+        ageField.setEditable(false);
+        userPanel.add(ageField, "grow,push, wrap");
 
         userPanel.add(shiftingLabel);
-        userPanel.add(shiftingTextField, "grow,push, wrap");
+        userPanel.add(isShiftingCkBoc, "grow,push, wrap");
 
         userPanel.add(purchasingDateLabel);
-        userPanel.add(purchasingDateTextField, "grow,push, wrap");
+
+        Properties p = new Properties();
+        p.put("text.today", "Today");
+        p.put("text.month", "Month");
+        p.put("text.year", "Year");
+        JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+        JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+        userPanel.add(datePicker, "grow,push, wrap");
 
         userPanel.add(licensesLabel);
         userPanel.add(licensesTextField, "grow,push, wrap");
@@ -134,38 +154,40 @@ public class NewComputerDialog extends JDialog {
     }
 
     private void addComputer() {
-        String computerName = computerNameTextField.getText();
-        String osName = osTextField.getText();
-        String ram = ramTextField.getText();
-        String processor = processorTextField.getText();
-        String serviceTage = serviceTagTextField.getText();
-        String age = ageTextField.getText();
-
-        //String user = userTextField.getText();
-        //String screens = screensTextField.getText();
-
-        Computer computer = new Computer();
-        computer.setName(computerName);
-        computer.setOs(osName);
-        computer.setOs(ram);
-        computer.setProcessor(processor);
-        computer.setServiceTag(serviceTage);
-        computer.setAge(Integer.parseInt(age));
-        computer.setShifting(shiftingTextField.isSelected());
-        //   Timestamp parchasingDate = Timestamp.valueOf(purchasingDateTextField.getText());
-        //  computer.setPurchaseDate(parchasingDate);
-        computerSupplierValid = () -> {
-            return computer;
-        };
-        this.dispose();
+        if (!StringUtils.isNullOrEmpty(computerNameTextField.getText()) && !StringUtils.isNullOrEmpty(serialNumberTextField.getText())
+                && !StringUtils.isNullOrEmpty(ramTextField.getText()) && !StringUtils.isNullOrEmpty(processorTextField.getText())
+                && !StringUtils.isNullOrEmpty(serviceTagTextField.getText())) {
+            String computerName = computerNameTextField.getText();
+            String serial = serialNumberTextField.getText();
+            String ram = ramTextField.getText();
+            String processor = processorTextField.getText();
+            String serviceTag = serviceTagTextField.getText();
+            String os = (String) osComboBox.getSelectedItem();
+            boolean isShifting = isShiftingCkBoc.isSelected();
+            Timestamp creationTimestamp = new Timestamp(model.getValue().getTime());
+            int age = computeAge(creationTimestamp.toLocalDateTime().toLocalDate(), LocalDate.now());
+            computer = new Computer();
+            computer.setName(computerName);
+            computer.setSerialNumber(serial);
+            computer.setRam(ram);
+            computer.setProcessor(processor);
+            computer.setServiceTag(serviceTag);
+            computer.setAge(age);
+            computer.setOs(os);
+            computer.setShifting(isShifting);
+            computer.setPurchaseDate(creationTimestamp);
+            computerSupplierValid = () -> {
+                return computer;
+            };
+            this.dispose();
+        }
     }
 
-    private void checkFields() {
-        addButton.setEnabled(!(computerNameTextField.getText().isEmpty() || ramTextField.getText().isEmpty()
-                || osTextField.getText().isEmpty() || processorTextField.getText().isEmpty()));
-    }
-
-    private void cancelActionPerofrmed() {
-        this.dispose();
+    private int computeAge(LocalDate today, LocalDate current) {
+        if ((today != null) && (current != null)) {
+            return Period.between(today, current).getYears();
+        } else {
+            return 0;
+        }
     }
 }
