@@ -9,21 +9,26 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 import javax.swing.*;
+import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import java.util.function.Supplier;
 
 public class NewComputerDialog extends JDialog {
 
-    private static final String osWindows = "Windows";
-    private static final String osUnix = "Unix";
-    private static final String osSolaris = "Solaris";
-    private static final String osMac = "Macintos";
-    private static final String osOther = "Other";
-    private JButton addButton = new JButton("Add");
+    private static final String OS_WINDOWS = "Windows";
+    private static final String OS_UNIX = "Unix";
+    private static final String OS_SOLARIS = "Solaris";
+    private static final String OS_MAC = "Macintos";
+    private static final String OS_OTHER = "Other";
+    private static final String ERROR = "Error occurred: maybe some fields are incorrect!";
+    private JButton addButton = new JButton(" Add ");
+    private JButton clearButton = new JButton("Clear");
     private JButton cancelButton = new JButton("Cancel");
     private JTextField computerNameTextField = new JTextField();
     private JTextField serialNumberTextField = new JTextField();
@@ -37,6 +42,7 @@ public class NewComputerDialog extends JDialog {
     private JTextField screensTextField = new JTextField();
     private JTextField licensesTextField = new JTextField();
     private UtilDateModel model = new UtilDateModel();
+    private JLabel errorLabel;
     private Computer computer;
     private Supplier<Computer> computerSupplierValid = () -> {
         return computer;
@@ -67,7 +73,8 @@ public class NewComputerDialog extends JDialog {
     }
 
     private void initComponents() {
-        setSize(600, 500);
+        setSize(800, 600);
+        setTitle("New Computer");
         JPanel userPanel = new JPanel();
         userPanel.setLayout(new MigLayout("", "[:200:]10[:300:]"));
         JLabel computerNameLabel = new JLabel("Computer name * ");
@@ -84,33 +91,33 @@ public class NewComputerDialog extends JDialog {
         JLabel licensesLabel = new JLabel("Licenses ");
 
         userPanel.add(computerNameLabel);
-        userPanel.add(computerNameTextField, "grow,push, wrap");
+        userPanel.add(computerNameTextField, "growx,push, wrap");
         userPanel.add(serialNumberLabel);
-        userPanel.add(serialNumberTextField, "grow,push, wrap");
+        userPanel.add(serialNumberTextField, "growx,push, wrap");
 
         userPanel.add(processorLabel);
-        userPanel.add(processorTextField, "grow,push, wrap");
+        userPanel.add(processorTextField, "growx,push, wrap");
 
         userPanel.add(ramLabel);
-        userPanel.add(ramTextField, "grow,push, wrap");
+        userPanel.add(ramTextField, "growx,push, wrap");
 
         userPanel.add(serviceLabel);
-        userPanel.add(serviceTagTextField, "grow,push, wrap");
+        userPanel.add(serviceTagTextField, "growx,push, wrap");
 
         userPanel.add(osLabel);
-        osComboBox.addItem(osWindows);
-        osComboBox.addItem(osUnix);
-        osComboBox.addItem(osMac);
-        osComboBox.addItem(osSolaris);
-        osComboBox.addItem(osOther);
-        userPanel.add(osComboBox, "grow,push, wrap ");
+        osComboBox.addItem(OS_WINDOWS);
+        osComboBox.addItem(OS_UNIX);
+        osComboBox.addItem(OS_MAC);
+        osComboBox.addItem(OS_SOLARIS);
+        osComboBox.addItem(OS_OTHER);
+        userPanel.add(osComboBox, "growx,push, wrap ");
 
         userPanel.add(ageLabel);
         ageField.setEditable(false);
-        userPanel.add(ageField, "grow,push, wrap");
+        userPanel.add(ageField, "growx,push, wrap");
 
         userPanel.add(shiftingLabel);
-        userPanel.add(isShiftingCkBoc, "grow,push, wrap");
+        userPanel.add(isShiftingCkBoc, "growx,push, wrap");
 
         userPanel.add(purchasingDateLabel);
 
@@ -123,14 +130,16 @@ public class NewComputerDialog extends JDialog {
         userPanel.add(datePicker, "grow,push, wrap");
 
         userPanel.add(licensesLabel);
-        userPanel.add(licensesTextField, "grow,push, wrap");
+        userPanel.add(licensesTextField, "growx,push, wrap");
 
         userPanel.add(userLabel);
-        userPanel.add(userTextField, "grow,push, wrap");
+        userPanel.add(userTextField, "growx,push, wrap");
 
         userPanel.add(screensLabel);
-        userPanel.add(screensTextField, "grow,push, wrap");
-
+        userPanel.add(screensTextField, "growx,push, wrap");
+        clearButton.addActionListener(e -> {
+            clear();
+        });
         cancelButton.addActionListener(e -> {
             int response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -146,10 +155,17 @@ public class NewComputerDialog extends JDialog {
             addComputer();
 
         });
-        JPanel footerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        footerPanel.add(addButton);
-        footerPanel.add(cancelButton);
-        add(userPanel, BorderLayout.CENTER);
+        JPanel footerPanel = new JPanel(new MigLayout());
+        JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        buttonsPanel.add(addButton);
+        buttonsPanel.add(clearButton);
+        buttonsPanel.add(cancelButton);
+        errorLabel = new JLabel(ERROR);
+        errorLabel.setForeground(Color.red);
+        errorLabel.setVisible(false);
+        footerPanel.add(errorLabel, "growx, center,  wrap");
+        footerPanel.add(buttonsPanel, "growx, push");
+        add(new JScrollPane(userPanel), BorderLayout.CENTER);
         add(footerPanel, BorderLayout.PAGE_END);
     }
 
@@ -176,11 +192,32 @@ public class NewComputerDialog extends JDialog {
             computer.setOs(os);
             computer.setShifting(isShifting);
             computer.setPurchaseDate(creationTimestamp);
+            errorLabel.setVisible(false);
             computerSupplierValid = () -> {
                 return computer;
             };
             this.dispose();
+        } else {
+            errorLabel.setVisible(true);
         }
+    }
+
+    /**
+     * Clear all fields
+     */
+    private void clear() {
+        List<JTextComponent> componentList = new ArrayList<>();
+        componentList.add(computerNameTextField);
+        componentList.add(serialNumberTextField);
+        componentList.add(processorTextField);
+        componentList.add(ramTextField);
+        componentList.add(serviceTagTextField);
+        componentList.add(ageField);
+        componentList.add(computerNameTextField);
+        componentList.add(computerNameTextField);
+        componentList.add(computerNameTextField);
+        componentList.add(computerNameTextField);
+        componentList.forEach(comp -> comp.setText(""));
     }
 
     private int computeAge(LocalDate today, LocalDate current) {
