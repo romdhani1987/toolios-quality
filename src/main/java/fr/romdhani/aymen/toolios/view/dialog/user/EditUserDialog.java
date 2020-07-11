@@ -34,7 +34,7 @@ public class EditUserDialog extends JDialog {
         return userAccount;
     };
     private Supplier<UserAccount> userAccountSupplierCancel = () -> {
-        return userAccount;
+        return null;
     };
 
     public EditUserDialog(UserAccount userAccount) {

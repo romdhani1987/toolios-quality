@@ -28,7 +28,7 @@ public class ResetPWUserDialog extends JDialog {
         return userAccount;
     };
     private Supplier<UserAccount> userAccountSupplierValid = () -> {
-        return userAccount;
+        return null;
     };
 
     public Supplier<UserAccount> getUserAccountSupplierValid() {

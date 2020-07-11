@@ -35,10 +35,13 @@ public class NewUserDialog extends JDialog {
     private JTextField functionTextField = new JTextField();
     private JTextField rolesTextField = new JTextField();
     private JTextField groupTextField = new JTextField();
-    private Supplier<UserAccount> userAccountSupplierCancel;
+
     private UserAccount userAccount = null;
     private Supplier<UserAccount> userAccountSupplierValid = () -> {
         return userAccount;
+    };
+    private Supplier<UserAccount> userAccountSupplierCancel=() -> {
+        return null;
     };
 
     public NewUserDialog() {

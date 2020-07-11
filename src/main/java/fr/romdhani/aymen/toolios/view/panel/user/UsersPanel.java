@@ -58,7 +58,7 @@ public class UsersPanel extends JPanel implements TooliosView {
     private void resetPw() {
         int row = usersTable.getSelectedRow();
         if (row < 0) {
-            JOptionPane.showMessageDialog(this, "No user were selected to edit!", "Reset Password", 1);
+            JOptionPane.showMessageDialog(this, "No user were selected!", "Reset Password", 1);
         } else {
             int modelRow = usersTable.convertRowIndexToModel(row);
             UserAccount user = userModelObject.getUser(modelRow);
@@ -78,7 +78,7 @@ public class UsersPanel extends JPanel implements TooliosView {
     private void editUser() {
         int row = usersTable.getSelectedRow();
         if (row < 0) {
-            JOptionPane.showMessageDialog(this, "No user were selected to edit!", "Edit user", 1);
+            JOptionPane.showMessageDialog(this, "No user were selected!", "Edit User", 1);
         } else {
             int modelRow = usersTable.convertRowIndexToModel(row);
             UserAccount user = userModelObject.getUser(modelRow);
@@ -124,8 +124,8 @@ public class UsersPanel extends JPanel implements TooliosView {
                 userModelObject.fireTableDataChanged();
                 usersTable.repaint();
             } else {
-                JOptionPane.showMessageDialog(this, "Failed to add this user!",
-                        "Delete user", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Add user has failed!",
+                        "Add User", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
