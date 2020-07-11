@@ -2,6 +2,7 @@ package fr.romdhani.aymen.toolios.view.dialog.user;
 
 import fr.romdhani.aymen.toolios.core.orm.Address;
 import fr.romdhani.aymen.toolios.core.orm.UserAccount;
+import fr.romdhani.aymen.toolios.utils.StringUtils;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -10,18 +11,16 @@ import java.awt.*;
 import java.util.function.Supplier;
 
 public class EditUserDialog extends JDialog {
-    private Supplier<UserAccount> userAccountSupplierValid = () -> {
-        return null;
-    };
-    private Supplier<UserAccount> userAccountSupplierCancel;
-    private JButton addButton = new JButton("Save");
+
+    private static final String ERROR_MESSAGE = "Error occurred! Maybe some required fields are empty!";
+    private JButton addButton = new JButton("Apply");
     private JButton cancelButton = new JButton("Cancel");
     private JTextField emailTextField = new JTextField();
     private JTextField fNameTextField = new JTextField();
     private JTextField lNameTextField = new JTextField();
     private JTextField loginTextField = new JTextField();
     private JTextField phoneTextField = new JTextField();
-    private JTextField creationTextField = new JTextField();
+    private JComboBox<String> creationCBox = new JComboBox();
     private JTextField streetTextField = new JTextField();
     private JTextField cityTextField = new JTextField();
     private JTextField codeTextField = new JTextField();
@@ -29,7 +28,14 @@ public class EditUserDialog extends JDialog {
     private JTextField functionTextField = new JTextField();
     private JTextField rolesTextField = new JTextField();
     private JTextField groupTextField = new JTextField();
-    private UserAccount userAccount;
+    private JLabel errorLabel;
+    private UserAccount userAccount = null;
+    private Supplier<UserAccount> userAccountSupplierValid = () -> {
+        return userAccount;
+    };
+    private Supplier<UserAccount> userAccountSupplierCancel = () -> {
+        return userAccount;
+    };
 
     public EditUserDialog(UserAccount userAccount) {
         super();
@@ -41,20 +47,13 @@ public class EditUserDialog extends JDialog {
         return userAccountSupplierValid;
     }
 
-    public void setUserAccountSupplierValid(Supplier<UserAccount> userAccountSupplierValid) {
-        this.userAccountSupplierValid = userAccountSupplierValid;
-    }
-
     public Supplier<UserAccount> getUserAccountSupplierCancel() {
         return userAccountSupplierCancel;
     }
 
-    public void setUserAccountSupplierCancel(Supplier<UserAccount> userAccountSupplierCancel) {
-        this.userAccountSupplierCancel = userAccountSupplierCancel;
-    }
-
     private void initComponents() {
-        setSize(600, 500);
+        setSize(800, 600);
+        setTitle("Edit User");
         JPanel userPanel = new JPanel();
         userPanel.setLayout(new MigLayout("", "[:200:]10[:300:]"));
         JLabel fName = new JLabel("First name * ");
@@ -74,39 +73,29 @@ public class EditUserDialog extends JDialog {
         userPanel.add(fName);
         userPanel.add(fNameTextField, "grow,push, wrap");
         updateField(userAccount.getFirstName(), fNameTextField);
-        fNameTextField.addActionListener(e -> {
-            checkFields();
-        });
 
         userPanel.add(lName);
         updateField(userAccount.getLastName(), lNameTextField);
         userPanel.add(lNameTextField, "grow,push, wrap");
-        lNameTextField.addActionListener(e -> {
-            checkFields();
-        });
 
         userPanel.add(loginLabel);
         updateField(userAccount.getLogin(), loginTextField);
         userPanel.add(loginTextField, "grow,push, wrap");
-        loginTextField.addActionListener(e -> {
-            checkFields();
-        });
 
         userPanel.add(emailLabel);
         updateField(userAccount.getEmail(), emailTextField);
         userPanel.add(emailTextField, "grow,push, wrap");
-        emailTextField.addActionListener(e -> {
-            checkFields();
-        });
 
         userPanel.add(phoneLabel);
         updateField(userAccount.getPhoneNumber(), phoneTextField);
         userPanel.add(phoneTextField, "grow,push, wrap");
 
         userPanel.add(creationLabel);
-        updateField(userAccount.getCreationMode(), creationTextField);
-        userPanel.add(creationTextField, "grow,push, wrap ");
-        //Adress
+        creationCBox.addItem("MANUAL");
+        creationCBox.addItem("AUTOMATIQUE");
+        creationCBox.setSelectedItem(userAccount.getCreationMode());
+        userPanel.add(creationCBox, "grow,push, wrap ");
+        //Address
         userPanel.add(new JLabel("Address"), "grow,push, wrap ");
 
         userPanel.add(streetLabel);
@@ -144,25 +133,30 @@ public class EditUserDialog extends JDialog {
             updateField(userAccount.getGroup().getName(), groupTextField);
         userPanel.add(groupTextField, "grow,push, wrap");
         cancelButton.addActionListener(e -> {
-            int response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
+            int response = JOptionPane.showConfirmDialog(null, "Do you want to save modification? ", "Confirm",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.YES_OPTION) {
-                userAccountSupplierCancel = () -> {
-                    return (null);
-                };
+                userAccount = null;
                 this.dispose();
             } else if (response == JOptionPane.CLOSED_OPTION) {
             }
         });
         addButton.addActionListener(e -> {
             validUser();
-
         });
-        JPanel footerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        footerPanel.add(addButton);
-        footerPanel.add(cancelButton);
+        JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel errorPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        errorLabel = new JLabel(ERROR_MESSAGE);
+        errorLabel.setVisible(false);
+        errorLabel.setForeground(Color.RED);
+        errorPanel.add(errorLabel);
+        JPanel footPanel = new JPanel(new MigLayout());
+        footPanel.add(errorPanel, "span 2,growx,push,wrap");
+        footPanel.add(buttonsPanel, "span 2,growx,push,wrap");
+        buttonsPanel.add(addButton);
+        buttonsPanel.add(cancelButton);
         add(userPanel, BorderLayout.CENTER);
-        add(footerPanel, BorderLayout.PAGE_END);
+        add(footPanel, BorderLayout.PAGE_END);
     }
 
     private void validUser() {
@@ -171,7 +165,7 @@ public class EditUserDialog extends JDialog {
         String login = loginTextField.getText();
         String email = emailTextField.getText();
         String phone = phoneTextField.getText();
-        String creationMode = creationTextField.getText();
+        String creationMode = (String) creationCBox.getSelectedItem();
 
         String street = streetTextField.getText();
         String code = codeTextField.getText();
@@ -180,39 +174,37 @@ public class EditUserDialog extends JDialog {
 
         String roles = rolesTextField.getText();
         String group = groupTextField.getText();
-        userAccount.setFirstName(firstName);
-        userAccount.setLastName(lastName);
-        userAccount.setLogin(login);
-        userAccount.setEmail(email);
-        userAccount.setPhoneNumber(phone);
-        userAccount.setCreationMode(creationMode);
-
-        Address adress = new Address();
-        adress.setStreet(street);
-        adress.setCity(city);
-        adress.setCode(code);
-        adress.setCountry(country);
-        userAccount.setAddress(adress);
-        //userAccount.setCreation_mode(creationMode);
-        //userAccount.setGroup();
-        //userAccount
-        userAccountSupplierValid = () -> {
-            return (userAccount);
-        };
-        this.dispose();
+        if (!StringUtils.isNullOrEmpty(firstName) &&
+                !StringUtils.isNullOrEmpty(lastName) &&
+                !StringUtils.isNullOrEmpty(login) && !StringUtils.isNullOrEmpty(email)) {
+            userAccount.setFirstName(firstName);
+            userAccount.setLastName(lastName);
+            userAccount.setLogin(login);
+            userAccount.setEmail(email);
+            userAccount.setPhoneNumber(phone);
+            userAccount.setCreationMode(creationMode);
+            Address adress = new Address();
+            adress.setStreet(street);
+            adress.setCity(city);
+            adress.setCode(code);
+            adress.setCountry(country);
+            userAccount.setAddress(adress);
+            //userAccount.setCreation_mode(creationMode);
+            //userAccount.setGroup();
+            //userAccount
+            userAccountSupplierValid = () -> {
+                return (userAccount);
+            };
+            this.dispose();
+        } else {
+            errorLabel.setVisible(true);
+            System.err.println("Error while trying to add a user");
+        }
     }
 
     private void checkFields() {
         addButton.setEnabled(!(fNameTextField.getText().isEmpty() || loginTextField.getText().isEmpty()
                 || lNameTextField.getText().isEmpty() || emailTextField.getText().isEmpty()));
-    }
-
-    private boolean checkEmail() {
-        if (!emailTextField.getText().matches("[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}") || emailTextField.getText().trim().isEmpty()) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     private void updateField(Object user, JTextComponent component) {

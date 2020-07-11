@@ -63,7 +63,7 @@ public class NewUserDialog extends JDialog {
     }
 
     private void initComponents() {
-        setSize(750, 500);
+        setSize(800, 600);
         JPanel userPanel = new JPanel();
         userPanel.setLayout(new MigLayout("", "[:200:]10[:300:]"));
         JLabel fName = new JLabel("First name * ");
