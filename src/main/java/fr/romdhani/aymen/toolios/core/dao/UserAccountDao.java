@@ -78,14 +78,12 @@ public class UserAccountDao implements DaoInterface<UserAccount, Long> {
     public UserAccount findByLogin(String login) {
         currentTransaction = currentSession.getTransaction();
         currentTransaction.begin();
-        currentSession.createCriteria(UserAccount.class).add(Restrictions.eq("id", 1l))
-                .list();
         List<UserAccount> users = currentSession.createCriteria(UserAccount.class).add(Restrictions.eq("login", login))
                 .list();
         currentTransaction.commit();
-        if (users.size() > 1) return null;
+        //TO DO add unique constraint in database
+        if (users.size() > 1) return users.get(0);
         else return users.get(0);
-
     }
 
     public void deleteAll() {

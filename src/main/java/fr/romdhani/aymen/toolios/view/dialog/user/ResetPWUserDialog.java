@@ -13,6 +13,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
 
+/**
+ * Creates and displays reset password dialog
+ *
+ * @author aromdhani
+ */
 public class ResetPWUserDialog extends JDialog {
 
     private JButton applyButton = new JButton("Apply");
@@ -41,7 +46,9 @@ public class ResetPWUserDialog extends JDialog {
         initComponents();
     }
 
-
+    /**
+     * initialize components
+     */
     private void initComponents() {
         setSize(800, 200);
         setTitle("Reset Password");
@@ -94,6 +101,9 @@ public class ResetPWUserDialog extends JDialog {
         add(footerPanel, BorderLayout.PAGE_END);
     }
 
+    /**
+     * clear all fileds
+     */
     private void clearFields() {
         List<JTextComponent> list = new ArrayList<>();
         list.add(oldPassField);
@@ -102,6 +112,11 @@ public class ResetPWUserDialog extends JDialog {
         list.forEach(component -> component.setText(""));
     }
 
+    /**
+     * Apply changes
+     *
+     * @throws NoSuchAlgorithmException
+     */
     private void applyChanges() throws NoSuchAlgorithmException {
         if (isValidPass(pass1Field.getPassword()) && isValidPass(pass1Field.getPassword()) && samePass()) {
             userAccount.setPasswordHash(getHash());

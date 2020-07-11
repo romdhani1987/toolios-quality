@@ -14,6 +14,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 import java.util.function.Supplier;
 
+/**
+ * Creates and displays connection dialog
+ *
+ * @author aromdhani
+ */
 public class ConnectionDialog extends JDialog {
     private static final String ERROR_MESSAGE = "Incorrect login or password!";
     private JLabel errorMessage;
@@ -47,6 +52,9 @@ public class ConnectionDialog extends JDialog {
         return validSupplier;
     }
 
+    /**
+     * initialize components
+     */
     private void initComponents() {
         errorMessage = new JLabel(ERROR_MESSAGE);
         errorMessage.setForeground(Color.red);
@@ -82,22 +90,28 @@ public class ConnectionDialog extends JDialog {
             public void windowClosing(WindowEvent windowEvent) {
                 int result = JOptionPane.showConfirmDialog(null, "Do you really want to exit Toolios-quality?", "Close?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (result == JOptionPane.YES_OPTION) {
-                 //   System.exit(0);
+                  //  System.exit(0);
                 }
             }
         });
     }
 
+    /**
+     * Exit software
+     */
     private void cancel() {
-        userAccount = null;
         System.exit(0);
     }
 
+    /**
+     * login
+     */
     private void login() {
         try {
             userAccount = userController.findByLogin(loginTextField.getText());
+            System.out.println(userAccount.toString());
             if (userAccount != null && checkPassword(passwordTextField.getPassword(), userAccount.getPasswordHash().getBytes(StandardCharsets.UTF_8))) {
-                UserSession.getInstance().setCurrentLogin(Optional.ofNullable(userAccount.getLogin()));
+                //UserSession.getInstance().setCurrentLogin(Optional.ofNullable(userAccount.getLogin()));
                 errorMessage.setVisible(false);
                 System.out.println(userAccount.getLogin() + ": signed in successfully!");
                 this.dispose();
@@ -112,11 +126,21 @@ public class ConnectionDialog extends JDialog {
         }
     }
 
+    /**
+     * Clear all fields
+     */
     private void clearFields() {
         loginTextField.setText("");
         passwordTextField.setText("");
     }
 
+    /**
+     * Check the passwords
+     *
+     * @param password      the old password
+     * @param passwordBytes the bytes
+     * @return <code>true</code> if matches
+     */
     public boolean checkPassword(char[] password, byte[] passwordBytes) {
         String enteredPass = new String(password);
         String codePass = Hash.asIsoString(Hash.sha256(enteredPass + "toolios"));

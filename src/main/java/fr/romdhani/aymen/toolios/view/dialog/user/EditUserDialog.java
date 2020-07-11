@@ -10,6 +10,11 @@ import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.util.function.Supplier;
 
+/**
+ * Creates and displays edit user dialog
+ *
+ * @author aromdhani
+ */
 public class EditUserDialog extends JDialog {
 
     private static final String ERROR_MESSAGE = "Error occurred! Maybe some required fields are empty!";
