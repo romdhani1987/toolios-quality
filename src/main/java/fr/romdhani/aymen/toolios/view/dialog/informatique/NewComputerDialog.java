@@ -192,6 +192,22 @@ public class NewComputerDialog extends JDialog {
             computer.setOs(os);
             computer.setShifting(isShifting);
             computer.setPurchaseDate(creationTimestamp);
+           /* List<License> licenseList = new ArrayList<>();
+            License license = new License();
+            license.setName("Windows licenses");
+            License license1 = new License();
+            license1.setName("unix licenses");
+            License license2 = new License();
+            license2.setName("team licenses");
+            Session session = getSession();
+            Transaction tr = session.getTransaction();
+            tr.begin();
+            session.save(license);
+            session.save(license1);
+            session.save(license2);
+            tr.commit();
+            licenseList.add(license);
+            computer.setLicenses(licenseList);*/
             errorLabel.setVisible(false);
             computerSupplierValid = () -> {
                 return computer;
