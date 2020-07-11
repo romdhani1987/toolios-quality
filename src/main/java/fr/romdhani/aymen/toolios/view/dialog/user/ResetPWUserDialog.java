@@ -50,7 +50,7 @@ public class ResetPWUserDialog extends JDialog {
      * initialize components
      */
     private void initComponents() {
-        setSize(800, 200);
+        setSize(800, 220);
         setTitle("Reset Password");
         JPanel userPanel = new JPanel();
         userPanel.setLayout(new MigLayout("", "[:200:]10[:300:]"));
