@@ -6,6 +6,7 @@ import fr.romdhani.aymen.toolios.core.orm.UserAccount;
 import fr.romdhani.aymen.toolios.view.buttons.TooliosButton;
 import fr.romdhani.aymen.toolios.view.dialog.user.EditUserDialog;
 import fr.romdhani.aymen.toolios.view.dialog.user.NewUserDialog;
+import fr.romdhani.aymen.toolios.view.dialog.user.ResetPWUserDialog;
 import fr.romdhani.aymen.toolios.view.panel.TooliosView;
 import fr.romdhani.aymen.toolios.view.table.model.UserModelObject;
 import net.miginfocom.swing.MigLayout;
@@ -19,7 +20,8 @@ public class UsersPanel extends JPanel implements TooliosView {
     private TooliosButton addButton;
     private TooliosButton editButton;
     private TooliosButton removeButton;
-    private TooliosButton updateButton;
+    private TooliosButton resetButton;
+    private TooliosButton refreshButton;
     private UserController userController;
 
     private void initComponents() {
@@ -38,14 +40,39 @@ public class UsersPanel extends JPanel implements TooliosView {
         removeButton.addActionListener(e -> {
             deleteUser();
         });
-        updateButton = new TooliosButton("Refresh");
+        resetButton = new TooliosButton("Reset password");
+        resetButton.addActionListener(e -> {
+            resetPw();
+        });
+        refreshButton = new TooliosButton("Refresh");
         JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttonsPanel.add(addButton);
         buttonsPanel.add(editButton);
         buttonsPanel.add(removeButton);
-        buttonsPanel.add(updateButton);
+        buttonsPanel.add(resetButton);
+        buttonsPanel.add(refreshButton);
         this.add(new JScrollPane(usersTable), "grow,span, push");
         this.add(buttonsPanel, "grow,span,push");
+    }
+
+    private void resetPw() {
+        int row = usersTable.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(this, "No user were selected to edit!", "Reset Password", 1);
+        } else {
+            int modelRow = usersTable.convertRowIndexToModel(row);
+            UserAccount user = userModelObject.getUser(modelRow);
+            ResetPWUserDialog resetDialog = new ResetPWUserDialog(user);
+            resetDialog.setModal(true);
+            resetDialog.setLocationRelativeTo(null);
+            resetDialog.setVisible(true);
+            UserAccount editedUser = resetDialog.getUserAccountSupplierValid().get();
+            if (editedUser != null && userController.addUserToDb(editedUser)) {
+                JOptionPane.showMessageDialog(null, "The password has been reset successfully!", "Confirm", 2);
+                userModelObject.fireTableDataChanged();
+                usersTable.repaint();
+            }
+        }
     }
 
     private void editUser() {

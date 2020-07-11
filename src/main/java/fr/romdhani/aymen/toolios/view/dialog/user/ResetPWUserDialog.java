@@ -23,36 +23,28 @@ public class ResetPWUserDialog extends JDialog {
     private JPasswordField oldPassField = new JPasswordField();
     private JPasswordField pass1Field = new JPasswordField();
     private JPasswordField pass2Field = new JPasswordField();
-
-    private Supplier<UserAccount> userAccountSupplierCancel;
     private UserAccount userAccount = null;
+    private Supplier<UserAccount> userAccountSupplierCancel = () -> {
+        return userAccount;
+    };
     private Supplier<UserAccount> userAccountSupplierValid = () -> {
         return userAccount;
     };
-
-    public ResetPWUserDialog() {
-        super();
-        initComponents();
-    }
 
     public Supplier<UserAccount> getUserAccountSupplierValid() {
         return userAccountSupplierValid;
     }
 
-    public void setUserAccountSupplierValid(Supplier<UserAccount> userAccountSupplierValid) {
-        this.userAccountSupplierValid = userAccountSupplierValid;
+    public ResetPWUserDialog(UserAccount userAccount) {
+        super();
+        this.userAccount = userAccount;
+        initComponents();
     }
 
-    public Supplier<UserAccount> getUserAccountSupplierCancel() {
-        return userAccountSupplierCancel;
-    }
-
-    public void setUserAccountSupplierCancel(Supplier<UserAccount> userAccountSupplierCancel) {
-        this.userAccountSupplierCancel = userAccountSupplierCancel;
-    }
 
     private void initComponents() {
-        setSize(800, 600);
+        setSize(800, 200);
+        setTitle("Reset Password");
         JPanel userPanel = new JPanel();
         userPanel.setLayout(new MigLayout("", "[:200:]10[:300:]"));
         JLabel loginLabel = new JLabel("Login * ");
@@ -61,8 +53,9 @@ public class ResetPWUserDialog extends JDialog {
         JLabel pass2Label = new JLabel("Confirm password * ");
 
 
-        userPanel.add(oldPassLabel);
+        userPanel.add(loginLabel);
         loginTextField.setEditable(false);
+        loginTextField.setText(userAccount.getLogin());
         userPanel.add(loginTextField, "grow,push, wrap");
 
         userPanel.add(oldPassLabel);
@@ -110,17 +103,14 @@ public class ResetPWUserDialog extends JDialog {
     }
 
     private void applyChanges() throws NoSuchAlgorithmException {
-
-        String login = loginTextField.getText();
         if (isValidPass(pass1Field.getPassword()) && isValidPass(pass1Field.getPassword()) && samePass()) {
-            userAccount = new UserAccount();
             userAccount.setPasswordHash(getHash());
             userAccountSupplierValid = () -> {
                 return (userAccount);
             };
             this.dispose();
         } else {
-            System.err.println("Error while trying to add a user");
+            System.err.println("Reset password has failed!");
         }
     }
 
@@ -131,6 +121,7 @@ public class ResetPWUserDialog extends JDialog {
     private boolean samePass() {
         return Arrays.equals(pass1Field.getPassword(), pass1Field.getPassword());
     }
+
     private String getHash() {
         return Hash.asIsoString(Hash.sha256(pass1Field.getText() + "toolios"));
     }
