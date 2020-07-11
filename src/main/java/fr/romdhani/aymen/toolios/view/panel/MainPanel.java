@@ -62,12 +62,16 @@ public class MainPanel extends JPanel {
         devicestabbedPane.add("Users", usersPanel);
         devicestabbedPane.add("Computers", computersPanel);
         devicestabbedPane.add("Screens", screensPanel);
+        devicestabbedPane.add("Motherboards", new JPanel());
         devicestabbedPane.add("Licenses", null);
-        devicestabbedPane.add("Other equipments", othersEquipementPanel);
-
+        devicestabbedPane.add("Equipments", othersEquipementPanel);
+        //Main panels and functions
         mainTabbedPane.add("Admin", devicestabbedPane);
         mainTabbedPane.add("Projects", projectTabbedPane);
+        mainTabbedPane.add("Components", new JPanel());
+        mainTabbedPane.add("Interventions", new JPanel());
         mainTabbedPane.add("Requests", requestTabbedPane);
+        mainTabbedPane.add("Actions", new JPanel());
 
         add(mainTabbedPane, "grow,span, push");
     }

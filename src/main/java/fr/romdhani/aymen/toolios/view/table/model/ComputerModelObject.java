@@ -9,7 +9,7 @@ import java.util.List;
 public class ComputerModelObject extends AbstractTableModel {
     private final List<Computer> computers = new ArrayList<Computer>();
 
-    private final String[] header = {"ID", "name", "Serial number", "Processor", "Ram", "Service tag", "Age", "Shifting", "Purchase date", "User"};
+    private final String[] header = {"ID", "name", "Serial number", "Operating System", "Processor", "Ram", "Service tag", "Age", "Shifting", "Purchase date", "User"};
 
     public ComputerModelObject() {
         super();
@@ -36,18 +36,20 @@ public class ComputerModelObject extends AbstractTableModel {
             case 2:
                 return computers.get(rowIndex).getSerialNumber();
             case 3:
-                return computers.get(rowIndex).getProcessor();
+                return computers.get(rowIndex).getOs();
             case 4:
-                return computers.get(rowIndex).getRam();
+                return computers.get(rowIndex).getProcessor();
             case 5:
-                return computers.get(rowIndex).getServiceTag();
+                return computers.get(rowIndex).getRam();
             case 6:
-                return computers.get(rowIndex).getAge();
+                return computers.get(rowIndex).getServiceTag();
             case 7:
-                return computers.get(rowIndex).isShifting();
+                return computers.get(rowIndex).getAge();
             case 8:
-                return computers.get(rowIndex).getPurchaseDate();
+                return computers.get(rowIndex).isShifting();
             case 9:
+                return computers.get(rowIndex).getPurchaseDate();
+            case 10:
                 return computers.get(rowIndex).getUserAccount();
             default:
                 return null;

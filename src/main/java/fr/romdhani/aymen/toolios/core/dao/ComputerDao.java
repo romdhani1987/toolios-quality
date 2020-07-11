@@ -35,7 +35,7 @@ public class ComputerDao implements DaoInterface<Computer, Long> {
     }
 
     /**
-     * Persisit an entity
+     * Persist an entity
      * @param entity
      */
     public void persist(Computer entity) {
