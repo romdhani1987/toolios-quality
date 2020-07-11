@@ -88,9 +88,9 @@ public class ConnectionDialog extends JDialog {
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent windowEvent) {
-                int result = JOptionPane.showConfirmDialog(null, "Do you really want to exit Toolios-quality?", "Close?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                int result = JOptionPane.showConfirmDialog(null, "Do you really want to cancel Toolios-quality?", "Cancel", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (result == JOptionPane.YES_OPTION) {
-                  //  System.exit(0);
+                    System.exit(0);
                 }
             }
         });

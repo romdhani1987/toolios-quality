@@ -9,6 +9,8 @@ import fr.romdhani.aymen.toolios.view.panel.WestPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class TooliosQualityView extends JFrame {
 
@@ -45,6 +47,15 @@ public class TooliosQualityView extends JFrame {
         getContentPane().add(footerPanel, BorderLayout.SOUTH);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setDefaultLookAndFeelDecorated(true);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent windowEvent) {
+                int result = JOptionPane.showConfirmDialog(null, "Do you really want to exit Toolios-quality?", "Exit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (result == JOptionPane.YES_OPTION) {
+                    System.exit(0);
+                }
+            }
+        });
     }
 
     public MainPanel getMainPanel() {

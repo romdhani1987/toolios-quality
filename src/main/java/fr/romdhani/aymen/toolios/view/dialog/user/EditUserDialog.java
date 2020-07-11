@@ -8,6 +8,8 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.function.Supplier;
 
 /**
@@ -162,6 +164,16 @@ public class EditUserDialog extends JDialog {
         buttonsPanel.add(cancelButton);
         add(userPanel, BorderLayout.CENTER);
         add(footPanel, BorderLayout.PAGE_END);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent windowEvent) {
+                int result = JOptionPane.showConfirmDialog(null, "Do you really want to cancel?", "Cancel", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (result == JOptionPane.YES_OPTION) {
+                    userAccount = null;
+                    dispose();
+                }
+            }
+        });
     }
 
     private void validUser() {
