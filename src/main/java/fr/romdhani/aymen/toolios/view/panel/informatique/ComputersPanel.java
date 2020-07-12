@@ -77,7 +77,7 @@ public class ComputersPanel extends JPanel implements TooliosView {
             editComputerDialog.setVisible(true);
             Computer computerToEdit = editComputerDialog.getComputerSupplierValid().get();
             if (computerToEdit != null && computerController.addComputerToDb(computerToEdit)) {
-                JOptionPane.showMessageDialog(null, "The use has been edited successfully!", "Confirm", 2);
+                JOptionPane.showMessageDialog(null, "The changes have been applied successfully!", "Confirm", 2);
                 computerModelObject.fireTableDataChanged();
                 computersTable.repaint();
             }
