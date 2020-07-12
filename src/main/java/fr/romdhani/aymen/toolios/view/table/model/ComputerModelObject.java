@@ -1,9 +1,11 @@
 package fr.romdhani.aymen.toolios.view.table.model;
 
 import fr.romdhani.aymen.toolios.core.orm.Computer;
+import fr.romdhani.aymen.toolios.core.orm.UserAccount;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ComputerModelObject extends AbstractTableModel {
@@ -77,5 +79,35 @@ public class ComputerModelObject extends AbstractTableModel {
 
     public Computer getComputer(int i) {
         return computers.get(i);
+    }
+
+    @Override
+    public Class getColumnClass(int columnIndex) {
+        switch (columnIndex) {
+            case 0://id
+                return Integer.class;
+            case 1://name
+                return String.class;
+            case 2:// serial number
+                return String.class;
+            case 3://Operating System"
+                return String.class;
+            case 4://Processor
+                return String.class;
+            case 5://Ram
+                return String.class;
+            case 6://Service tag
+                return String.class;
+            case 7://Age
+                return Integer.class;
+            case 8://Shifting
+                return Boolean.class;
+            case 9://Purchase date
+                return Date.class;
+            case 10://User
+                return UserAccount.class;
+            default:
+                return Object.class;
+        }
     }
 }

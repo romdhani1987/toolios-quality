@@ -1,10 +1,15 @@
 package fr.romdhani.aymen.toolios.view.table.model;
 
+import fr.romdhani.aymen.toolios.core.orm.Address;
 import fr.romdhani.aymen.toolios.core.orm.UserAccount;
+import fr.romdhani.aymen.toolios.core.orm.UserGroup;
+import fr.romdhani.aymen.toolios.core.orm.UserRoles;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.function.Function;
 
 public class UserModelObject extends AbstractTableModel {
     private final List<UserAccount> users = new ArrayList<UserAccount>();
@@ -77,5 +82,35 @@ public class UserModelObject extends AbstractTableModel {
 
     public UserAccount getUser(int i) {
         return users.get(i);
+    }
+
+    @Override
+    public Class getColumnClass(int columnIndex) {
+        switch (columnIndex) {
+            case 0://id
+                return Integer.class;
+            case 1://login
+                return String.class;
+            case 2://fName
+                return String.class;
+            case 3://lname
+                return String.class;
+            case 4://email
+                return String.class;
+            case 5://phone
+                return String.class;
+            case 6://creation mode
+                return String.class;
+            case 7://Adress
+                return Address.class;
+            case 8://Function
+                return Function.class;
+            case 9://Roles
+                return UserRoles.class;
+            case 10://Group
+                return UserGroup.class;
+            default:
+                return Object.class;
+        }
     }
 }
