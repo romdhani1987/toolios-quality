@@ -11,9 +11,6 @@ import org.jdatepicker.impl.UtilDateModel;
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
-import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -247,13 +244,5 @@ public class EditComputerDialog extends JDialog {
         componentList.add(computerNameTextField);
         componentList.add(computerNameTextField);
         componentList.forEach(comp -> comp.setText(""));
-    }
-
-    private int computeAge(LocalDate today, LocalDate current) {
-        if ((today != null) && (current != null)) {
-            return Period.between(today, current).getYears();
-        } else {
-            return 0;
-        }
     }
 }
