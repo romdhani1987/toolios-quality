@@ -183,18 +183,6 @@ public class Computer implements Serializable {
     @Override
     public String toString() {
         return "Computer{" +
-                "name='" + name + '\'' +
-                ", SerialNumber='" + SerialNumber + '\'' +
-                ", processor='" + processor + '\'' +
-                ", ram='" + ram + '\'' +
-                ", serviceTag='" + serviceTag + '\'' +
-                ", os='" + os + '\'' +
-                ", licenses=" + licenses +
-                ", screens=" + screens +
-                ", age=" + age +
-                ", shifting=" + shifting +
-                ", purchaseDate=" + purchaseDate +
-                ", serialized_properties='" + serialized_properties + '\'' +
-                '}';
+                " name='" + name + '}';
     }
 }

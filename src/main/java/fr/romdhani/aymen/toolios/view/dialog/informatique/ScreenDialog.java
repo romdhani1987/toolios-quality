@@ -2,12 +2,9 @@ package fr.romdhani.aymen.toolios.view.dialog.informatique;
 
 import fr.romdhani.aymen.toolios.core.orm.Computer;
 import fr.romdhani.aymen.toolios.core.orm.Screen;
-import fr.romdhani.aymen.toolios.core.orm.UserAccount;
 import fr.romdhani.aymen.toolios.utils.StringUtils;
 import fr.romdhani.aymen.toolios.view.commons.DateLabelFormatter;
 import net.miginfocom.swing.MigLayout;
-import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
@@ -38,7 +35,7 @@ public class ScreenDialog extends JDialog {
     private JTextField serialNumberTextField = new JTextField();
     private JTextField serviceTagTextField = new JTextField();
     private JTextField ageField = new JTextField();
-    private JTextField computerTextField = new JTextField();
+    private JComboBox<Computer> computerComboBox = new JComboBox();
     private UtilDateModel model = new UtilDateModel();
     private JLabel errorLabel;
     private Screen screen;
@@ -115,7 +112,14 @@ public class ScreenDialog extends JDialog {
         userPanel.add(datePicker, "growx,push, wrap");
 
         userPanel.add(computerLabel);
-        userPanel.add(computerTextField, "growx,push, wrap");
+        List<Computer> computers = (List<Computer>) getSession().createQuery("from Computer").list();
+        computers.forEach(computer -> {
+            computerComboBox.addItem(computer);
+        });
+        if (screen != null && isEditable) {
+            computerComboBox.setSelectedItem(screen.getComputer());
+        }
+        userPanel.add(computerComboBox, "growx,push, wrap");
 
         clearButton.addActionListener(e -> {
             clear();
@@ -161,6 +165,7 @@ public class ScreenDialog extends JDialog {
                 screen.setName(computerName);
                 screen.setSerialNumber(serial);
                 screen.setServiceTag(serviceTag);
+                screen.setComputer((Computer) computerComboBox.getSelectedItem());
             } else {
                 screen = new Screen();
                 screen.setName(computerName);
@@ -168,6 +173,7 @@ public class ScreenDialog extends JDialog {
                 screen.setServiceTag(serviceTag);
                 screen.setAge(age);
                 screen.setPurchaseDate(creationTimestamp);
+                screen.setComputer((Computer) computerComboBox.getSelectedItem());
             }
             errorLabel.setVisible(false);
             screenSupplierValid = () -> {
