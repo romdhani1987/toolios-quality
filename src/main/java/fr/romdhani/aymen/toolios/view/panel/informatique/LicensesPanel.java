@@ -25,7 +25,7 @@ public class LicensesPanel extends JPanel implements TooliosView {
     private TooliosButton addButton;
     private TooliosButton editButton;
     private TooliosButton removeButton;
-    private TooliosButton updateButton;
+    private TooliosButton refreshButton;
     private UserController userController;
 
     private void initComponents() {
@@ -33,15 +33,39 @@ public class LicensesPanel extends JPanel implements TooliosView {
         userModelObject = new ScreenModelObject();
         screensTable = new JTable(userModelObject);
         addButton = new TooliosButton("Add");
+        addButton.addActionListener(e -> {
+            addLicense();
+        });
         editButton = new TooliosButton("Edit");
+        editButton.addActionListener(e -> {
+            editLicense();
+        });
         removeButton = new TooliosButton("Delete");
-        updateButton = new TooliosButton("Refresh");
+        removeButton.addActionListener(e -> {
+            deleteLicense();
+        });
+        refreshButton = new TooliosButton("Refresh");
+        refreshButton.addActionListener(e -> {
+            refresh();
+        });
         JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttonsPanel.add(addButton);
         buttonsPanel.add(editButton);
         buttonsPanel.add(removeButton);
-        buttonsPanel.add(updateButton);
+        buttonsPanel.add(refreshButton);
         this.add(new JScrollPane(screensTable), "grow,span, push");
         this.add(buttonsPanel, "grow,span,push");
+    }
+
+    private void refresh() {
+    }
+
+    private void deleteLicense() {
+    }
+
+    private void editLicense() {
+    }
+
+    private void addLicense() {
     }
 }
