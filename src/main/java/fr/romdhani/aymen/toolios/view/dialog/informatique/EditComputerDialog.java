@@ -163,7 +163,7 @@ public class EditComputerDialog extends JDialog {
             }
         });
         applyChanges.addActionListener(e -> {
-            addComputer();
+            applyChanges();
 
         });
         JPanel footerPanel = new JPanel(new MigLayout());
@@ -186,7 +186,7 @@ public class EditComputerDialog extends JDialog {
         }
     }
 
-    private void addComputer() {
+    private void applyChanges() {
         if (!StringUtils.isNullOrEmpty(computerNameTextField.getText()) && !StringUtils.isNullOrEmpty(serialNumberTextField.getText())
                 && !StringUtils.isNullOrEmpty(ramTextField.getText()) && !StringUtils.isNullOrEmpty(processorTextField.getText())
                 && !StringUtils.isNullOrEmpty(serviceTagTextField.getText())) {
@@ -197,17 +197,13 @@ public class EditComputerDialog extends JDialog {
             String serviceTag = serviceTagTextField.getText();
             String os = (String) osComboBox.getSelectedItem();
             boolean isShifting = isShiftingCkBoc.isSelected();
-            Timestamp creationTimestamp = new Timestamp(model.getValue().getTime());
-            int age = computeAge(creationTimestamp.toLocalDateTime().toLocalDate(), LocalDate.now());
             computer.setName(computerName);
             computer.setSerialNumber(serial);
             computer.setRam(ram);
             computer.setProcessor(processor);
             computer.setServiceTag(serviceTag);
-            computer.setAge(age);
             computer.setOs(os);
             computer.setShifting(isShifting);
-            computer.setPurchaseDate(creationTimestamp);
            /* List<License> licenseList = new ArrayList<>();
             License license = new License();
             license.setName("Windows licenses");
