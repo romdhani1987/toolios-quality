@@ -3,7 +3,9 @@ package fr.romdhani.aymen.toolios.core.orm;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author aromdhani
@@ -39,7 +41,7 @@ public class Computer implements Serializable {
     private List<License> licenses;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "computer")
-    private List<Screen> screens;
+    private Set<Screen> screens = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -133,12 +135,17 @@ public class Computer implements Serializable {
         this.licenses = licenses;
     }
 
-    public List<Screen> getScreens() {
+    public Set<Screen> getScreens() {
         return screens;
     }
 
-    public void setScreens(List<Screen> screens) {
+    public void setScreens(Set<Screen> screens) {
         this.screens = screens;
+    }
+
+    public void addScreen(Screen screen) {
+        screen.setComputer(this);
+        screens.add(screen);
     }
 
     public int getAge() {
