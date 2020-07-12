@@ -2,6 +2,7 @@ package fr.romdhani.aymen.toolios.controller.informatique;
 
 import fr.romdhani.aymen.toolios.core.orm.Screen;
 import fr.romdhani.aymen.toolios.core.service.ScreenService;
+import fr.romdhani.aymen.toolios.view.panel.informatique.ComputersPanel;
 import fr.romdhani.aymen.toolios.view.panel.informatique.ScreensPanel;
 
 public class ScreenController {
@@ -18,7 +19,12 @@ public class ScreenController {
 
     public ScreenController(ScreenService screenService) {
         this.screenService = screenService;
+        initComponents();
+    }
+
+    private void initComponents() {
         screensPanel = new ScreensPanel(this);
+        screensPanel.getScreenModelObject().addAllScreens(screenService.findAll());
     }
 
     public boolean addScreenToDb(Screen screen) {

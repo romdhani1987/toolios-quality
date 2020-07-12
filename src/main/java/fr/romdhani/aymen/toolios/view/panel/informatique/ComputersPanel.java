@@ -53,7 +53,7 @@ public class ComputersPanel extends JPanel implements TooliosView {
         if (response == JOptionPane.YES_OPTION) {
             int row = computersTable.getSelectedRow();
             if (row < 0) {
-                JOptionPane.showMessageDialog(this, "No computer were selected to delete!", "Delete computer", 1);
+                JOptionPane.showMessageDialog(this, "No computer were selected to delete!", "Delete Computer", 1);
             } else {
                 int modelRow = computersTable.convertRowIndexToModel(row);
                 Computer computer = computerModelObject.getComputer(modelRow);
@@ -67,7 +67,7 @@ public class ComputersPanel extends JPanel implements TooliosView {
 
         int row = computersTable.getSelectedRow();
         if (row < 0) {
-            JOptionPane.showMessageDialog(this, "No computer were selected to edit!", "Edit user", 1);
+            JOptionPane.showMessageDialog(this, "No computer were selected to edit!", "Edit Computer", 1);
         } else {
             int modelRow = computersTable.convertRowIndexToModel(row);
             Computer computer = computerModelObject.getComputer(modelRow);

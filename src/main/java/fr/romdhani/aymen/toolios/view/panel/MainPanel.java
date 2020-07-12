@@ -42,17 +42,18 @@ public class MainPanel extends JPanel {
         connectionDialog.setSize(new Dimension(300, 200));
         connectionDialog.setLocationRelativeTo(null);
         connectionDialog.setVisible(true);
+
         setLayout(new MigLayout());
         mainTabbedPane = new JTabbedPane();
         projectTabbedPane = new JTabbedPane();
         requestTabbedPane = new JTabbedPane();
         devicestabbedPane = new JTabbedPane();
 
-
         usersPanel = userController.getUsersPanel();
         // Computers
         ComputerService computerService = new ComputerService();
-        computersPanel = new ComputerController(computerService).getComputersPanel();
+        ComputerController computerController = new ComputerController(computerService);
+        computersPanel = computerController.getComputersPanel();
         // Screens
         ScreenService screenService = new ScreenService();
         ScreenController screenController = new ScreenController(screenService);

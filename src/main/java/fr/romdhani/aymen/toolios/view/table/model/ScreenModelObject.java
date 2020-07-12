@@ -53,9 +53,9 @@ public class ScreenModelObject extends AbstractTableModel {
     }
 
     public void addAllScreens(List<Screen> screensList) {
-        screensList.forEach(user -> {
-            if (!screens.contains(user)) {
-                screens.add(user);
+        screensList.forEach(screen -> {
+            if (!screens.contains(screen)) {
+                screens.add(screen);
                 fireTableRowsInserted(screens.size() - 1, screens.size() - 1);
             }
         });
@@ -65,6 +65,7 @@ public class ScreenModelObject extends AbstractTableModel {
         screens.add(screen);
         fireTableRowsInserted(screens.size() - 1, screens.size() - 1);
     }
+
 
     public void deleteScreen(int rowIndex) {
         screens.remove(rowIndex);
