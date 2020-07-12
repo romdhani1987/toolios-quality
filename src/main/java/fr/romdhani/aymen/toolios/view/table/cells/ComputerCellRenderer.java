@@ -18,10 +18,11 @@ public class ComputerCellRenderer extends AbstractCellEditor implements TableCel
 
     public ComputerCellRenderer() {
         super();
-
         comboBox = new JComboBox();
         java.util.List<Computer> computers = (List<Computer>) getSession().createQuery("from Computer").list();
-        computers.forEach(e -> comboBox.addItem(e.getName()));
+        computers.forEach(e -> {
+            comboBox.addItem(e.getName());
+        });
         comboBox.addActionListener(this);
 
     }
