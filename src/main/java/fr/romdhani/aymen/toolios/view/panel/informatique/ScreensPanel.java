@@ -8,6 +8,7 @@ import fr.romdhani.aymen.toolios.view.dialog.informatique.EditComputerDialog;
 import fr.romdhani.aymen.toolios.view.dialog.informatique.NewComputerDialog;
 import fr.romdhani.aymen.toolios.view.dialog.informatique.ScreenDialog;
 import fr.romdhani.aymen.toolios.view.panel.TooliosView;
+import fr.romdhani.aymen.toolios.view.table.cells.ComputerCellRenderer;
 import fr.romdhani.aymen.toolios.view.table.model.ScreenModelObject;
 import net.miginfocom.swing.MigLayout;
 
@@ -39,6 +40,9 @@ public class ScreensPanel extends JPanel implements TooliosView {
         setLayout(new MigLayout());
         screenModelObject = new ScreenModelObject();
         screensTable = new JTable(screenModelObject);
+        screensTable.setDefaultEditor(Computer.class, new ComputerCellRenderer());
+        screensTable.setAutoCreateRowSorter(true);
+
         addButton = new TooliosButton("Add");
         addButton.addActionListener(e -> {
             addScreen();

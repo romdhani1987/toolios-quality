@@ -25,6 +25,8 @@ public class ComputersPanel extends JPanel implements TooliosView {
         setLayout(new MigLayout());
         computerModelObject = new ComputerModelObject();
         computersTable = new JTable(computerModelObject);
+        computersTable.setAutoCreateRowSorter(true);
+
         addButton = new TooliosButton("Add");
         addButton.addActionListener(e -> {
             addComputer();

@@ -74,8 +74,8 @@ public class ComputerDao implements DaoInterface<Computer, Long> {
 
     @SuppressWarnings("unchecked")
     public List<Computer> findAll() {
-        List<Computer> users = (List<Computer>) getCurrentSession().createQuery("from Computer").list();
-        return users;
+        List<Computer> computers = (List<Computer>) getCurrentSession().createQuery("from Computer").list();
+        return computers;
     }
 
     /**

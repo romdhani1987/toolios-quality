@@ -28,6 +28,8 @@ public class UsersPanel extends JPanel implements TooliosView {
         setLayout(new MigLayout());
         userModelObject = new UserModelObject();
         usersTable = new JTable(userModelObject);
+        usersTable.setAutoCreateRowSorter(true);
+
         addButton = new TooliosButton("Add");
         addButton.addActionListener(e -> {
             addUser();
