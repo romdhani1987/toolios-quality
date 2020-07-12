@@ -4,16 +4,18 @@ import fr.romdhani.aymen.toolios.controller.informatique.ScreenController;
 import fr.romdhani.aymen.toolios.core.orm.Computer;
 import fr.romdhani.aymen.toolios.core.orm.Screen;
 import fr.romdhani.aymen.toolios.view.buttons.TooliosButton;
-import fr.romdhani.aymen.toolios.view.dialog.informatique.EditComputerDialog;
-import fr.romdhani.aymen.toolios.view.dialog.informatique.NewComputerDialog;
 import fr.romdhani.aymen.toolios.view.dialog.informatique.ScreenDialog;
 import fr.romdhani.aymen.toolios.view.panel.TooliosView;
-import fr.romdhani.aymen.toolios.view.table.cells.ComputerCellRenderer;
+import fr.romdhani.aymen.toolios.view.table.cells.CellComputerEditor;
+
 import fr.romdhani.aymen.toolios.view.table.model.ScreenModelObject;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
+
+import static fr.romdhani.aymen.toolios.utils.HibernateUtil.getSession;
 
 public class ScreensPanel extends JPanel implements TooliosView {
 
@@ -40,7 +42,8 @@ public class ScreensPanel extends JPanel implements TooliosView {
         setLayout(new MigLayout());
         screenModelObject = new ScreenModelObject();
         screensTable = new JTable(screenModelObject);
-        screensTable.setDefaultEditor(Computer.class, new ComputerCellRenderer());
+        java.util.List<Computer> computers = (List<Computer>) getSession().createQuery("from Computer").list();
+        screensTable.setDefaultEditor(Computer.class, new CellComputerEditor(computers));
         screensTable.setAutoCreateRowSorter(true);
 
         addButton = new TooliosButton("Add");

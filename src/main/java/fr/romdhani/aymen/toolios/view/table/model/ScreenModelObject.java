@@ -97,4 +97,7 @@ public class ScreenModelObject extends AbstractTableModel {
                 return Object.class;
         }
     }
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return columnIndex > 0;
+    }
 }
