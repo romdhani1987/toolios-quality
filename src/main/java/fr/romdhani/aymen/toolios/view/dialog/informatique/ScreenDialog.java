@@ -2,9 +2,12 @@ package fr.romdhani.aymen.toolios.view.dialog.informatique;
 
 import fr.romdhani.aymen.toolios.core.orm.Computer;
 import fr.romdhani.aymen.toolios.core.orm.Screen;
+import fr.romdhani.aymen.toolios.core.orm.UserAccount;
 import fr.romdhani.aymen.toolios.utils.StringUtils;
 import fr.romdhani.aymen.toolios.view.commons.DateLabelFormatter;
 import net.miginfocom.swing.MigLayout;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
@@ -19,6 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.function.Supplier;
+
+import static fr.romdhani.aymen.toolios.utils.HibernateUtil.getSession;
 
 /**
  * Creates and displays scren diaolg
