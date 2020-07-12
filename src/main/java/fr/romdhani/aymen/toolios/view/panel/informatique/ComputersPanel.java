@@ -97,8 +97,8 @@ public class ComputersPanel extends JPanel implements TooliosView {
                 computerModelObject.fireTableDataChanged();
                 computersTable.repaint();
             } else {
-                JOptionPane.showMessageDialog(this, "Failed to add this user!",
-                        "Delete user", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Failed to add the computer!",
+                        "New Computer", JOptionPane.ERROR_MESSAGE);
             }
         }
     }

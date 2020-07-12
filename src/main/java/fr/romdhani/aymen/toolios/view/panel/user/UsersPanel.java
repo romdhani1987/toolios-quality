@@ -124,8 +124,8 @@ public class UsersPanel extends JPanel implements TooliosView {
                 userModelObject.fireTableDataChanged();
                 usersTable.repaint();
             } else {
-                JOptionPane.showMessageDialog(this, "Add user has failed!",
-                        "Add User", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Failed to add the user!",
+                        "New User", JOptionPane.ERROR_MESSAGE);
             }
         }
     }

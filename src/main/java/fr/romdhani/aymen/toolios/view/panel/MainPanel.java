@@ -1,7 +1,7 @@
 package fr.romdhani.aymen.toolios.view.panel;
 
 import fr.romdhani.aymen.toolios.controller.informatique.ComputerController;
-import fr.romdhani.aymen.toolios.controller.ScreenController;
+import fr.romdhani.aymen.toolios.controller.informatique.ScreenController;
 import fr.romdhani.aymen.toolios.controller.user.UserController;
 import fr.romdhani.aymen.toolios.core.service.ComputerService;
 import fr.romdhani.aymen.toolios.core.service.ScreenService;
@@ -50,13 +50,16 @@ public class MainPanel extends JPanel {
 
 
         usersPanel = userController.getUsersPanel();
-        // computers
+        // Computers
         ComputerService computerService = new ComputerService();
         computersPanel = new ComputerController(computerService).getComputersPanel();
-        //Screens
+        // Screens
         ScreenService screenService = new ScreenService();
-        screensPanel = new ScreenController(screenService).getScreensPanel();
-        // other Equipments
+        ScreenController screenController = new ScreenController(screenService);
+        screensPanel = screenController.getScreensPanel();
+        // Motherboards
+
+        // Equipments
         othersEquipementPanel = new EquipementPanel();
 
         devicestabbedPane.add("Users", usersPanel);

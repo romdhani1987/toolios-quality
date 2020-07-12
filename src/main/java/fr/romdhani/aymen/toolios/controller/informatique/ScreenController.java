@@ -1,51 +1,39 @@
 package fr.romdhani.aymen.toolios.controller.informatique;
 
-import fr.romdhani.aymen.toolios.core.orm.Computer;
-import fr.romdhani.aymen.toolios.core.service.ComputerService;
-import fr.romdhani.aymen.toolios.view.panel.informatique.ComputersPanel;
+import fr.romdhani.aymen.toolios.core.orm.Screen;
+import fr.romdhani.aymen.toolios.core.service.ScreenService;
+import fr.romdhani.aymen.toolios.view.panel.informatique.ScreensPanel;
 
 public class ScreenController {
-    private ComputersPanel computersPanel;
-    private ComputerService computerService;
+    private ScreensPanel screensPanel;
+    private ScreenService screenService;
 
-    public ComputersPanel getComputersPanel() {
-        return computersPanel;
+    public ScreensPanel getScreensPanel() {
+        return screensPanel;
     }
 
-    public void setComputersPanel(ComputersPanel computersPanel) {
-        this.computersPanel = computersPanel;
+    public ScreenService getComputerService() {
+        return screenService;
     }
 
-    public ComputerService getComputerService() {
-        return computerService;
+    public ScreenController(ScreenService screenService) {
+        this.screenService = screenService;
+        screensPanel = new ScreensPanel(this);
     }
 
-    public void setComputerService(ComputerService computerService) {
-        this.computerService = computerService;
+    public boolean addScreenToDb(Screen screen) {
+        return screenService.persist(screen);
     }
 
-    public ScreenController(ComputerService userAccountService) {
-        this.computerService = userAccountService;
-        initComponents();
-    }
-
-    private void initComponents() {
-
-    }
-
-    public boolean addComputerToDb(Computer computer) {
-        return computerService.persist(computer);
-    }
-
-    public void deleteComputerFromDb(Computer computer) {
-        computerService.delete(computer.getId());
+    public void deleteScreenFromDb(Screen screen) {
+        screenService.delete(screen.getId());
     }
 
     public void refresh() {
-        computersPanel.getComputerModelObject().addAllComputers(computerService.findAll());
+        screensPanel.getScreenModelObject().addAllScreens(screenService.findAll());
     }
 
-    public void deleteAllUserFromDb() {
-        computerService.deleteAll();
+    public void deleteAllScreensFromDb() {
+        screenService.deleteAll();
     }
 }
