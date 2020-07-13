@@ -2,7 +2,6 @@ package fr.romdhani.aymen.toolios.view.panel.informatique;
 
 import fr.romdhani.aymen.toolios.controller.informatique.LicenseController;
 import fr.romdhani.aymen.toolios.core.orm.License;
-import fr.romdhani.aymen.toolios.core.orm.Screen;
 import fr.romdhani.aymen.toolios.view.buttons.TooliosButton;
 import fr.romdhani.aymen.toolios.view.dialog.informatique.LicenseDialog;
 import fr.romdhani.aymen.toolios.view.panel.TooliosView;
