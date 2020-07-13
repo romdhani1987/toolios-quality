@@ -98,7 +98,6 @@ public class LicensesPanel extends JPanel implements TooliosView {
         licenseDialog.setVisible(true);
         if (licenseDialog.getLicenseSupplierValid().get() != null) {
             License license = licenseDialog.getLicenseSupplierValid().get();
-            System.out.println("license: " + license.toString());
             if (licenseController.addLicenseToDb(license)) {
                 JOptionPane.showMessageDialog(null, "The license has been added successfully!", "Confirm", 2);
                 licensesModelObject.addLicense(license);

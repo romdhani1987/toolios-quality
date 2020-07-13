@@ -12,6 +12,8 @@ import org.jdatepicker.impl.UtilDateModel;
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -130,9 +132,7 @@ public class LicenseDialog extends JDialog {
             int response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.YES_OPTION) {
-                licenseSupplierCancel = () -> {
-                    return (null);
-                };
+                license = null;
                 this.dispose();
             } else if (response == JOptionPane.CLOSED_OPTION) {
             }
@@ -152,6 +152,12 @@ public class LicenseDialog extends JDialog {
         footerPanel.add(buttonsPanel, "growx, push");
         add(new JScrollPane(licensePanel), BorderLayout.CENTER);
         add(footerPanel, BorderLayout.PAGE_END);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent windowEvent) {
+                license = null;
+            }
+        });
     }
 
     private void applyChanges() {
@@ -161,14 +167,15 @@ public class LicenseDialog extends JDialog {
             String computerName = licenseNameTextField.getText();
             String computerType = licenseTypeTextField.getText();
             String serial = serialNumberTextField.getText();
-            Timestamp purchaseTimestamp = new Timestamp(model.getValue().getTime());
-            Timestamp expirationTimestamp = new Timestamp(expModel.getValue().getTime());
+
             if (isEditable) {
                 license.setName(computerName);
                 license.setType(computerType);
                 license.setSerialNumber(serial);
                 license.setComputer((Computer) computerComboBox.getSelectedItem());
             } else {
+                Timestamp purchaseTimestamp = new Timestamp(model.getValue().getTime());
+                Timestamp expirationTimestamp = new Timestamp(expModel.getValue().getTime());
                 license = new License();
                 license.setName(computerName);
                 license.setType(computerType);
