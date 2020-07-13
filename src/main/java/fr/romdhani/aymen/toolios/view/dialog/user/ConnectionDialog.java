@@ -1,7 +1,6 @@
 package fr.romdhani.aymen.toolios.view.dialog.user;
 
 import fr.romdhani.aymen.toolios.controller.user.UserController;
-import fr.romdhani.aymen.toolios.controller.user.UserSession;
 import fr.romdhani.aymen.toolios.core.orm.UserAccount;
 import fr.romdhani.aymen.toolios.utils.Hash;
 import net.miginfocom.swing.MigLayout;
@@ -11,7 +10,6 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.nio.charset.StandardCharsets;
-import java.util.Optional;
 import java.util.function.Supplier;
 
 /**

@@ -6,7 +6,6 @@ import fr.romdhani.aymen.toolios.core.orm.Screen;
 import fr.romdhani.aymen.toolios.view.buttons.TooliosButton;
 import fr.romdhani.aymen.toolios.view.dialog.informatique.ScreenDialog;
 import fr.romdhani.aymen.toolios.view.panel.TooliosView;
-
 import fr.romdhani.aymen.toolios.view.table.model.ScreenModelObject;
 import net.miginfocom.swing.MigLayout;
 

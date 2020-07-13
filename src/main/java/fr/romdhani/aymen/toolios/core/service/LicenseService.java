@@ -1,9 +1,7 @@
 package fr.romdhani.aymen.toolios.core.service;
 
 import fr.romdhani.aymen.toolios.core.dao.LicenseDao;
-import fr.romdhani.aymen.toolios.core.dao.ScreenDao;
 import fr.romdhani.aymen.toolios.core.orm.License;
-import fr.romdhani.aymen.toolios.core.orm.Screen;
 
 import java.util.List;
 

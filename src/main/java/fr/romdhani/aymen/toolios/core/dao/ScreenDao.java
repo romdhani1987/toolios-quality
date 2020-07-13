@@ -1,7 +1,6 @@
 package fr.romdhani.aymen.toolios.core.dao;
 
 
-import fr.romdhani.aymen.toolios.core.orm.Address;
 import fr.romdhani.aymen.toolios.core.orm.Screen;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

@@ -1,7 +1,6 @@
 package fr.romdhani.aymen.toolios.view.dialog.informatique;
 
 import fr.romdhani.aymen.toolios.core.orm.Computer;
-import fr.romdhani.aymen.toolios.core.orm.License;
 import fr.romdhani.aymen.toolios.utils.StringUtils;
 import fr.romdhani.aymen.toolios.view.commons.DateLabelFormatter;
 import net.miginfocom.swing.MigLayout;

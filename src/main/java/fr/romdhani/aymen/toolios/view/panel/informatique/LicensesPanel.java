@@ -1,11 +1,11 @@
 package fr.romdhani.aymen.toolios.view.panel.informatique;
 
 import fr.romdhani.aymen.toolios.controller.informatique.LicenseController;
-import fr.romdhani.aymen.toolios.controller.user.UserController;
+import fr.romdhani.aymen.toolios.core.orm.License;
 import fr.romdhani.aymen.toolios.view.buttons.TooliosButton;
+import fr.romdhani.aymen.toolios.view.dialog.informatique.LicenseDialog;
 import fr.romdhani.aymen.toolios.view.panel.TooliosView;
 import fr.romdhani.aymen.toolios.view.table.model.LicenseModelObject;
-import fr.romdhani.aymen.toolios.view.table.model.ScreenModelObject;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -72,8 +72,41 @@ public class LicensesPanel extends JPanel implements TooliosView {
     }
 
     private void editLicense() {
+        int row = licensesTable.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(this, "No license were selected to edit!", "Edit License", 1);
+        } else {
+            int modelRow = licensesTable.convertRowIndexToModel(row);
+            License license = licensesModelObject.getLicense(modelRow);
+            LicenseDialog editLicenseDialog = new LicenseDialog(license, true);
+            editLicenseDialog.setModal(true);
+            editLicenseDialog.setLocationRelativeTo(null);
+            editLicenseDialog.setVisible(true);
+            License screenToEdit = editLicenseDialog.getLicenseSupplierValid().get();
+            if (screenToEdit != null && licenseController.addScreenToDb(screenToEdit)) {
+                JOptionPane.showMessageDialog(null, "The changes have been applied successfully!", "Confirm", 2);
+                licensesModelObject.fireTableDataChanged();
+                licensesTable.repaint();
+            }
+        }
     }
 
     private void addLicense() {
+        LicenseDialog licenseDialog = new LicenseDialog();
+        licenseDialog.setModal(true);
+        licenseDialog.setLocationRelativeTo(null);
+        licenseDialog.setVisible(true);
+        if (licenseDialog.getLicenseSupplierCancel().get() != null) {
+            License license = licenseDialog.getLicenseSupplierCancel().get();
+            if (licenseController.addScreenToDb(license)) {
+                JOptionPane.showMessageDialog(null, "The license has been added successfully!", "Confirm", 2);
+                licensesModelObject.addLicense(license);
+                licensesModelObject.fireTableDataChanged();
+                licensesTable.repaint();
+            } else {
+                JOptionPane.showMessageDialog(this, "Failed to add the license !",
+                        "Add License", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
 }

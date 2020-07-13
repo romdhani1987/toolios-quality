@@ -7,7 +7,6 @@ import fr.romdhani.aymen.toolios.core.orm.UserRoles;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.function.Function;
 
