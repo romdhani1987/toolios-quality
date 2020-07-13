@@ -16,9 +16,8 @@ public class IconResource {
      * Enum type that indicates the name of the icon.
      */
     public enum ICON {
-        EXIT, CONSOLE, EXPORT, EXPORTDATA, EDIT, HELP, INFORMATION, LOAD, CROSS, TICK;
+        PLUS, EDIT_SMALL, DELETE_BLUE, LOCK_UNLOCK, EXIT, CONSOLE, EXPORT, EXPORTDATA, EDIT, HELP, INFORMATION, LOAD, CROSS, TICK;
     }
-
     private static HashMap<ICON, ImageIcon> images = new HashMap<ICON, ImageIcon>();
 
     /**
@@ -30,6 +29,34 @@ public class IconResource {
     public static ImageIcon getImage(ICON icon) {
         if (!images.containsKey(icon)) {
             switch (icon) {
+                case PLUS:
+                    try {
+                        images.put(icon, new ImageIcon(ImageIO.read(new File("src/main/resources/icons/plus.png"))));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case EDIT_SMALL:
+                    try {
+                        images.put(icon, new ImageIcon(ImageIO.read(new File("src/main/resources/icons/edit-small.png"))));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case DELETE_BLUE:
+                    try {
+                        images.put(icon, new ImageIcon(ImageIO.read(new File("src/main/resources/icons/delete-blue.png"))));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case LOCK_UNLOCK:
+                    try {
+                        images.put(icon, new ImageIcon(ImageIO.read(new File("src/main/resources/icons/lock-unlock.png"))));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    break;
                 case EXPORT:
                     try {
                         images.put(icon, new ImageIcon(ImageIO.read(new File("src/main/resources/icons/export.png"))));

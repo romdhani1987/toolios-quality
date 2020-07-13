@@ -3,6 +3,7 @@ package fr.romdhani.aymen.toolios.view.dialog.user;
 import fr.romdhani.aymen.toolios.controller.user.UserController;
 import fr.romdhani.aymen.toolios.core.orm.UserAccount;
 import fr.romdhani.aymen.toolios.utils.Hash;
+import fr.romdhani.aymen.toolios.view.utils.IconResource;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -25,7 +26,7 @@ public class ConnectionDialog extends JDialog {
     private JTextField loginTextField;
     private JPasswordField passwordTextField;
     private JButton loginButton;
-    private JButton clearButton;
+    private JButton cancelButton;
     private UserController userController;
     private UserAccount userAccount;
     private Supplier<UserAccount> cancelSupplier = () -> {
@@ -62,11 +63,13 @@ public class ConnectionDialog extends JDialog {
         loginTextField = new JTextField();
         passwordTextField = new JPasswordField();
         loginButton = new JButton("Login");
+        loginButton.setIcon(IconResource.getImage(IconResource.ICON.LOCK_UNLOCK));
         loginButton.addActionListener(e -> {
             login();
         });
-        clearButton = new JButton("Cancel");
-        clearButton.addActionListener(e -> {
+        cancelButton = new JButton("Cancel");
+        cancelButton.setIcon(IconResource.getImage(IconResource.ICON.CROSS));
+        cancelButton.addActionListener(e -> {
             cancel();
         });
         JPanel panel = new JPanel(new MigLayout());
@@ -79,7 +82,7 @@ public class ConnectionDialog extends JDialog {
         panel.add(panelError, "growx, span 2,wrap");
         JPanel panelButtons = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelButtons.add(loginButton);
-        panelButtons.add(clearButton);
+        panelButtons.add(cancelButton);
         panel.add(panelButtons, "growx, span 2");
         setLayout(new BorderLayout());
         add(panel, BorderLayout.CENTER);
