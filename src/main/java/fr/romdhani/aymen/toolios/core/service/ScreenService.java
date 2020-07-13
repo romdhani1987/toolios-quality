@@ -48,7 +48,7 @@ public class ScreenService {
         screenDao.deleteAll();
     }
 
-    public ScreenDao UserAccountDao() {
+    public ScreenDao screenDao() {
         return screenDao;
     }
 }

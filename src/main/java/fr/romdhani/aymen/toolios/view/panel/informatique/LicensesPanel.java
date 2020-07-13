@@ -1,9 +1,10 @@
 package fr.romdhani.aymen.toolios.view.panel.informatique;
 
-import fr.romdhani.aymen.toolios.controller.informatique.ScreenController;
+import fr.romdhani.aymen.toolios.controller.informatique.LicenseController;
 import fr.romdhani.aymen.toolios.controller.user.UserController;
 import fr.romdhani.aymen.toolios.view.buttons.TooliosButton;
 import fr.romdhani.aymen.toolios.view.panel.TooliosView;
+import fr.romdhani.aymen.toolios.view.table.model.LicenseModelObject;
 import fr.romdhani.aymen.toolios.view.table.model.ScreenModelObject;
 import net.miginfocom.swing.MigLayout;
 
@@ -12,26 +13,33 @@ import java.awt.*;
 
 public class LicensesPanel extends JPanel implements TooliosView {
 
-    private ScreenController screenController;
+    private LicenseController licenseController;
 
-    public LicensesPanel(ScreenController screenController) {
+    public LicensesPanel(LicenseController licenseController) {
         super();
-        this.screenController = screenController;
+        this.licenseController = licenseController;
         initComponents();
     }
 
-    private JTable screensTable;
-    private ScreenModelObject userModelObject;
+    private JTable licensesTable;
+    private LicenseModelObject licensesModelObject;
     private TooliosButton addButton;
     private TooliosButton editButton;
     private TooliosButton removeButton;
     private TooliosButton refreshButton;
-    private UserController userController;
+
+    public LicenseController getLicenseController() {
+        return licenseController;
+    }
+
+    public LicenseModelObject getLicensesModelObject() {
+        return licensesModelObject;
+    }
 
     private void initComponents() {
         setLayout(new MigLayout());
-        userModelObject = new ScreenModelObject();
-        screensTable = new JTable(userModelObject);
+        licensesModelObject = new LicenseModelObject();
+        licensesTable = new JTable(licensesModelObject);
         addButton = new TooliosButton("Add");
         addButton.addActionListener(e -> {
             addLicense();
@@ -53,7 +61,7 @@ public class LicensesPanel extends JPanel implements TooliosView {
         buttonsPanel.add(editButton);
         buttonsPanel.add(removeButton);
         buttonsPanel.add(refreshButton);
-        this.add(new JScrollPane(screensTable), "grow,span, push");
+        this.add(new JScrollPane(licensesTable), "grow,span, push");
         this.add(buttonsPanel, "grow,span,push");
     }
 

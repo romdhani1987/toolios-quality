@@ -1,14 +1,17 @@
 package fr.romdhani.aymen.toolios.view.panel;
 
 import fr.romdhani.aymen.toolios.controller.informatique.ComputerController;
+import fr.romdhani.aymen.toolios.controller.informatique.LicenseController;
 import fr.romdhani.aymen.toolios.controller.informatique.ScreenController;
 import fr.romdhani.aymen.toolios.controller.user.UserController;
 import fr.romdhani.aymen.toolios.core.service.ComputerService;
+import fr.romdhani.aymen.toolios.core.service.LicenseService;
 import fr.romdhani.aymen.toolios.core.service.ScreenService;
 import fr.romdhani.aymen.toolios.core.service.UserAccountService;
 import fr.romdhani.aymen.toolios.view.dialog.user.ConnectionDialog;
 import fr.romdhani.aymen.toolios.view.panel.equipment.EquipementPanel;
 import fr.romdhani.aymen.toolios.view.panel.informatique.ComputersPanel;
+import fr.romdhani.aymen.toolios.view.panel.informatique.LicensesPanel;
 import fr.romdhani.aymen.toolios.view.panel.informatique.ScreensPanel;
 import fr.romdhani.aymen.toolios.view.panel.user.UsersPanel;
 import net.miginfocom.swing.MigLayout;
@@ -23,6 +26,7 @@ public class MainPanel extends JPanel {
     private JTabbedPane mainTabbedPane;
     private ComputersPanel computersPanel;
     private ScreensPanel screensPanel;
+    private LicensesPanel licensesPanel;
     private UsersPanel usersPanel;
     private EquipementPanel othersEquipementPanel;
     private UserController userController;
@@ -58,6 +62,10 @@ public class MainPanel extends JPanel {
         ScreenService screenService = new ScreenService();
         ScreenController screenController = new ScreenController(screenService);
         screensPanel = screenController.getScreensPanel();
+        //Licenses
+        LicenseService licenseService = new LicenseService();
+        LicenseController licenseController = new LicenseController(licenseService);
+        licensesPanel = licenseController.getLicensesPanel();
         // Motherboards
 
         // Equipments
@@ -66,8 +74,8 @@ public class MainPanel extends JPanel {
         devicestabbedPane.add("Users", usersPanel);
         devicestabbedPane.add("Computers", computersPanel);
         devicestabbedPane.add("Screens", screensPanel);
+        devicestabbedPane.add("Licenses", licensesPanel);
         devicestabbedPane.add("Motherboards", new JPanel());
-        devicestabbedPane.add("Licenses", null);
         devicestabbedPane.add("Equipments", othersEquipementPanel);
         //Main panels and functions
         mainTabbedPane.add("Admin", devicestabbedPane);
