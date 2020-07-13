@@ -9,6 +9,7 @@ import fr.romdhani.aymen.toolios.view.dialog.user.NewUserDialog;
 import fr.romdhani.aymen.toolios.view.dialog.user.ResetPWUserDialog;
 import fr.romdhani.aymen.toolios.view.panel.TooliosView;
 import fr.romdhani.aymen.toolios.view.table.model.UserModelObject;
+import fr.romdhani.aymen.toolios.view.utils.IconResource;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -31,22 +32,27 @@ public class UsersPanel extends JPanel implements TooliosView {
         usersTable.setAutoCreateRowSorter(true);
 
         addButton = new TooliosButton("Add");
+        addButton.setIcon(IconResource.getImage(IconResource.ICON.PLUS));
         addButton.addActionListener(e -> {
             addUser();
         });
         editButton = new TooliosButton("Edit");
+        editButton.setIcon(IconResource.getImage(IconResource.ICON.EDIT_SMALL));
         editButton.addActionListener(e -> {
             editUser();
         });
         removeButton = new TooliosButton("Delete");
+        removeButton.setIcon(IconResource.getImage(IconResource.ICON.DELETE_BLUE));
         removeButton.addActionListener(e -> {
             deleteUser();
         });
         resetButton = new TooliosButton("Reset password");
+        resetButton.setIcon(IconResource.getImage(IconResource.ICON.ARROW_CIRCLE));
         resetButton.addActionListener(e -> {
             resetPw();
         });
         refreshButton = new TooliosButton("Refresh");
+        refreshButton.setIcon(IconResource.getImage(IconResource.ICON.REFRESH));
         JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttonsPanel.add(addButton);
         buttonsPanel.add(editButton);

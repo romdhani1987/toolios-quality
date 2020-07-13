@@ -6,6 +6,7 @@ import fr.romdhani.aymen.toolios.view.buttons.TooliosButton;
 import fr.romdhani.aymen.toolios.view.dialog.informatique.LicenseDialog;
 import fr.romdhani.aymen.toolios.view.panel.TooliosView;
 import fr.romdhani.aymen.toolios.view.table.model.LicenseModelObject;
+import fr.romdhani.aymen.toolios.view.utils.IconResource;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -42,18 +43,22 @@ public class LicensesPanel extends JPanel implements TooliosView {
         licensesModelObject = new LicenseModelObject();
         licensesTable = new JTable(licensesModelObject);
         addButton = new TooliosButton("Add");
+        addButton.setIcon(IconResource.getImage(IconResource.ICON.PLUS));
         addButton.addActionListener(e -> {
             addLicense();
         });
         editButton = new TooliosButton("Edit");
+        editButton.setIcon(IconResource.getImage(IconResource.ICON.EDIT_SMALL));
         editButton.addActionListener(e -> {
             editLicense();
         });
         removeButton = new TooliosButton("Delete");
+        removeButton.setIcon(IconResource.getImage(IconResource.ICON.DELETE_BLUE));
         removeButton.addActionListener(e -> {
             deleteLicense();
         });
         refreshButton = new TooliosButton("Refresh");
+        refreshButton.setIcon(IconResource.getImage(IconResource.ICON.REFRESH));
         refreshButton.addActionListener(e -> {
             refresh();
         });

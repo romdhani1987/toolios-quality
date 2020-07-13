@@ -7,6 +7,7 @@ import fr.romdhani.aymen.toolios.view.buttons.TooliosButton;
 import fr.romdhani.aymen.toolios.view.dialog.informatique.ScreenDialog;
 import fr.romdhani.aymen.toolios.view.panel.TooliosView;
 import fr.romdhani.aymen.toolios.view.table.model.ScreenModelObject;
+import fr.romdhani.aymen.toolios.view.utils.IconResource;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -31,7 +32,7 @@ public class ScreensPanel extends JPanel implements TooliosView {
     private TooliosButton addButton;
     private TooliosButton editButton;
     private TooliosButton removeButton;
-    private TooliosButton updateButton;
+    private TooliosButton refreshButton;
 
     public ScreenModelObject getScreenModelObject() {
         return screenModelObject;
@@ -46,26 +47,30 @@ public class ScreensPanel extends JPanel implements TooliosView {
         screensTable.setAutoCreateRowSorter(true);
 
         addButton = new TooliosButton("Add");
+        addButton.setIcon(IconResource.getImage(IconResource.ICON.PLUS));
         addButton.addActionListener(e -> {
             addScreen();
         });
         editButton = new TooliosButton("Edit");
+        editButton.setIcon(IconResource.getImage(IconResource.ICON.EDIT_SMALL));
         editButton.addActionListener(e -> {
             editScreen();
         });
         removeButton = new TooliosButton("Delete");
+        removeButton.setIcon(IconResource.getImage(IconResource.ICON.DELETE_BLUE));
         removeButton.addActionListener(e -> {
             deleteScreen();
         });
-        updateButton = new TooliosButton("Refresh");
-        updateButton.addActionListener(e -> {
+        refreshButton = new TooliosButton("Refresh");
+        refreshButton.setIcon(IconResource.getImage(IconResource.ICON.REFRESH));
+        refreshButton.addActionListener(e -> {
             refresh();
         });
         JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttonsPanel.add(addButton);
         buttonsPanel.add(editButton);
         buttonsPanel.add(removeButton);
-        buttonsPanel.add(updateButton);
+        buttonsPanel.add(refreshButton);
         this.add(new JScrollPane(screensTable), "grow,span, push");
         this.add(buttonsPanel, "grow,span,push");
     }

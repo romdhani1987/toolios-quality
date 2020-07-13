@@ -7,6 +7,7 @@ import fr.romdhani.aymen.toolios.view.dialog.informatique.EditComputerDialog;
 import fr.romdhani.aymen.toolios.view.dialog.informatique.NewComputerDialog;
 import fr.romdhani.aymen.toolios.view.panel.TooliosView;
 import fr.romdhani.aymen.toolios.view.table.model.ComputerModelObject;
+import fr.romdhani.aymen.toolios.view.utils.IconResource;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -18,7 +19,7 @@ public class ComputersPanel extends JPanel implements TooliosView {
     private TooliosButton addButton;
     private TooliosButton editButton;
     private TooliosButton removeButton;
-    private TooliosButton updateButton;
+    private TooliosButton refreshButton;
     private ComputerController computerController;
 
     private void initComponents() {
@@ -28,23 +29,27 @@ public class ComputersPanel extends JPanel implements TooliosView {
         computersTable.setAutoCreateRowSorter(true);
 
         addButton = new TooliosButton("Add");
+        addButton.setIcon(IconResource.getImage(IconResource.ICON.PLUS));
         addButton.addActionListener(e -> {
             addComputer();
         });
         editButton = new TooliosButton("Edit");
+        editButton.setIcon(IconResource.getImage(IconResource.ICON.EDIT_SMALL));
         editButton.addActionListener(e -> {
             editComputer();
         });
         removeButton = new TooliosButton("Delete");
+        removeButton.setIcon(IconResource.getImage(IconResource.ICON.DELETE_BLUE));
         removeButton.addActionListener(e -> {
             deleteComputer();
         });
-        updateButton = new TooliosButton("Refresh");
+        refreshButton = new TooliosButton("Refresh");
+        refreshButton.setIcon(IconResource.getImage(IconResource.ICON.REFRESH));
         JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttonsPanel.add(addButton);
         buttonsPanel.add(editButton);
         buttonsPanel.add(removeButton);
-        buttonsPanel.add(updateButton);
+        buttonsPanel.add(refreshButton);
         this.add(new JScrollPane(computersTable), "grow,span, push");
         this.add(buttonsPanel, "grow,span,push");
     }
