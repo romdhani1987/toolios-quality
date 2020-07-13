@@ -10,6 +10,7 @@ import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Optional;
 
 public class LicensesPanel extends JPanel implements TooliosView {
 
@@ -82,8 +83,8 @@ public class LicensesPanel extends JPanel implements TooliosView {
             editLicenseDialog.setModal(true);
             editLicenseDialog.setLocationRelativeTo(null);
             editLicenseDialog.setVisible(true);
-            License screenToEdit = editLicenseDialog.getLicenseSupplierValid().get();
-            if (screenToEdit != null && licenseController.addLicenseToDb(screenToEdit)) {
+            Optional<License> screenToEditOpt = editLicenseDialog.getLicenseSupplierValid().get();
+            if (screenToEditOpt.isPresent() && licenseController.addLicenseToDb(screenToEditOpt.get())) {
                 JOptionPane.showMessageDialog(null, "The changes have been applied successfully!", "Confirm", 2);
                 licensesModelObject.fireTableDataChanged();
                 licensesTable.repaint();
@@ -97,10 +98,10 @@ public class LicensesPanel extends JPanel implements TooliosView {
         licenseDialog.setLocationRelativeTo(null);
         licenseDialog.setVisible(true);
         if (licenseDialog.getLicenseSupplierValid().get() != null) {
-            License license = licenseDialog.getLicenseSupplierValid().get();
-            if (licenseController.addLicenseToDb(license)) {
+            Optional<License> licenseOpt = licenseDialog.getLicenseSupplierValid().get();
+            if (licenseOpt.isPresent() && licenseController.addLicenseToDb(licenseOpt.get())) {
                 JOptionPane.showMessageDialog(null, "The license has been added successfully!", "Confirm", 2);
-                licensesModelObject.addLicense(license);
+                licensesModelObject.addLicense(licenseOpt.get());
                 licensesModelObject.fireTableDataChanged();
                 licensesTable.repaint();
             } else {

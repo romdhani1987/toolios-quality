@@ -17,6 +17,7 @@ import java.awt.event.WindowEvent;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.function.Supplier;
 
@@ -40,20 +41,20 @@ public class LicenseDialog extends JDialog {
     private UtilDateModel model = new UtilDateModel();
     private UtilDateModel expModel = new UtilDateModel();
     private JLabel errorLabel;
-    private License license;
+    private Optional<License> licenseOpt = Optional.empty();
     private boolean isEditable = false;
-    private Supplier<License> licenseSupplierValid = () -> {
-        return license;
+    private Supplier<Optional<License>> licenseSupplierValid = () -> {
+        return licenseOpt;
     };
-    private Supplier<License> licenseSupplierCancel = () -> {
-        return null;
+    private Supplier<Optional<License>> licenseSupplierCancel = () -> {
+        return Optional.empty();
     };
 
-    public Supplier<License> getLicenseSupplierValid() {
+    public Supplier<Optional<License>> getLicenseSupplierValid() {
         return licenseSupplierValid;
     }
 
-    public Supplier<License> getLicenseSupplierCancel() {
+    public Supplier<Optional<License>> getLicenseSupplierCancel() {
         return licenseSupplierCancel;
     }
 
@@ -64,7 +65,7 @@ public class LicenseDialog extends JDialog {
 
     public LicenseDialog(License license, boolean isEditable) {
         super();
-        this.license = license;
+        this.licenseOpt = Optional.ofNullable(license);
         this.isEditable = isEditable;
         initComponents();
     }
@@ -82,20 +83,20 @@ public class LicenseDialog extends JDialog {
         JLabel expirationDateLabel = new JLabel("Expiration date *");
         JLabel computerLabel = new JLabel("Computer ");
         // Layout
-        if (license != null && isEditable) {
-            licenseNameTextField.setText(license.getName());
+        if (licenseOpt.isPresent() && isEditable) {
+            licenseNameTextField.setText(licenseOpt.get().getName());
         }
         licensePanel.add(licenseNameLabel);
         licensePanel.add(licenseNameTextField, "growx,push, wrap");
 
-        if (license != null && isEditable) {
-            licenseTypeTextField.setText(license.getType());
+        if (licenseOpt.isPresent() && isEditable) {
+            licenseTypeTextField.setText(licenseOpt.get().getType());
         }
         licensePanel.add(licenseTypeLabel);
         licensePanel.add(licenseTypeTextField, "growx,push, wrap");
 
-        if (license != null && isEditable) {
-            serialNumberTextField.setText(license.getSerialNumber());
+        if (licenseOpt.isPresent() && isEditable) {
+            serialNumberTextField.setText(licenseOpt.get().getSerialNumber());
         }
         licensePanel.add(serialNumberLabel);
         licensePanel.add(serialNumberTextField, "growx,push, wrap");
@@ -120,8 +121,8 @@ public class LicenseDialog extends JDialog {
         computers.forEach(computer -> {
             computerComboBox.addItem(computer);
         });
-        if (license != null && isEditable) {
-            computerComboBox.setSelectedItem(license.getComputer());
+        if (licenseOpt.isPresent() && isEditable) {
+            computerComboBox.setSelectedItem(licenseOpt.get().getComputer());
         }
         licensePanel.add(computerComboBox, "growx,push, wrap");
 
@@ -132,7 +133,7 @@ public class LicenseDialog extends JDialog {
             int response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.YES_OPTION) {
-                license = null;
+                licenseOpt = Optional.empty();
                 this.dispose();
             } else if (response == JOptionPane.CLOSED_OPTION) {
             }
@@ -155,7 +156,7 @@ public class LicenseDialog extends JDialog {
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent windowEvent) {
-                license = null;
+                licenseOpt = Optional.empty();
             }
         });
     }
@@ -168,25 +169,25 @@ public class LicenseDialog extends JDialog {
             String computerType = licenseTypeTextField.getText();
             String serial = serialNumberTextField.getText();
 
-            if (isEditable) {
-                license.setName(computerName);
-                license.setType(computerType);
-                license.setSerialNumber(serial);
-                license.setComputer((Computer) computerComboBox.getSelectedItem());
+            if (isEditable && licenseOpt.isEmpty()) {
+                licenseOpt.get().setName(computerName);
+                licenseOpt.get().setType(computerType);
+                licenseOpt.get().setSerialNumber(serial);
+                licenseOpt.get().setComputer((Computer) computerComboBox.getSelectedItem());
             } else {
                 Timestamp purchaseTimestamp = new Timestamp(model.getValue().getTime());
                 Timestamp expirationTimestamp = new Timestamp(expModel.getValue().getTime());
-                license = new License();
-                license.setName(computerName);
-                license.setType(computerType);
-                license.setSerialNumber(serial);
-                license.setPurchaseDate(purchaseTimestamp);
-                license.setExpirationDate(expirationTimestamp);
-                license.setComputer((Computer) computerComboBox.getSelectedItem());
+                licenseOpt = Optional.of(new License());
+                licenseOpt.get().setName(computerName);
+                licenseOpt.get().setType(computerType);
+                licenseOpt.get().setSerialNumber(serial);
+                licenseOpt.get().setPurchaseDate(purchaseTimestamp);
+                licenseOpt.get().setExpirationDate(expirationTimestamp);
+                licenseOpt.get().setComputer((Computer) computerComboBox.getSelectedItem());
             }
             errorLabel.setVisible(false);
             licenseSupplierValid = () -> {
-                return license;
+                return licenseOpt;
             };
             this.dispose();
         } else {
