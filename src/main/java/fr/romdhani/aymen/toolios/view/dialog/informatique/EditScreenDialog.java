@@ -2,6 +2,7 @@ package fr.romdhani.aymen.toolios.view.dialog.informatique;
 
 import fr.romdhani.aymen.toolios.core.orm.Address;
 import fr.romdhani.aymen.toolios.core.orm.UserAccount;
+import fr.romdhani.aymen.toolios.view.utils.IconResource;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -40,18 +41,10 @@ public class EditScreenDialog extends JDialog {
     public Supplier<UserAccount> getUserAccountSupplierValid() {
         return userAccountSupplierValid;
     }
-
-    public void setUserAccountSupplierValid(Supplier<UserAccount> userAccountSupplierValid) {
-        this.userAccountSupplierValid = userAccountSupplierValid;
-    }
-
     public Supplier<UserAccount> getUserAccountSupplierCancel() {
         return userAccountSupplierCancel;
     }
 
-    public void setUserAccountSupplierCancel(Supplier<UserAccount> userAccountSupplierCancel) {
-        this.userAccountSupplierCancel = userAccountSupplierCancel;
-    }
 
     private void initComponents() {
         setSize(600, 500);
@@ -143,6 +136,8 @@ public class EditScreenDialog extends JDialog {
         if (userAccount.getGroup() != null)
             updateField(userAccount.getGroup().getName(), groupTextField);
         userPanel.add(groupTextField, "grow,push, wrap");
+
+        cancelButton.setIcon(IconResource.getImage(IconResource.ICON.CROSS));
         cancelButton.addActionListener(e -> {
             int response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -154,6 +149,8 @@ public class EditScreenDialog extends JDialog {
             } else if (response == JOptionPane.CLOSED_OPTION) {
             }
         });
+
+        addButton.setIcon(IconResource.getImage(IconResource.ICON.TICK));
         addButton.addActionListener(e -> {
             addUser();
 

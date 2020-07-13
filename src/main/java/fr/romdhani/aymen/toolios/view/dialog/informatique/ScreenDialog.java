@@ -4,6 +4,7 @@ import fr.romdhani.aymen.toolios.core.orm.Computer;
 import fr.romdhani.aymen.toolios.core.orm.Screen;
 import fr.romdhani.aymen.toolios.utils.StringUtils;
 import fr.romdhani.aymen.toolios.view.commons.DateLabelFormatter;
+import fr.romdhani.aymen.toolios.view.utils.IconResource;
 import net.miginfocom.swing.MigLayout;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -117,9 +118,12 @@ public class ScreenDialog extends JDialog {
         }
         userPanel.add(computerComboBox, "growx,push, wrap");
 
+        clearButton.setIcon(IconResource.getImage(IconResource.ICON.ARROW_CIRCLE));
         clearButton.addActionListener(e -> {
             clear();
         });
+
+        cancelButton.setIcon(IconResource.getImage(IconResource.ICON.CROSS));
         cancelButton.addActionListener(e -> {
             int response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -129,6 +133,8 @@ public class ScreenDialog extends JDialog {
             } else if (response == JOptionPane.CLOSED_OPTION) {
             }
         });
+
+        addButton.setIcon(IconResource.getImage(IconResource.ICON.TICK));
         addButton.addActionListener(e -> {
             applyChanges();
         });
@@ -144,7 +150,7 @@ public class ScreenDialog extends JDialog {
         footerPanel.add(buttonsPanel, "growx, push");
         add(new JScrollPane(userPanel), BorderLayout.CENTER);
         add(footerPanel, BorderLayout.PAGE_END);
-        this.addWindowListener(new WindowAdapter() {
+        addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent windowEvent) {
                 screenOpt = Optional.empty();

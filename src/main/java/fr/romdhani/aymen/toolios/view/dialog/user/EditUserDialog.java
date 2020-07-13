@@ -3,6 +3,7 @@ package fr.romdhani.aymen.toolios.view.dialog.user;
 import fr.romdhani.aymen.toolios.core.orm.Address;
 import fr.romdhani.aymen.toolios.core.orm.UserAccount;
 import fr.romdhani.aymen.toolios.utils.StringUtils;
+import fr.romdhani.aymen.toolios.view.utils.IconResource;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -139,6 +140,8 @@ public class EditUserDialog extends JDialog {
         if (userAccount.getGroup() != null)
             updateField(userAccount.getGroup().getName(), groupTextField);
         userPanel.add(groupTextField, "grow,push, wrap");
+
+        cancelButton.setIcon(IconResource.getImage(IconResource.ICON.CROSS));
         cancelButton.addActionListener(e -> {
             int response = JOptionPane.showConfirmDialog(null, "Do you want to save modification? ", "Confirm",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -148,6 +151,7 @@ public class EditUserDialog extends JDialog {
             } else if (response == JOptionPane.CLOSED_OPTION) {
             }
         });
+        addButton.setIcon(IconResource.getImage(IconResource.ICON.TICK));
         addButton.addActionListener(e -> {
             validUser();
         });
@@ -164,7 +168,7 @@ public class EditUserDialog extends JDialog {
         buttonsPanel.add(cancelButton);
         add(userPanel, BorderLayout.CENTER);
         add(footPanel, BorderLayout.PAGE_END);
-        this.addWindowListener(new WindowAdapter() {
+        addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent windowEvent) {
                 int result = JOptionPane.showConfirmDialog(null, "Do you really want to cancel?", "Cancel", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);

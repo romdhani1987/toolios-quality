@@ -62,11 +62,13 @@ public class ConnectionDialog extends JDialog {
         password = new JLabel("Password: ");
         loginTextField = new JTextField();
         passwordTextField = new JPasswordField();
+
         loginButton = new JButton("Login");
         loginButton.setIcon(IconResource.getImage(IconResource.ICON.LOCK_UNLOCK));
         loginButton.addActionListener(e -> {
             login();
         });
+
         cancelButton = new JButton("Cancel");
         cancelButton.setIcon(IconResource.getImage(IconResource.ICON.CROSS));
         cancelButton.addActionListener(e -> {

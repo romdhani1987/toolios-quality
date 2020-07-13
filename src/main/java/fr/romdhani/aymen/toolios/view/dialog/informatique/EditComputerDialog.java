@@ -3,6 +3,7 @@ package fr.romdhani.aymen.toolios.view.dialog.informatique;
 import fr.romdhani.aymen.toolios.core.orm.Computer;
 import fr.romdhani.aymen.toolios.utils.StringUtils;
 import fr.romdhani.aymen.toolios.view.commons.DateLabelFormatter;
+import fr.romdhani.aymen.toolios.view.utils.IconResource;
 import net.miginfocom.swing.MigLayout;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -27,7 +28,7 @@ public class EditComputerDialog extends JDialog {
     private static final String OS_MAC = "Macintos";
     private static final String OS_OTHER = "Other";
     private static final String ERROR = "Error occurred: maybe some fields are incorrect!";
-    private JButton applyChanges = new JButton(" Apply ");
+    private JButton applyButton = new JButton(" Apply ");
     private JButton clearButton = new JButton("Clear");
     private JButton cancelButton = new JButton("Cancel");
     private JTextField computerNameTextField = new JTextField();
@@ -147,9 +148,13 @@ public class EditComputerDialog extends JDialog {
 
         userPanel.add(screensLabel);
         userPanel.add(screensTextField, "growx,push, wrap");
+
+        clearButton.setIcon(IconResource.getImage(IconResource.ICON.ARROW_CIRCLE));
         clearButton.addActionListener(e -> {
             clear();
         });
+
+        cancelButton.setIcon(IconResource.getImage(IconResource.ICON.CROSS));
         cancelButton.addActionListener(e -> {
             int response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -158,13 +163,15 @@ public class EditComputerDialog extends JDialog {
                 this.dispose();
             }
         });
-        applyChanges.addActionListener(e -> {
+
+        applyButton.setIcon(IconResource.getImage(IconResource.ICON.TICK));
+        applyButton.addActionListener(e -> {
             applyChanges();
 
         });
         JPanel footerPanel = new JPanel(new MigLayout());
         JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        buttonsPanel.add(applyChanges);
+        buttonsPanel.add(applyButton);
         buttonsPanel.add(clearButton);
         buttonsPanel.add(cancelButton);
         errorLabel = new JLabel(ERROR);

@@ -2,6 +2,7 @@ package fr.romdhani.aymen.toolios.view.dialog.user;
 
 import fr.romdhani.aymen.toolios.core.orm.UserAccount;
 import fr.romdhani.aymen.toolios.utils.Hash;
+import fr.romdhani.aymen.toolios.view.utils.IconResource;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -74,7 +75,7 @@ public class ResetPWUserDialog extends JDialog {
         userPanel.add(pass2Label);
         userPanel.add(pass2Field, "grow,push, wrap");
 
-
+        cancelButton.setIcon(IconResource.getImage(IconResource.ICON.CROSS));
         cancelButton.addActionListener(e -> {
             int response = JOptionPane.showConfirmDialog(null, "Do you want really to cancel?", "Confirm",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -83,6 +84,7 @@ public class ResetPWUserDialog extends JDialog {
                 this.dispose();
             }
         });
+        applyButton.setIcon(IconResource.getImage(IconResource.ICON.TICK));
         applyButton.addActionListener(e -> {
             try {
                 applyChanges();
@@ -90,6 +92,7 @@ public class ResetPWUserDialog extends JDialog {
                 noSuchAlgorithmException.printStackTrace();
             }
         });
+        clearButton.setIcon(IconResource.getImage(IconResource.ICON.ARROW_CIRCLE));
         clearButton.addActionListener(e -> {
             clearFields();
         });

@@ -4,6 +4,7 @@ import fr.romdhani.aymen.toolios.core.orm.Address;
 import fr.romdhani.aymen.toolios.core.orm.UserAccount;
 import fr.romdhani.aymen.toolios.utils.Hash;
 import fr.romdhani.aymen.toolios.utils.StringUtils;
+import fr.romdhani.aymen.toolios.view.utils.IconResource;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -40,7 +41,7 @@ public class NewUserDialog extends JDialog {
     private Supplier<UserAccount> userAccountSupplierValid = () -> {
         return userAccount;
     };
-    private Supplier<UserAccount> userAccountSupplierCancel=() -> {
+    private Supplier<UserAccount> userAccountSupplierCancel = () -> {
         return null;
     };
 
@@ -135,6 +136,7 @@ public class NewUserDialog extends JDialog {
 
         userPanel.add(groupLabel);
         userPanel.add(groupTextField, "grow,push, wrap");
+        cancelButton.setIcon(IconResource.getImage(IconResource.ICON.CROSS));
         cancelButton.addActionListener(e -> {
             int response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -146,6 +148,7 @@ public class NewUserDialog extends JDialog {
             } else if (response == JOptionPane.CLOSED_OPTION) {
             }
         });
+        addButton.setIcon(IconResource.getImage(IconResource.ICON.TICK));
         addButton.addActionListener(e -> {
             try {
                 addUser();
@@ -153,6 +156,7 @@ public class NewUserDialog extends JDialog {
                 noSuchAlgorithmException.printStackTrace();
             }
         });
+        clearButton.setIcon(IconResource.getImage(IconResource.ICON.ARROW_CIRCLE));
         clearButton.addActionListener(e -> {
             clearFields();
         });
