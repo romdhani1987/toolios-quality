@@ -11,10 +11,10 @@ import org.jdatepicker.impl.UtilDateModel;
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Date;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.*;
 import java.util.List;
-import java.util.Properties;
 import java.util.function.Supplier;
 
 public class EditComputerDialog extends JDialog {
@@ -152,11 +152,8 @@ public class EditComputerDialog extends JDialog {
             int response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.YES_OPTION) {
-                computerSupplierCancel = () -> {
-                    return (null);
-                };
+                computer = null;
                 this.dispose();
-            } else if (response == JOptionPane.CLOSED_OPTION) {
             }
         });
         applyChanges.addActionListener(e -> {
@@ -175,6 +172,12 @@ public class EditComputerDialog extends JDialog {
         footerPanel.add(buttonsPanel, "growx, push");
         add(new JScrollPane(userPanel), BorderLayout.CENTER);
         add(footerPanel, BorderLayout.PAGE_END);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent windowEvent) {
+                computer = null;
+            }
+        });
     }
 
     private void setInitialValue(JTextComponent component, Object value) {
@@ -201,23 +204,6 @@ public class EditComputerDialog extends JDialog {
             computer.setServiceTag(serviceTag);
             computer.setOs(os);
             computer.setShifting(isShifting);
-           /* List<License> licenseList = new ArrayList<>();
-            License license = new License();
-            license.setName("Windows licenses");
-            License license1 = new License();
-            license1.setName("unix licenses");
-            License license2 = new License();
-            license2.setName("team licenses");
-            Session session = getSession();
-            Transaction tr = session.getTransaction();
-            tr.begin();
-            session.save(license);
-            session.save(license1);
-            session.save(license2);
-            tr.commit();
-            licenseList.add(license);
-            computer.setLicenses(licenseList);*/
-
             errorLabel.setVisible(false);
             computerSupplierValid = () -> {
                 return computer;
