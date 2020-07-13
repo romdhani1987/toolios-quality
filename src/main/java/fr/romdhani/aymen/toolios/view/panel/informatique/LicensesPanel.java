@@ -2,6 +2,7 @@ package fr.romdhani.aymen.toolios.view.panel.informatique;
 
 import fr.romdhani.aymen.toolios.controller.informatique.LicenseController;
 import fr.romdhani.aymen.toolios.core.orm.License;
+import fr.romdhani.aymen.toolios.core.orm.Screen;
 import fr.romdhani.aymen.toolios.view.buttons.TooliosButton;
 import fr.romdhani.aymen.toolios.view.dialog.informatique.LicenseDialog;
 import fr.romdhani.aymen.toolios.view.panel.TooliosView;
@@ -70,6 +71,19 @@ public class LicensesPanel extends JPanel implements TooliosView {
     }
 
     private void deleteLicense() {
+        int response = JOptionPane.showConfirmDialog(this, "Do you want really to delete the license ?", "Confirm",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.YES_OPTION) {
+            int row = licensesTable.getSelectedRow();
+            if (row < 0) {
+                JOptionPane.showMessageDialog(this, "No License were selected to delete!", "Delete License", 1);
+            } else {
+                int modelRow = licensesTable.convertRowIndexToModel(row);
+                License license = licensesModelObject.getLicense(modelRow);
+                licenseController.deleteLicenseFromDb(license);
+                licensesModelObject.deleteScreen(modelRow);
+            }
+        }
     }
 
     private void editLicense() {

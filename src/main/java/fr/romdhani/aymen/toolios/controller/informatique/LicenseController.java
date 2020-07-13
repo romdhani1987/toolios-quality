@@ -31,8 +31,8 @@ public class LicenseController {
         return licenseService.persist(license);
     }
 
-    public void deleteLicenseFromDb(Screen screen) {
-        licenseService.delete(screen.getId());
+    public void deleteLicenseFromDb(License license) {
+        licenseService.delete(license.getId());
     }
 
     public void refresh() {

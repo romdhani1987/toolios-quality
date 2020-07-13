@@ -153,7 +153,7 @@ public class LicenseDialog extends JDialog {
         footerPanel.add(buttonsPanel, "growx, push");
         add(new JScrollPane(licensePanel), BorderLayout.CENTER);
         add(footerPanel, BorderLayout.PAGE_END);
-        this.addWindowListener(new WindowAdapter() {
+        addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent windowEvent) {
                 licenseOpt = Optional.empty();

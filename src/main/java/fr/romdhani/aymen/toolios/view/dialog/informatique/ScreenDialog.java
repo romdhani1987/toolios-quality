@@ -12,11 +12,14 @@ import org.jdatepicker.impl.UtilDateModel;
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.function.Supplier;
 
@@ -38,13 +41,10 @@ public class ScreenDialog extends JDialog {
     private JComboBox<Computer> computerComboBox = new JComboBox();
     private UtilDateModel model = new UtilDateModel();
     private JLabel errorLabel;
-    private Screen screen;
+    private Optional<Screen> screenOpt = Optional.empty();
     private boolean isEditable = false;
-    private Supplier<Screen> screenSupplierValid = () -> {
-        return screen;
-    };
-    private Supplier<Screen> screenSupplierCancel = () -> {
-        return screen;
+    private Supplier<Optional<Screen>> screenSupplierValid = () -> {
+        return screenOpt;
     };
 
     public ScreenDialog() {
@@ -52,19 +52,15 @@ public class ScreenDialog extends JDialog {
         initComponents();
     }
 
-    public ScreenDialog(Screen screen, boolean isEditable) {
+    public ScreenDialog(Screen screenOpt, boolean isEditable) {
         super();
-        this.screen = screen;
+        this.screenOpt = Optional.of(screenOpt);
         this.isEditable = isEditable;
         initComponents();
     }
 
-    public Supplier<Screen> getScreenSupplierValid() {
+    public Supplier<Optional<Screen>> getScreenSupplierValid() {
         return screenSupplierValid;
-    }
-
-    public Supplier<Screen> getScreenSupplierCancel() {
-        return screenSupplierCancel;
     }
 
     private void initComponents() {
@@ -79,20 +75,20 @@ public class ScreenDialog extends JDialog {
         JLabel purchasingDateLabel = new JLabel("Purchase date ");
         JLabel computerLabel = new JLabel("Computer ");
         // Layout
-        if (screen != null && isEditable) {
-            screenNameTextField.setText(screen.getName());
+        if (screenOpt.isPresent() && isEditable) {
+            screenNameTextField.setText(screenOpt.get().getName());
         }
         userPanel.add(computerNameLabel);
         userPanel.add(screenNameTextField, "growx,push, wrap");
 
-        if (screen != null && isEditable) {
-            serialNumberTextField.setText(screen.getSerialNumber());
+        if (screenOpt.isPresent() && isEditable) {
+            serialNumberTextField.setText(screenOpt.get().getSerialNumber());
         }
         userPanel.add(serialNumberLabel);
         userPanel.add(serialNumberTextField, "growx,push, wrap");
 
-        if (screen != null && isEditable) {
-            serviceTagTextField.setText(screen.getServiceTag());
+        if (screenOpt.isPresent() && isEditable) {
+            serviceTagTextField.setText(screenOpt.get().getServiceTag());
         }
         userPanel.add(serviceLabel);
         userPanel.add(serviceTagTextField, "growx,push, wrap");
@@ -116,8 +112,8 @@ public class ScreenDialog extends JDialog {
         computers.forEach(computer -> {
             computerComboBox.addItem(computer);
         });
-        if (screen != null && isEditable) {
-            computerComboBox.setSelectedItem(screen.getComputer());
+        if (screenOpt.isPresent() && isEditable) {
+            computerComboBox.setSelectedItem(screenOpt.get().getComputer());
         }
         userPanel.add(computerComboBox, "growx,push, wrap");
 
@@ -128,9 +124,7 @@ public class ScreenDialog extends JDialog {
             int response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.YES_OPTION) {
-                screenSupplierCancel = () -> {
-                    return (null);
-                };
+                screenOpt = Optional.empty();
                 this.dispose();
             } else if (response == JOptionPane.CLOSED_OPTION) {
             }
@@ -150,6 +144,12 @@ public class ScreenDialog extends JDialog {
         footerPanel.add(buttonsPanel, "growx, push");
         add(new JScrollPane(userPanel), BorderLayout.CENTER);
         add(footerPanel, BorderLayout.PAGE_END);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent windowEvent) {
+                screenOpt = Optional.empty();
+            }
+        });
     }
 
     private void applyChanges() {
@@ -159,25 +159,26 @@ public class ScreenDialog extends JDialog {
             String computerName = screenNameTextField.getText();
             String serial = serialNumberTextField.getText();
             String serviceTag = serviceTagTextField.getText();
-            Timestamp creationTimestamp = new Timestamp(model.getValue().getTime());
-            int age = computeAge(creationTimestamp.toLocalDateTime().toLocalDate(), LocalDate.now());
-            if (isEditable) {
-                screen.setName(computerName);
-                screen.setSerialNumber(serial);
-                screen.setServiceTag(serviceTag);
-                screen.setComputer((Computer) computerComboBox.getSelectedItem());
+
+            if (isEditable && screenOpt.isPresent()) {
+                screenOpt.get().setName(computerName);
+                screenOpt.get().setSerialNumber(serial);
+                screenOpt.get().setServiceTag(serviceTag);
+                screenOpt.get().setComputer((Computer) computerComboBox.getSelectedItem());
             } else {
-                screen = new Screen();
-                screen.setName(computerName);
-                screen.setSerialNumber(serial);
-                screen.setServiceTag(serviceTag);
-                screen.setAge(age);
-                screen.setPurchaseDate(creationTimestamp);
-                screen.setComputer((Computer) computerComboBox.getSelectedItem());
+                Timestamp creationTimestamp = new Timestamp(model.getValue().getTime());
+                int age = computeAge(creationTimestamp.toLocalDateTime().toLocalDate(), LocalDate.now());
+                screenOpt = Optional.of(new Screen());
+                screenOpt.get().setName(computerName);
+                screenOpt.get().setSerialNumber(serial);
+                screenOpt.get().setServiceTag(serviceTag);
+                screenOpt.get().setAge(age);
+                screenOpt.get().setPurchaseDate(creationTimestamp);
+                screenOpt.get().setComputer((Computer) computerComboBox.getSelectedItem());
             }
             errorLabel.setVisible(false);
             screenSupplierValid = () -> {
-                return screen;
+                return screenOpt;
             };
             this.dispose();
         } else {

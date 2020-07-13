@@ -12,6 +12,7 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
+import java.util.Optional;
 
 import static fr.romdhani.aymen.toolios.utils.HibernateUtil.getSession;
 
@@ -100,8 +101,8 @@ public class ScreensPanel extends JPanel implements TooliosView {
             editScreenDialog.setModal(true);
             editScreenDialog.setLocationRelativeTo(null);
             editScreenDialog.setVisible(true);
-            Screen screenToEdit = editScreenDialog.getScreenSupplierValid().get();
-            if (screenToEdit != null && screenController.addScreenToDb(screenToEdit)) {
+            Optional<Screen> screenToEditOpt = editScreenDialog.getScreenSupplierValid().get();
+            if (screenToEditOpt.isPresent() && screenController.addScreenToDb(screenToEditOpt.get())) {
                 JOptionPane.showMessageDialog(null, "The changes have been applied successfully!", "Confirm", 2);
                 screenModelObject.fireTableDataChanged();
                 screensTable.repaint();
@@ -115,10 +116,10 @@ public class ScreensPanel extends JPanel implements TooliosView {
         screenDialog.setLocationRelativeTo(null);
         screenDialog.setVisible(true);
         if (screenDialog.getScreenSupplierValid().get() != null) {
-            Screen screen = screenDialog.getScreenSupplierValid().get();
-            if (screenController.addScreenToDb(screen)) {
+            Optional<Screen> screenOpt = screenDialog.getScreenSupplierValid().get();
+            if (screenOpt.isPresent() && screenController.addScreenToDb(screenOpt.get())) {
                 JOptionPane.showMessageDialog(null, "The screen has been added successfully!", "Confirm", 2);
-                screenModelObject.addScreen(screen);
+                screenModelObject.addScreen(screenOpt.get());
                 screenModelObject.fireTableDataChanged();
                 screensTable.repaint();
             } else {
