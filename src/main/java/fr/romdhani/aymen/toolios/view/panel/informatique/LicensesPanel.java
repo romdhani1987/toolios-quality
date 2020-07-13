@@ -83,7 +83,7 @@ public class LicensesPanel extends JPanel implements TooliosView {
             editLicenseDialog.setLocationRelativeTo(null);
             editLicenseDialog.setVisible(true);
             License screenToEdit = editLicenseDialog.getLicenseSupplierValid().get();
-            if (screenToEdit != null && licenseController.addScreenToDb(screenToEdit)) {
+            if (screenToEdit != null && licenseController.addLicenseToDb(screenToEdit)) {
                 JOptionPane.showMessageDialog(null, "The changes have been applied successfully!", "Confirm", 2);
                 licensesModelObject.fireTableDataChanged();
                 licensesTable.repaint();
@@ -96,9 +96,10 @@ public class LicensesPanel extends JPanel implements TooliosView {
         licenseDialog.setModal(true);
         licenseDialog.setLocationRelativeTo(null);
         licenseDialog.setVisible(true);
-        if (licenseDialog.getLicenseSupplierCancel().get() != null) {
-            License license = licenseDialog.getLicenseSupplierCancel().get();
-            if (licenseController.addScreenToDb(license)) {
+        if (licenseDialog.getLicenseSupplierValid().get() != null) {
+            License license = licenseDialog.getLicenseSupplierValid().get();
+            System.out.println("license: " + license.toString());
+            if (licenseController.addLicenseToDb(license)) {
                 JOptionPane.showMessageDialog(null, "The license has been added successfully!", "Confirm", 2);
                 licensesModelObject.addLicense(license);
                 licensesModelObject.fireTableDataChanged();

@@ -27,11 +27,11 @@ public class LicenseController {
         licensesPanel.getLicensesModelObject().addAllLicenses(licenseService.findAll());
     }
 
-    public boolean addScreenToDb(License license) {
+    public boolean addLicenseToDb(License license) {
         return licenseService.persist(license);
     }
 
-    public void deleteScreenFromDb(Screen screen) {
+    public void deleteLicenseFromDb(Screen screen) {
         licenseService.delete(screen.getId());
     }
 
@@ -39,7 +39,7 @@ public class LicenseController {
         licensesPanel.getLicensesModelObject().addAllLicenses(licenseService.findAll());
     }
 
-    public void deleteAllScreensFromDb() {
+    public void deleteAllLicensesFromDb() {
         licenseService.deleteAll();
     }
 }

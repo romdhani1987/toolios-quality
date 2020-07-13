@@ -71,6 +71,8 @@ public class MainPanel extends JPanel {
         // Equipments
         othersEquipementPanel = new EquipementPanel();
 
+
+        //Main panel
         devicestabbedPane.add("Users", usersPanel);
         devicestabbedPane.add("Computers", computersPanel);
         devicestabbedPane.add("Screens", screensPanel);

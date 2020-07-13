@@ -36,6 +36,7 @@ public class LicenseDialog extends JDialog {
     private JTextField serialNumberTextField = new JTextField();
     private JComboBox<Computer> computerComboBox = new JComboBox();
     private UtilDateModel model = new UtilDateModel();
+    private UtilDateModel expModel = new UtilDateModel();
     private JLabel errorLabel;
     private License license;
     private boolean isEditable = false;
@@ -96,6 +97,7 @@ public class LicenseDialog extends JDialog {
         }
         licensePanel.add(serialNumberLabel);
         licensePanel.add(serialNumberTextField, "growx,push, wrap");
+
         // Purchase date
         licensePanel.add(purchasingDateLabel);
         Properties p = new Properties();
@@ -107,7 +109,7 @@ public class LicenseDialog extends JDialog {
         licensePanel.add(datePicker, "growx,push, wrap");
         // Purchase date
         licensePanel.add(expirationDateLabel);
-        JDatePanelImpl expDatePanel = new JDatePanelImpl(model, p);
+        JDatePanelImpl expDatePanel = new JDatePanelImpl(expModel, p);
         JDatePickerImpl expDatePicker = new JDatePickerImpl(expDatePanel, new DateLabelFormatter());
         licensePanel.add(expDatePicker, "growx,push, wrap");
         //Computer
@@ -120,6 +122,7 @@ public class LicenseDialog extends JDialog {
             computerComboBox.setSelectedItem(license.getComputer());
         }
         licensePanel.add(computerComboBox, "growx,push, wrap");
+
         clearButton.addActionListener(e -> {
             clear();
         });
@@ -156,10 +159,10 @@ public class LicenseDialog extends JDialog {
                 && !StringUtils.isNullOrEmpty(licenseTypeTextField.getText())
                 && !StringUtils.isNullOrEmpty(serialNumberTextField.getText())) {
             String computerName = licenseNameTextField.getText();
-            String computerType = licenseNameTextField.getText();
+            String computerType = licenseTypeTextField.getText();
             String serial = serialNumberTextField.getText();
             Timestamp purchaseTimestamp = new Timestamp(model.getValue().getTime());
-            Timestamp expirationTimestamp = new Timestamp(model.getValue().getTime());
+            Timestamp expirationTimestamp = new Timestamp(expModel.getValue().getTime());
             if (isEditable) {
                 license.setName(computerName);
                 license.setType(computerType);
