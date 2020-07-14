@@ -129,7 +129,7 @@ public class LicenseDialog extends JDialog {
             computerComboBox.setSelectedItem(licenseOpt.get().getComputer());
         }
         licensePanel.add(computerComboBox, "growx,push, wrap");
-// buttons
+        //Buttons
         clearButton.setIcon(IconResource.getImage(IconResource.ICON.ARROW_CIRCLE));
         clearButton.addActionListener(e -> {
             clear();
