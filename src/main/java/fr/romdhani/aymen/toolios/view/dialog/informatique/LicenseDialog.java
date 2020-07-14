@@ -119,6 +119,9 @@ public class LicenseDialog extends JDialog {
         //Computer
         licensePanel.add(computerLabel);
         List<Computer> computers = (List<Computer>) getSession().createQuery("from Computer").list();
+        Computer unknown = new Computer();
+        unknown.setName("Unassigned");
+        computerComboBox.addItem(unknown);
         computers.forEach(computer -> {
             computerComboBox.addItem(computer);
         });
@@ -126,7 +129,7 @@ public class LicenseDialog extends JDialog {
             computerComboBox.setSelectedItem(licenseOpt.get().getComputer());
         }
         licensePanel.add(computerComboBox, "growx,push, wrap");
-
+// buttons
         clearButton.setIcon(IconResource.getImage(IconResource.ICON.ARROW_CIRCLE));
         clearButton.addActionListener(e -> {
             clear();
