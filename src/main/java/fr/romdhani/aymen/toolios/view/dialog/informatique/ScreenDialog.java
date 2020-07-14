@@ -110,9 +110,13 @@ public class ScreenDialog extends JDialog {
 
         userPanel.add(computerLabel);
         List<Computer> computers = (List<Computer>) getSession().createQuery("from Computer").list();
+        Computer unknown = new Computer();
+        unknown.setName("Unassigned");
+        computerComboBox.addItem(unknown);
         computers.forEach(computer -> {
             computerComboBox.addItem(computer);
         });
+
         if (screenOpt.isPresent() && isEditable) {
             computerComboBox.setSelectedItem(screenOpt.get().getComputer());
         }
