@@ -1,7 +1,6 @@
 package fr.romdhani.aymen.toolios.view.dialog.user;
 
-import fr.romdhani.aymen.toolios.core.orm.Address;
-import fr.romdhani.aymen.toolios.core.orm.UserAccount;
+import fr.romdhani.aymen.toolios.core.orm.*;
 import fr.romdhani.aymen.toolios.utils.Hash;
 import fr.romdhani.aymen.toolios.utils.StringUtils;
 import fr.romdhani.aymen.toolios.view.utils.IconResource;
@@ -33,9 +32,9 @@ public class NewUserDialog extends JDialog {
     private JTextField cityTextField = new JTextField();
     private JTextField codeTextField = new JTextField();
     private JTextField countryTextField = new JTextField();
-    private JTextField functionTextField = new JTextField();
-    private JTextField rolesTextField = new JTextField();
-    private JTextField groupTextField = new JTextField();
+    private JComboBox<UserFunction> functionComboBox = new JComboBox();
+    private JComboBox<UserRoles> rolesComboBox = new JComboBox();
+    private JComboBox<UserGroup> groupComboBox = new JComboBox();
 
     private UserAccount userAccount = null;
     private Supplier<UserAccount> userAccountSupplierValid = () -> {
@@ -129,14 +128,15 @@ public class NewUserDialog extends JDialog {
         userPanel.add(new JLabel(), "grow,push, wrap ");
         //
         userPanel.add(functionLabel);
-        userPanel.add(functionTextField, "grow,push, wrap");
+        userPanel.add(functionComboBox, "grow,push, wrap");
 
         userPanel.add(rolesLabel);
-        userPanel.add(rolesTextField, "grow,push, wrap");
+        userPanel.add(rolesComboBox, "grow,push, wrap");
 
         userPanel.add(groupLabel);
-        userPanel.add(groupTextField, "grow,push, wrap");
+        userPanel.add(groupComboBox, "grow,push, wrap");
         cancelButton.setIcon(IconResource.getImage(IconResource.ICON.CROSS));
+        //Cancel button
         cancelButton.addActionListener(e -> {
             int response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -148,6 +148,7 @@ public class NewUserDialog extends JDialog {
             } else if (response == JOptionPane.CLOSED_OPTION) {
             }
         });
+        //Add button
         addButton.setIcon(IconResource.getImage(IconResource.ICON.TICK));
         addButton.addActionListener(e -> {
             try {
@@ -156,6 +157,7 @@ public class NewUserDialog extends JDialog {
                 noSuchAlgorithmException.printStackTrace();
             }
         });
+        //Clear button
         clearButton.setIcon(IconResource.getImage(IconResource.ICON.ARROW_CIRCLE));
         clearButton.addActionListener(e -> {
             clearFields();
@@ -198,8 +200,6 @@ public class NewUserDialog extends JDialog {
         String city = cityTextField.getText();
         String country = countryTextField.getText();
 
-        String roles = rolesTextField.getText();
-        String group = groupTextField.getText();
         if (!StringUtils.isNullOrEmpty(firstName) &&
                 !StringUtils.isNullOrEmpty(lastName) &&
                 !StringUtils.isNullOrEmpty(login) && !StringUtils.isNullOrEmpty(email) &&

@@ -3,7 +3,6 @@ package fr.romdhani.aymen.toolios.core.orm;
 import java.io.Serializable;
 
 /**
- *
  * @author aromdhani
  */
 public class MotherBoard implements Serializable {

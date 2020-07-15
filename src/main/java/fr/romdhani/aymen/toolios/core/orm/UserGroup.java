@@ -84,8 +84,8 @@ public class UserGroup implements Serializable {
         return ORM_user_account;
     }
 
+    @Override
     public String toString() {
-        return String.valueOf(getId());
+        return "User group{" + name + "}";
     }
-
 }

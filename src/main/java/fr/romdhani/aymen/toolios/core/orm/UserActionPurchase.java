@@ -9,7 +9,6 @@ public class UserActionPurchase implements Serializable {
 	public UserActionPurchase() {
 	}
 
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;

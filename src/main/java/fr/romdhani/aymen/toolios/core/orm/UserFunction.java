@@ -61,8 +61,8 @@ public class UserFunction implements Serializable {
         return ORM_user_account;
     }
 
+    @Override
     public String toString() {
-        return String.valueOf(getId());
+        return "Function{" + name + "}";
     }
-
 }
