@@ -15,7 +15,7 @@ public class TooliosQuality {
     public static void main(String[] args) {
         System.out.println("*** Start Toolios-Quality ***");
         try {
-            if (!ConfigProperties.getInstance().isDatabaseInitialized()) {
+            if (ConfigProperties.getInstance().isDatabaseInitialized()) {
                 DatabaseInitializer.getInstance().populateRoles();
             }
             TooliosQualityView tooliosQualityView = new TooliosQualityView("Toolios-Quality");

@@ -4,10 +4,6 @@ import fr.romdhani.aymen.toolios.core.orm.UserFunction;
 import fr.romdhani.aymen.toolios.core.orm.UserRoles;
 import org.hibernate.Transaction;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Function;
-
 import static fr.romdhani.aymen.toolios.utils.HibernateUtil.execQuery;
 import static fr.romdhani.aymen.toolios.utils.HibernateUtil.getSession;
 
@@ -30,9 +26,10 @@ public class DatabaseInitializer {
      * Populate the roles table
      */
     public  void populateRoles() {
-        System.out.println("INFO- Start to table user roles...");
+        System.out.println("INFO- Start to populate table user roles...");
         UserRoles userRoles = new UserRoles();
         userRoles.setName(UserRoles.UserRole.USER.getRole());
+        System.out.println("INFO- "+userRoles.toString());
         Transaction tr = getSession().getTransaction();
         tr.begin();
         getSession().save(userRoles);

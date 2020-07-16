@@ -7,11 +7,11 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * @author Crunchify.com
+ * @author aromdhani
  */
 
 public class ConfigProperties {
-    Boolean isDatabasePopulated = false;
+    Boolean isPopulated = false;
     InputStream inputStream;
 
     private ConfigProperties() {
@@ -27,12 +27,11 @@ public class ConfigProperties {
     }
 
     public Boolean isDatabaseInitialized() throws IOException {
-
         try {
             Properties prop = new Properties();
-            String propFileName = "config.properties";
+            String propFileName = "toolios.properties";
 
-            inputStream = new FileInputStream("src/main/resources/config/config.properties");
+            inputStream = new FileInputStream("src/main/resources/config/toolios.properties");
 
             if (inputStream != null) {
                 prop.load(inputStream);
@@ -40,14 +39,12 @@ public class ConfigProperties {
                 throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
             }
             // get the property value and print it out
-            isDatabasePopulated = Boolean.valueOf(prop.getProperty("populate.database"));
-
-            System.out.println("*** Start to populate the database: " + isDatabasePopulated);
+            isPopulated = Boolean.valueOf(prop.getProperty("isPopulated"));
         } catch (Exception e) {
             System.out.println("Exception: " + e);
         } finally {
             inputStream.close();
         }
-        return isDatabasePopulated;
+        return isPopulated;
     }
 }
