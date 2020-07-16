@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
+ * Read and write toolios configuration properties
+ *
  * @author aromdhani
  */
 
