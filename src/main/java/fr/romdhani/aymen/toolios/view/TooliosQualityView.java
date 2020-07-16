@@ -47,7 +47,7 @@ public class TooliosQualityView extends JFrame {
         getContentPane().add(footerPanel, BorderLayout.SOUTH);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setDefaultLookAndFeelDecorated(true);
-        this.addWindowListener(new WindowAdapter() {
+        addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent windowEvent) {
                 int result = JOptionPane.showConfirmDialog(null, "Do you really want to exit Toolios-quality?", "Exit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);

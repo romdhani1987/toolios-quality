@@ -25,7 +25,7 @@ public class DatabaseInitializer {
     /**
      * Populate the roles table
      */
-    public  void populateRoles() {
+    public void populateRoles() {
         System.out.println("INFO- Start to populate table user roles...");
         UserRoles userRoles = new UserRoles();
         userRoles.setName(UserRoles.UserRole.USER.getRole());
@@ -39,7 +39,7 @@ public class DatabaseInitializer {
     /**
      * Populate the table function
      */
-    public  void populateFunction() {
+    public void populateFunction() {
         System.out.println("INFO- Start to populate function table ...");
         UserFunction function = new UserFunction();
         function.setName("Software engineer");
