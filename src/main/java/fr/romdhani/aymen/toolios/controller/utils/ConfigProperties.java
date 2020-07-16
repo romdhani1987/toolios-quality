@@ -11,8 +11,9 @@ import java.util.Properties;
  */
 
 public class ConfigProperties {
-    Boolean isPopulated = false;
-    InputStream inputStream;
+    private Boolean isPopulated = false;
+    private InputStream inputStream;
+    private static final String propFileName = "toolios.properties";
 
     private ConfigProperties() {
 
@@ -29,14 +30,12 @@ public class ConfigProperties {
     public Boolean isDatabaseInitialized() throws IOException {
         try {
             Properties prop = new Properties();
-            String propFileName = "toolios.properties";
 
             inputStream = new FileInputStream("src/main/resources/config/toolios.properties");
-
             if (inputStream != null) {
                 prop.load(inputStream);
             } else {
-                throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
+                throw new FileNotFoundException("Property file '" + propFileName + "' not found in the classpath");
             }
             // get the property value and print it out
             isPopulated = Boolean.valueOf(prop.getProperty("isPopulated"));
