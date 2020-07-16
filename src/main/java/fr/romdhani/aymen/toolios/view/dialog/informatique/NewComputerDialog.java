@@ -1,6 +1,8 @@
 package fr.romdhani.aymen.toolios.view.dialog.informatique;
 
+import fr.romdhani.aymen.toolios.controller.utils.DatabaseUtils;
 import fr.romdhani.aymen.toolios.core.orm.Computer;
+import fr.romdhani.aymen.toolios.core.orm.UserAccount;
 import fr.romdhani.aymen.toolios.utils.StringUtils;
 import fr.romdhani.aymen.toolios.view.commons.DateLabelFormatter;
 import fr.romdhani.aymen.toolios.view.utils.IconResource;
@@ -39,7 +41,7 @@ public class NewComputerDialog extends JDialog {
     private JComboBox<String> osComboBox = new JComboBox();
     private JTextField ageField = new JTextField();
     private JCheckBox isShiftingCkBoc = new JCheckBox();
-    private JTextField userTextField = new JTextField();
+    private JComboBox<UserAccount> userComboBox = new JComboBox();
     private JTextField screensTextField = new JTextField();
     private JTextField licensesTextField = new JTextField();
     private UtilDateModel model = new UtilDateModel();
@@ -128,16 +130,20 @@ public class NewComputerDialog extends JDialog {
         p.put("text.year", "Year");
         JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
         JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
-        userPanel.add(datePicker, "grow,push, wrap");
-
-        userPanel.add(licensesLabel);
-        userPanel.add(licensesTextField, "growx,push, wrap");
+        userPanel.add(datePicker, "grow, push, wrap");
 
         userPanel.add(userLabel);
-        userPanel.add(userTextField, "growx,push, wrap");
+        DatabaseUtils.getInstance().getUsers().forEach(user -> {
+            userComboBox.addItem(user);
+        });
+      //  DatabaseUtils.getInstance().populateGroup();
+        userPanel.add(userComboBox, "growx, push, wrap");
+
+        userPanel.add(licensesLabel);
+        userPanel.add(licensesTextField, "growx, push, wrap");
 
         userPanel.add(screensLabel);
-        userPanel.add(screensTextField, "growx,push, wrap");
+        userPanel.add(screensTextField, "growx, push, wrap");
 
         clearButton.setIcon(IconResource.getImage(IconResource.ICON.ARROW_CIRCLE));
         clearButton.addActionListener(e -> {

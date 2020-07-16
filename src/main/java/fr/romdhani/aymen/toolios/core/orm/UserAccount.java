@@ -346,7 +346,6 @@ public class UserAccount implements Serializable {
             userRequestSet.add(userRequest);
         }
     }
-
     public void removeUserRequest(final UserRequest userRequest) {
         final Set<UserRequest> UserRequestSet = getORMUserRequest();
         if (userRequest != null) {
@@ -364,11 +363,6 @@ public class UserAccount implements Serializable {
 
     @Override
     public String toString() {
-        return "UserAccount{" +
-                "login='" + login + '\'' +
-                ", f_name='" + f_name + '\'' +
-                ", l_name='" + l_name + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+        return "UserAccount{" + login + "}";
     }
 }

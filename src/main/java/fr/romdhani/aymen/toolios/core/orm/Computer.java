@@ -10,6 +10,7 @@ import java.util.Set;
 /**
  * @author aromdhani
  */
+
 @Entity
 @Table(name = "computer", schema = "public")
 public class Computer implements Serializable {

@@ -9,7 +9,6 @@ public class UserFunction implements Serializable {
     public UserFunction() {
     }
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

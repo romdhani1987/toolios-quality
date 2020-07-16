@@ -1,7 +1,7 @@
 package fr.romdhani.aymen.toolios;
 
 import fr.romdhani.aymen.toolios.controller.utils.ConfigProperties;
-import fr.romdhani.aymen.toolios.controller.utils.DatabaseInitializer;
+import fr.romdhani.aymen.toolios.controller.utils.DatabaseUtils;
 import fr.romdhani.aymen.toolios.view.TooliosQualityView;
 
 import java.awt.*;
@@ -16,7 +16,8 @@ public class TooliosQuality {
         System.out.println("*** Start Toolios-Quality ***");
         try {
             if (ConfigProperties.getInstance().isDatabaseInitialized()) {
-                DatabaseInitializer.getInstance().populateRoles();
+                DatabaseUtils.getInstance().populateRoles();
+                DatabaseUtils.getInstance().populateFunction();
             }
             TooliosQualityView tooliosQualityView = new TooliosQualityView("Toolios-Quality");
             Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
