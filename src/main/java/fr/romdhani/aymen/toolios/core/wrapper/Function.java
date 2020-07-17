@@ -21,6 +21,7 @@ public enum Function {
     MRI_APPLICATION_ENGINEER("MRI Application Enginee"),
     ELECTRONICS_TECHNICIAN("Electronics Technician"),
     SENIOR_SALES_MANAGER("Senior Sales Manager"),
+    FINANCE_CONTROLLER("Finance Controller"),
     SALES_MANAGER("Sales Manager");
 
     String name;

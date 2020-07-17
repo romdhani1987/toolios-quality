@@ -2,6 +2,7 @@ package fr.romdhani.aymen.toolios.controller.utils;
 
 import fr.romdhani.aymen.toolios.core.orm.*;
 import fr.romdhani.aymen.toolios.core.wrapper.Function;
+import fr.romdhani.aymen.toolios.core.wrapper.Group;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -188,6 +189,13 @@ public class DatabaseUtils {
             userFunction.setName(Function.SALES_MANAGER.getName());
             session.save(userFunction);
         }
+        // Create user function : SALES_MANAGER
+        List<UserFunction> financeControllerList = createUserFunction(session, Function.FINANCE_CONTROLLER.getName());
+        if (financeControllerList.size() == 0) {
+            UserFunction userFunction = new UserFunction();
+            userFunction.setName(Function.FINANCE_CONTROLLER.getName());
+            session.save(userFunction);
+        }
         tr.commit();
     }
 
@@ -201,35 +209,89 @@ public class DatabaseUtils {
     }
 
     /**
-     * Populate groups
+     * Populate group
      */
     public synchronized void populateGroups() {
-        System.out.println("INFO- Start to populate groups  table ...");
-        Transaction tr = getSession().getTransaction();
+        System.out.println("INFO- Start to populate user groups table ...");
+        Session session = getSession();
+        Transaction tr = session.getTransaction();
         tr.begin();
-        Company company = new Company();
-        company.setName("RS2D");
-        getSession().save(company);
+        // ADMINISTRATION
+        List<UserGroup> userGroupList = createUserGroup(session, Group.ADMINISTRATION.getName());
+        if (userGroupList.size() == 0) {
+            UserGroup userGroup = new UserGroup();
+            userGroup.setName(Group.ADMINISTRATION.getName());
+            session.save(userGroup);
+        }
+        //MARKETING
+        List<UserGroup> marketingList = createUserGroup(session, Group.MARKETING.getName());
+        if (marketingList.size() == 0) {
+            UserGroup userGroup = new UserGroup();
+            userGroup.setName(Group.MARKETING.getName());
+            session.save(userGroup);
+        }
+        //ELECTRONICS
+        List<UserGroup> electronicsList = createUserGroup(session, Group.ELECTRONICS.getName());
+        if (electronicsList.size() == 0) {
+            UserGroup userGroup = new UserGroup();
+            userGroup.setName(Group.ELECTRONICS.getName());
+            session.save(userGroup);
+        }
+        //SOFTWARE
+        List<UserGroup> softwareList = createUserGroup(session, Group.SOFTWARE.getName());
+        if (softwareList.size() == 0) {
+            UserGroup userGroup = new UserGroup();
+            userGroup.setName(Group.SOFTWARE.getName());
+            session.save(userGroup);
+        }
+        //MRI
+        List<UserGroup> mriList = createUserGroup(session, Group.MRI.getName());
+        if (mriList.size() == 0) {
+            UserGroup userGroup = new UserGroup();
+            userGroup.setName(Group.MRI.getName());
+            session.save(userGroup);
+        }
+        //NMR
+        List<UserGroup> nmrList = createUserGroup(session, Group.NMR.getName());
+        if (nmrList.size() == 0) {
+            UserGroup userGroup = new UserGroup();
+            userGroup.setName(Group.NMR.getName());
+            session.save(userGroup);
+        }
+        //FINANCE
+        List<UserGroup> financeList = createUserGroup(session, Group.FINANCE.getName());
+        if (financeList.size() == 0) {
+            UserGroup userGroup = new UserGroup();
+            userGroup.setName(Group.FINANCE.getName());
+            session.save(userGroup);
+        }
+        //SALES
+        List<UserGroup> salesList = createUserGroup(session, Group.SALES.getName());
+        if (salesList.size() == 0) {
+            UserGroup userGroup = new UserGroup();
+            userGroup.setName(Group.SALES.getName());
+            session.save(userGroup);
+        }
+        //DIRECTION
+        List<UserGroup> directionList = createUserGroup(session, Group.DIRECTION.getName());
+        if (directionList.size() == 0) {
+            UserGroup userGroup = new UserGroup();
+            userGroup.setName(Group.DIRECTION.getName());
+            session.save(userGroup);
+        }
+        //DIRECTION
+        List<UserGroup> installList = createUserGroup(session, Group.INSTALL.getName());
+        if (installList.size() == 0) {
+            UserGroup userGroup = new UserGroup();
+            userGroup.setName(Group.INSTALL.getName());
+            session.save(userGroup);
+        }
         tr.commit();
+
     }
 
-    /**
-     * Populate groups
-     */
-    public synchronized void populateGroup() {
-
-        System.out.println("INFO- Start to populate user group table ...");
-        Transaction tr = getSession().getTransaction();
-        tr.begin();
-        Company company = new Company();
-        company.setName("RS2D");
-        getSession().save(company);
-
-        UserGroup userGroup = new UserGroup();
-        userGroup.setName("Software");
-        userGroup.setCompany(company);
-        getSession().save(userGroup);
-        tr.commit();
+    private List<UserGroup> createUserGroup(Session session, String functionName) {
+        return (List<UserGroup>) session.createCriteria(UserGroup.class).add(Restrictions.eq("name", functionName)).list();
     }
 
     public List<UserAccount> getUsers() {
