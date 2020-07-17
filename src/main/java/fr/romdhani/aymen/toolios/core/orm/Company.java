@@ -9,7 +9,6 @@ public class Company implements Serializable {
     public Company() {
     }
 
-
     private java.util.Set this_getSet(int key) {
         return null;
     }

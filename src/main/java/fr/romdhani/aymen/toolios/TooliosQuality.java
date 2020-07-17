@@ -18,7 +18,8 @@ public class TooliosQuality {
             if (ConfigProperties.getInstance().isDatabaseInitialized()) {
                 DatabaseUtils.getInstance().populateRoles();
                 DatabaseUtils.getInstance().populateFunction();
-                DatabaseUtils.getInstance().populateGroups();
+                DatabaseUtils.getInstance().createCompany();
+                DatabaseUtils.getInstance().createGroups();
             }
             TooliosQualityView tooliosQualityView = new TooliosQualityView("Toolios-Quality");
             Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();

@@ -211,16 +211,19 @@ public class DatabaseUtils {
     /**
      * Populate group
      */
-    public synchronized void populateGroups() {
-        System.out.println("INFO- Start to populate user groups table ...");
+    public synchronized void createGroups() {
+        System.out.println("INFO- Start to create user groups table...");
         Session session = getSession();
         Transaction tr = session.getTransaction();
         tr.begin();
+        List<Company> companyList = (List<Company>) session.createCriteria(Company.class).add(Restrictions.eq("name", "RS2D")).list();
+        Company company = companyList.get(0);
         // ADMINISTRATION
         List<UserGroup> userGroupList = createUserGroup(session, Group.ADMINISTRATION.getName());
         if (userGroupList.size() == 0) {
             UserGroup userGroup = new UserGroup();
             userGroup.setName(Group.ADMINISTRATION.getName());
+            userGroup.setCompany(company);
             session.save(userGroup);
         }
         //MARKETING
@@ -228,6 +231,7 @@ public class DatabaseUtils {
         if (marketingList.size() == 0) {
             UserGroup userGroup = new UserGroup();
             userGroup.setName(Group.MARKETING.getName());
+            userGroup.setCompany(company);
             session.save(userGroup);
         }
         //ELECTRONICS
@@ -235,6 +239,7 @@ public class DatabaseUtils {
         if (electronicsList.size() == 0) {
             UserGroup userGroup = new UserGroup();
             userGroup.setName(Group.ELECTRONICS.getName());
+            userGroup.setCompany(company);
             session.save(userGroup);
         }
         //SOFTWARE
@@ -242,6 +247,7 @@ public class DatabaseUtils {
         if (softwareList.size() == 0) {
             UserGroup userGroup = new UserGroup();
             userGroup.setName(Group.SOFTWARE.getName());
+            userGroup.setCompany(company);
             session.save(userGroup);
         }
         //MRI
@@ -249,6 +255,7 @@ public class DatabaseUtils {
         if (mriList.size() == 0) {
             UserGroup userGroup = new UserGroup();
             userGroup.setName(Group.MRI.getName());
+            userGroup.setCompany(company);
             session.save(userGroup);
         }
         //NMR
@@ -256,6 +263,7 @@ public class DatabaseUtils {
         if (nmrList.size() == 0) {
             UserGroup userGroup = new UserGroup();
             userGroup.setName(Group.NMR.getName());
+            userGroup.setCompany(company);
             session.save(userGroup);
         }
         //FINANCE
@@ -263,6 +271,7 @@ public class DatabaseUtils {
         if (financeList.size() == 0) {
             UserGroup userGroup = new UserGroup();
             userGroup.setName(Group.FINANCE.getName());
+            userGroup.setCompany(company);
             session.save(userGroup);
         }
         //SALES
@@ -270,6 +279,7 @@ public class DatabaseUtils {
         if (salesList.size() == 0) {
             UserGroup userGroup = new UserGroup();
             userGroup.setName(Group.SALES.getName());
+            userGroup.setCompany(company);
             session.save(userGroup);
         }
         //DIRECTION
@@ -277,6 +287,7 @@ public class DatabaseUtils {
         if (directionList.size() == 0) {
             UserGroup userGroup = new UserGroup();
             userGroup.setName(Group.DIRECTION.getName());
+            userGroup.setCompany(company);
             session.save(userGroup);
         }
         //DIRECTION
@@ -284,16 +295,45 @@ public class DatabaseUtils {
         if (installList.size() == 0) {
             UserGroup userGroup = new UserGroup();
             userGroup.setName(Group.INSTALL.getName());
+            userGroup.setCompany(company);
             session.save(userGroup);
         }
         tr.commit();
-
     }
 
+    /**
+     * @param session
+     * @param functionName
+     * @return
+     */
     private List<UserGroup> createUserGroup(Session session, String functionName) {
         return (List<UserGroup>) session.createCriteria(UserGroup.class).add(Restrictions.eq("name", functionName)).list();
     }
 
+    /**
+     * Create a the company
+     */
+    public synchronized void createCompany() {
+        System.out.println("INFO- Start to create the company table...");
+        Session session = getSession();
+        Transaction tr = session.getTransaction();
+        tr.begin();
+        // RS2D
+        List<Company> companyList = (List<Company>) session.createCriteria(Company.class).add(Restrictions.eq("name", "RS2D")).list();
+        if (companyList.size() == 0) {
+            Company company = new Company();
+            company.setName("RS2D");
+            session.save(company);
+        }
+        tr.commit();
+    }
+
+
+    /**
+     * Gets the list of the users.
+     *
+     * @return the list of users in the database
+     */
     public List<UserAccount> getUsers() {
         return (List<UserAccount>) getSession().createQuery("from UserAccount").list();
     }
