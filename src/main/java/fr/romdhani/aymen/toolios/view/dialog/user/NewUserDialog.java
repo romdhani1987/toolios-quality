@@ -36,7 +36,7 @@ public class NewUserDialog extends JDialog {
     private JComboBox<UserFunction> functionComboBox = new JComboBox();
     private JComboBox<UserRoles> rolesComboBox = new JComboBox();
     private JComboBox<UserGroup> groupComboBox = new JComboBox();
-
+    private JComboBox<Company> comapnyComboBox = new JComboBox();
     private UserAccount userAccount = null;
     private Supplier<UserAccount> userAccountSupplierValid = () -> {
         return userAccount;
@@ -54,16 +54,8 @@ public class NewUserDialog extends JDialog {
         return userAccountSupplierValid;
     }
 
-    public void setUserAccountSupplierValid(Supplier<UserAccount> userAccountSupplierValid) {
-        this.userAccountSupplierValid = userAccountSupplierValid;
-    }
-
     public Supplier<UserAccount> getUserAccountSupplierCancel() {
         return userAccountSupplierCancel;
-    }
-
-    public void setUserAccountSupplierCancel(Supplier<UserAccount> userAccountSupplierCancel) {
-        this.userAccountSupplierCancel = userAccountSupplierCancel;
     }
 
     private void initComponents() {
@@ -85,6 +77,7 @@ public class NewUserDialog extends JDialog {
         JLabel functionLabel = new JLabel("Function ");
         JLabel rolesLabel = new JLabel("Roles ");
         JLabel groupLabel = new JLabel("Group ");
+        JLabel companyLabel = new JLabel("Company ");
 
         userPanel.add(fName);
         userPanel.add(fNameTextField, "grow,push, wrap");
@@ -127,13 +120,17 @@ public class NewUserDialog extends JDialog {
         userPanel.add(countryTextField, "grow,push, wrap");
         // User company
 
+        userPanel.add(companyLabel);
+        DatabaseUtils.getInstance().getUserCompany().forEach(company -> {
+            comapnyComboBox.addItem(company);
+        });
+        userPanel.add(comapnyComboBox, "grow,push, wrap");
         // User groups
         userPanel.add(groupLabel);
         DatabaseUtils.getInstance().getUserGroups().forEach(group -> {
             groupComboBox.addItem(group);
         });
         userPanel.add(groupComboBox, "grow,push, wrap");
-        userPanel.add(new JLabel(), "grow,push, wrap ");
 
         // User functions
         userPanel.add(functionLabel);

@@ -330,6 +330,14 @@ public class DatabaseUtils {
         tr.commit();
     }
 
+    /**
+     * Gets the list of the user company.
+     *
+     * @return the list of company in the database
+     */
+    private Optional<Company> getCompany(Session session, String companyName) {
+        return Optional.ofNullable((Company) session.createCriteria(Company.class).add(Restrictions.eq("name", companyName)).uniqueResult());
+    }
 
     /**
      * Gets the list of the users.
@@ -376,12 +384,5 @@ public class DatabaseUtils {
         return (List<UserRoles>) getSession().createQuery("from UserRoles").list();
     }
 
-    /**
-     * Gets the list of the user company.
-     *
-     * @return the list of company in the database
-     */
-    public Optional<Company> getCompany(Session session, String companyName) {
-        return Optional.ofNullable((Company) session.createCriteria(Company.class).add(Restrictions.eq("name", companyName)).uniqueResult());
-    }
+
 }
