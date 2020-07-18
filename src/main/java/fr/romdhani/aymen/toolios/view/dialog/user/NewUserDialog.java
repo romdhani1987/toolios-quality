@@ -1,5 +1,6 @@
 package fr.romdhani.aymen.toolios.view.dialog.user;
 
+import fr.romdhani.aymen.toolios.controller.utils.DatabaseUtils;
 import fr.romdhani.aymen.toolios.core.orm.*;
 import fr.romdhani.aymen.toolios.utils.Hash;
 import fr.romdhani.aymen.toolios.utils.StringUtils;
@@ -124,19 +125,32 @@ public class NewUserDialog extends JDialog {
 
         userPanel.add(countryLabel);
         userPanel.add(countryTextField, "grow,push, wrap");
+        // User company
 
+        // User groups
+        userPanel.add(groupLabel);
+        DatabaseUtils.getInstance().getUserGroups().forEach(group -> {
+            groupComboBox.addItem(group);
+        });
+        userPanel.add(groupComboBox, "grow,push, wrap");
         userPanel.add(new JLabel(), "grow,push, wrap ");
-        //
-        userPanel.add(functionLabel);
-        userPanel.add(functionComboBox, "grow,push, wrap");
 
+        // User functions
+        userPanel.add(functionLabel);
+        DatabaseUtils.getInstance().getUserFunctions().forEach(function -> {
+            functionComboBox.addItem(function);
+        });
+        userPanel.add(functionComboBox, "grow,push, wrap");
+        // User Roles
         userPanel.add(rolesLabel);
+        DatabaseUtils.getInstance().getUserRoles().forEach(role -> {
+            rolesComboBox.addItem(role);
+        });
         userPanel.add(rolesComboBox, "grow,push, wrap");
 
-        userPanel.add(groupLabel);
-        userPanel.add(groupComboBox, "grow,push, wrap");
-        cancelButton.setIcon(IconResource.getImage(IconResource.ICON.CROSS));
+
         //Cancel button
+        cancelButton.setIcon(IconResource.getImage(IconResource.ICON.CROSS));
         cancelButton.addActionListener(e -> {
             int response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -219,9 +233,15 @@ public class NewUserDialog extends JDialog {
             adress.setCode(code);
             adress.setCountry(country);
             userAccount.setAddress(adress);
-            //userAccount.setCreation_mode(creationMode);
-            //userAccount.setGroup();
-            //userAccount
+            if (groupComboBox.getSelectedItem() != null) {
+                userAccount.setGroup((UserGroup) groupComboBox.getSelectedItem());
+            }
+            if (functionComboBox.getSelectedItem() != null) {
+                userAccount.setFunction((UserFunction) functionComboBox.getSelectedItem());
+            }
+            if (rolesComboBox.getSelectedItem() != null) {
+                userAccount.setRoles((UserRoles) rolesComboBox.getSelectedItem());
+            }
             userAccountSupplierValid = () -> {
                 return (userAccount);
             };

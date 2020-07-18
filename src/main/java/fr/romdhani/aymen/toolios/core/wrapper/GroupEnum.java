@@ -5,7 +5,7 @@ package fr.romdhani.aymen.toolios.core.wrapper;
  *
  * @author aromdhani
  */
-public enum Group {
+public enum GroupEnum {
 
     MARKETING("marketing"),
     ELECTRONICS("Electronics"),
@@ -19,7 +19,7 @@ public enum Group {
     INSTALL("Install");
     String name;
 
-    Group(String name) {
+    GroupEnum(String name) {
         this.name = name;
     }
 

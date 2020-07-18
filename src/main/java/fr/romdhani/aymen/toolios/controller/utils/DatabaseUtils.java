@@ -1,13 +1,15 @@
 package fr.romdhani.aymen.toolios.controller.utils;
 
 import fr.romdhani.aymen.toolios.core.orm.*;
-import fr.romdhani.aymen.toolios.core.wrapper.Function;
-import fr.romdhani.aymen.toolios.core.wrapper.Group;
+import fr.romdhani.aymen.toolios.core.wrapper.CompanyEnum;
+import fr.romdhani.aymen.toolios.core.wrapper.FunctionEnum;
+import fr.romdhani.aymen.toolios.core.wrapper.GroupEnum;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
+import java.util.Optional;
 
 import static fr.romdhani.aymen.toolios.utils.HibernateUtil.getSession;
 
@@ -84,116 +86,116 @@ public class DatabaseUtils {
         Transaction tr = session.getTransaction();
         tr.begin();
         // Create user function : software engineer
-        List<UserFunction> softwareEngineerList = createUserFunction(session, Function.SOFTWARE_ENGINEER.getName());
+        List<UserFunction> softwareEngineerList = createUserFunction(session, FunctionEnum.SOFTWARE_ENGINEER.getName());
         if (softwareEngineerList.size() == 0) {
             UserFunction userFunction = new UserFunction();
-            userFunction.setName(Function.SOFTWARE_ENGINEER.getName());
+            userFunction.setName(FunctionEnum.SOFTWARE_ENGINEER.getName());
             session.save(userFunction);
         }
         // Create user function : electronics engineer
-        List<UserFunction> electronicsEngineerList = createUserFunction(session, Function.ELECTRONICS_ENGINEER.getName());
+        List<UserFunction> electronicsEngineerList = createUserFunction(session, FunctionEnum.ELECTRONICS_ENGINEER.getName());
         if (electronicsEngineerList.size() == 0) {
             UserFunction userFunction = new UserFunction();
-            userFunction.setName(Function.ELECTRONICS_ENGINEER.getName());
+            userFunction.setName(FunctionEnum.ELECTRONICS_ENGINEER.getName());
             session.save(userFunction);
         }
         // Create user function : electronics engineer
-        List<UserFunction> administrativeManagerList = createUserFunction(session, Function.ADMINISTRATIVE_MANAGER.getName());
+        List<UserFunction> administrativeManagerList = createUserFunction(session, FunctionEnum.ADMINISTRATIVE_MANAGER.getName());
         if (administrativeManagerList.size() == 0) {
             UserFunction userFunction = new UserFunction();
-            userFunction.setName(Function.ADMINISTRATIVE_MANAGER.getName());
+            userFunction.setName(FunctionEnum.ADMINISTRATIVE_MANAGER.getName());
             session.save(userFunction);
         }
         // Create user function : administrative assistant
-        List<UserFunction> administrativeAssistantList = createUserFunction(session, Function.ADMINISTRATIVE_ASSISTANT.getName());
+        List<UserFunction> administrativeAssistantList = createUserFunction(session, FunctionEnum.ADMINISTRATIVE_ASSISTANT.getName());
         if (administrativeAssistantList.size() == 0) {
             UserFunction userFunction = new UserFunction();
-            userFunction.setName(Function.ADMINISTRATIVE_ASSISTANT.getName());
+            userFunction.setName(FunctionEnum.ADMINISTRATIVE_ASSISTANT.getName());
             session.save(userFunction);
         }
         // Create user function : logistics analyst
-        List<UserFunction> logisticsAnalystList = createUserFunction(session, Function.LOGISTICS_ANALYST.getName());
+        List<UserFunction> logisticsAnalystList = createUserFunction(session, FunctionEnum.LOGISTICS_ANALYST.getName());
         if (logisticsAnalystList.size() == 0) {
             UserFunction userFunction = new UserFunction();
-            userFunction.setName(Function.LOGISTICS_ANALYST.getName());
+            userFunction.setName(FunctionEnum.LOGISTICS_ANALYST.getName());
             session.save(userFunction);
         }
         // Create user function :NMR_PRODUCT_MANAGER
-        List<UserFunction> nmrProductManagerList = createUserFunction(session, Function.NMR_PRODUCT_MANAGER.getName());
+        List<UserFunction> nmrProductManagerList = createUserFunction(session, FunctionEnum.NMR_PRODUCT_MANAGER.getName());
         if (nmrProductManagerList.size() == 0) {
             UserFunction userFunction = new UserFunction();
-            userFunction.setName(Function.NMR_PRODUCT_MANAGER.getName());
+            userFunction.setName(FunctionEnum.NMR_PRODUCT_MANAGER.getName());
             session.save(userFunction);
         }
         // Create user function : logistics analyst
-        List<UserFunction> ctoList = createUserFunction(session, Function.CTO.getName());
+        List<UserFunction> ctoList = createUserFunction(session, FunctionEnum.CTO.getName());
         if (ctoList.size() == 0) {
             UserFunction userFunction = new UserFunction();
-            userFunction.setName(Function.CTO.getName());
+            userFunction.setName(FunctionEnum.CTO.getName());
             session.save(userFunction);
         }
         // Create user function : RESEARCH_ENGINEER
-        List<UserFunction> researchEngineerList = createUserFunction(session, Function.RESEARCH_ENGINEER.getName());
+        List<UserFunction> researchEngineerList = createUserFunction(session, FunctionEnum.RESEARCH_ENGINEER.getName());
         if (researchEngineerList.size() == 0) {
             UserFunction userFunction = new UserFunction();
-            userFunction.setName(Function.RESEARCH_ENGINEER.getName());
+            userFunction.setName(FunctionEnum.RESEARCH_ENGINEER.getName());
             session.save(userFunction);
         }
         // Create user function : MRI_PRODUCT_MANAGER
-        List<UserFunction> mriProductManagerList = createUserFunction(session, Function.MRI_PRODUCT_MANAGER.getName());
+        List<UserFunction> mriProductManagerList = createUserFunction(session, FunctionEnum.MRI_PRODUCT_MANAGER.getName());
         if (mriProductManagerList.size() == 0) {
             UserFunction userFunction = new UserFunction();
-            userFunction.setName(Function.MRI_PRODUCT_MANAGER.getName());
+            userFunction.setName(FunctionEnum.MRI_PRODUCT_MANAGER.getName());
             session.save(userFunction);
         }
         // Create user function : SCIENTIFIC_MARKETING
-        List<UserFunction> scientificMarketingList = createUserFunction(session, Function.SCIENTIFIC_MARKETING.getName());
+        List<UserFunction> scientificMarketingList = createUserFunction(session, FunctionEnum.SCIENTIFIC_MARKETING.getName());
         if (scientificMarketingList.size() == 0) {
             UserFunction userFunction = new UserFunction();
-            userFunction.setName(Function.SCIENTIFIC_MARKETING.getName());
+            userFunction.setName(FunctionEnum.SCIENTIFIC_MARKETING.getName());
             session.save(userFunction);
         }
         // Create user function : SERVICE_ENGINEER
-        List<UserFunction> serviceEngineerList = createUserFunction(session, Function.SERVICE_ENGINEER.getName());
+        List<UserFunction> serviceEngineerList = createUserFunction(session, FunctionEnum.SERVICE_ENGINEER.getName());
         if (serviceEngineerList.size() == 0) {
             UserFunction userFunction = new UserFunction();
-            userFunction.setName(Function.SERVICE_ENGINEER.getName());
+            userFunction.setName(FunctionEnum.SERVICE_ENGINEER.getName());
             session.save(userFunction);
         }
         // Create user function : CUSTOMER_INSTALLATIONS
-        List<UserFunction> customerInstallationList = createUserFunction(session, Function.CUSTOMER_INSTALLATIONS.getName());
+        List<UserFunction> customerInstallationList = createUserFunction(session, FunctionEnum.CUSTOMER_INSTALLATIONS.getName());
         if (customerInstallationList.size() == 0) {
             UserFunction userFunction = new UserFunction();
-            userFunction.setName(Function.CUSTOMER_INSTALLATIONS.getName());
+            userFunction.setName(FunctionEnum.CUSTOMER_INSTALLATIONS.getName());
             session.save(userFunction);
         }
 
         // Create user function : ELECTRONICS_TECHNICIAN
-        List<UserFunction> electronicsTechnicianList = createUserFunction(session, Function.ELECTRONICS_TECHNICIAN.getName());
+        List<UserFunction> electronicsTechnicianList = createUserFunction(session, FunctionEnum.ELECTRONICS_TECHNICIAN.getName());
         if (electronicsTechnicianList.size() == 0) {
             UserFunction userFunction = new UserFunction();
-            userFunction.setName(Function.ELECTRONICS_TECHNICIAN.getName());
+            userFunction.setName(FunctionEnum.ELECTRONICS_TECHNICIAN.getName());
             session.save(userFunction);
         }
         // Create user function : SENIOR_SALES_MANAGER
-        List<UserFunction> seniorSalesList = createUserFunction(session, Function.SENIOR_SALES_MANAGER.getName());
+        List<UserFunction> seniorSalesList = createUserFunction(session, FunctionEnum.SENIOR_SALES_MANAGER.getName());
         if (seniorSalesList.size() == 0) {
             UserFunction userFunction = new UserFunction();
-            userFunction.setName(Function.SENIOR_SALES_MANAGER.getName());
+            userFunction.setName(FunctionEnum.SENIOR_SALES_MANAGER.getName());
             session.save(userFunction);
         }
         // Create user function : SALES_MANAGER
-        List<UserFunction> salesManagerList = createUserFunction(session, Function.SALES_MANAGER.getName());
+        List<UserFunction> salesManagerList = createUserFunction(session, FunctionEnum.SALES_MANAGER.getName());
         if (salesManagerList.size() == 0) {
             UserFunction userFunction = new UserFunction();
-            userFunction.setName(Function.SALES_MANAGER.getName());
+            userFunction.setName(FunctionEnum.SALES_MANAGER.getName());
             session.save(userFunction);
         }
         // Create user function : SALES_MANAGER
-        List<UserFunction> financeControllerList = createUserFunction(session, Function.FINANCE_CONTROLLER.getName());
+        List<UserFunction> financeControllerList = createUserFunction(session, FunctionEnum.FINANCE_CONTROLLER.getName());
         if (financeControllerList.size() == 0) {
             UserFunction userFunction = new UserFunction();
-            userFunction.setName(Function.FINANCE_CONTROLLER.getName());
+            userFunction.setName(FunctionEnum.FINANCE_CONTROLLER.getName());
             session.save(userFunction);
         }
         tr.commit();
@@ -219,82 +221,82 @@ public class DatabaseUtils {
         List<Company> companyList = (List<Company>) session.createCriteria(Company.class).add(Restrictions.eq("name", "RS2D")).list();
         Company company = companyList.get(0);
         // ADMINISTRATION
-        List<UserGroup> userGroupList = createUserGroup(session, Group.ADMINISTRATION.getName());
+        List<UserGroup> userGroupList = createUserGroup(session, GroupEnum.ADMINISTRATION.getName());
         if (userGroupList.size() == 0) {
             UserGroup userGroup = new UserGroup();
-            userGroup.setName(Group.ADMINISTRATION.getName());
+            userGroup.setName(GroupEnum.ADMINISTRATION.getName());
             userGroup.setCompany(company);
             session.save(userGroup);
         }
         //MARKETING
-        List<UserGroup> marketingList = createUserGroup(session, Group.MARKETING.getName());
+        List<UserGroup> marketingList = createUserGroup(session, GroupEnum.MARKETING.getName());
         if (marketingList.size() == 0) {
             UserGroup userGroup = new UserGroup();
-            userGroup.setName(Group.MARKETING.getName());
+            userGroup.setName(GroupEnum.MARKETING.getName());
             userGroup.setCompany(company);
             session.save(userGroup);
         }
         //ELECTRONICS
-        List<UserGroup> electronicsList = createUserGroup(session, Group.ELECTRONICS.getName());
+        List<UserGroup> electronicsList = createUserGroup(session, GroupEnum.ELECTRONICS.getName());
         if (electronicsList.size() == 0) {
             UserGroup userGroup = new UserGroup();
-            userGroup.setName(Group.ELECTRONICS.getName());
+            userGroup.setName(GroupEnum.ELECTRONICS.getName());
             userGroup.setCompany(company);
             session.save(userGroup);
         }
         //SOFTWARE
-        List<UserGroup> softwareList = createUserGroup(session, Group.SOFTWARE.getName());
+        List<UserGroup> softwareList = createUserGroup(session, GroupEnum.SOFTWARE.getName());
         if (softwareList.size() == 0) {
             UserGroup userGroup = new UserGroup();
-            userGroup.setName(Group.SOFTWARE.getName());
+            userGroup.setName(GroupEnum.SOFTWARE.getName());
             userGroup.setCompany(company);
             session.save(userGroup);
         }
         //MRI
-        List<UserGroup> mriList = createUserGroup(session, Group.MRI.getName());
+        List<UserGroup> mriList = createUserGroup(session, GroupEnum.MRI.getName());
         if (mriList.size() == 0) {
             UserGroup userGroup = new UserGroup();
-            userGroup.setName(Group.MRI.getName());
+            userGroup.setName(GroupEnum.MRI.getName());
             userGroup.setCompany(company);
             session.save(userGroup);
         }
         //NMR
-        List<UserGroup> nmrList = createUserGroup(session, Group.NMR.getName());
+        List<UserGroup> nmrList = createUserGroup(session, GroupEnum.NMR.getName());
         if (nmrList.size() == 0) {
             UserGroup userGroup = new UserGroup();
-            userGroup.setName(Group.NMR.getName());
+            userGroup.setName(GroupEnum.NMR.getName());
             userGroup.setCompany(company);
             session.save(userGroup);
         }
         //FINANCE
-        List<UserGroup> financeList = createUserGroup(session, Group.FINANCE.getName());
+        List<UserGroup> financeList = createUserGroup(session, GroupEnum.FINANCE.getName());
         if (financeList.size() == 0) {
             UserGroup userGroup = new UserGroup();
-            userGroup.setName(Group.FINANCE.getName());
+            userGroup.setName(GroupEnum.FINANCE.getName());
             userGroup.setCompany(company);
             session.save(userGroup);
         }
         //SALES
-        List<UserGroup> salesList = createUserGroup(session, Group.SALES.getName());
+        List<UserGroup> salesList = createUserGroup(session, GroupEnum.SALES.getName());
         if (salesList.size() == 0) {
             UserGroup userGroup = new UserGroup();
-            userGroup.setName(Group.SALES.getName());
+            userGroup.setName(GroupEnum.SALES.getName());
             userGroup.setCompany(company);
             session.save(userGroup);
         }
         //DIRECTION
-        List<UserGroup> directionList = createUserGroup(session, Group.DIRECTION.getName());
+        List<UserGroup> directionList = createUserGroup(session, GroupEnum.DIRECTION.getName());
         if (directionList.size() == 0) {
             UserGroup userGroup = new UserGroup();
-            userGroup.setName(Group.DIRECTION.getName());
+            userGroup.setName(GroupEnum.DIRECTION.getName());
             userGroup.setCompany(company);
             session.save(userGroup);
         }
         //DIRECTION
-        List<UserGroup> installList = createUserGroup(session, Group.INSTALL.getName());
+        List<UserGroup> installList = createUserGroup(session, GroupEnum.INSTALL.getName());
         if (installList.size() == 0) {
             UserGroup userGroup = new UserGroup();
-            userGroup.setName(Group.INSTALL.getName());
+            userGroup.setName(GroupEnum.INSTALL.getName());
             userGroup.setCompany(company);
             session.save(userGroup);
         }
@@ -314,13 +316,13 @@ public class DatabaseUtils {
      * Create a the company
      */
     public synchronized void createCompany() {
-        System.out.println("INFO- Start to create the company table...");
+        System.out.println("INFO- Start to create company...");
         Session session = getSession();
         Transaction tr = session.getTransaction();
         tr.begin();
         // RS2D
-        List<Company> companyList = (List<Company>) session.createCriteria(Company.class).add(Restrictions.eq("name", "RS2D")).list();
-        if (companyList.size() == 0) {
+        Optional<Company> companyOpt = getCompany(session, CompanyEnum.RS2D.getName());
+        if (!companyOpt.isPresent()) {
             Company company = new Company();
             company.setName("RS2D");
             session.save(company);
@@ -336,5 +338,50 @@ public class DatabaseUtils {
      */
     public List<UserAccount> getUsers() {
         return (List<UserAccount>) getSession().createQuery("from UserAccount").list();
+    }
+
+    /**
+     * Gets the list of the user function.
+     *
+     * @return the list of user functions in the database
+     */
+    public List<UserFunction> getUserFunctions() {
+        return (List<UserFunction>) getSession().createQuery("from UserFunction").list();
+    }
+
+    /**
+     * Gets the list of the user groups.
+     *
+     * @return the list of user groups  in the database
+     */
+    public List<UserGroup> getUserGroups() {
+        return (List<UserGroup>) getSession().createQuery("from UserGroup").list();
+    }
+
+    /**
+     * Gets the list of the user groups.
+     *
+     * @return the list of user groups  in the database
+     */
+    public List<Company> getUserCompany() {
+        return (List<Company>) getSession().createQuery("from Company").list();
+    }
+
+    /**
+     * Gets the list of the user roles.
+     *
+     * @return the list of user roles in the database
+     */
+    public List<UserRoles> getUserRoles() {
+        return (List<UserRoles>) getSession().createQuery("from UserRoles").list();
+    }
+
+    /**
+     * Gets the list of the user company.
+     *
+     * @return the list of company in the database
+     */
+    public Optional<Company> getCompany(Session session, String companyName) {
+        return Optional.ofNullable((Company) session.createCriteria(Company.class).add(Restrictions.eq("name", companyName)).uniqueResult());
     }
 }

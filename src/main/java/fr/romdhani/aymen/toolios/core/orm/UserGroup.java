@@ -86,6 +86,6 @@ public class UserGroup implements Serializable {
 
     @Override
     public String toString() {
-        return "User group{" + name + "}";
+        return name;
     }
 }

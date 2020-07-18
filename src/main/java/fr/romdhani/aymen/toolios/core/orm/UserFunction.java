@@ -62,6 +62,6 @@ public class UserFunction implements Serializable {
 
     @Override
     public String toString() {
-        return "Function{" + name + "}";
+        return name;
     }
 }

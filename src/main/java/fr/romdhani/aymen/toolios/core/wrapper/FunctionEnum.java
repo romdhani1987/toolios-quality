@@ -5,14 +5,14 @@ package fr.romdhani.aymen.toolios.core.wrapper;
  *
  * @author aromdhani
  */
-public enum Function {
+public enum FunctionEnum {
     SOFTWARE_ENGINEER("Software Engineer"),
     ELECTRONICS_ENGINEER("Electronics Engineer"),
     ADMINISTRATIVE_MANAGER("Administrative Manager"),
     ADMINISTRATIVE_ASSISTANT("Administrative Assistant"),
     LOGISTICS_ANALYST("Logistics Analyst"),
     NMR_PRODUCT_MANAGER("NMR Product Manager"),
-    CTO("Comity Technical oOfficer"),
+    CTO("Comity Technical Officer"),
     RESEARCH_ENGINEER("Research Engineer"),
     MRI_PRODUCT_MANAGER("MRI Product Manager"),
     SCIENTIFIC_MARKETING("Scientific Marketing"),
@@ -26,7 +26,7 @@ public enum Function {
 
     String name;
 
-    Function(String name) {
+    FunctionEnum(String name) {
         this.name = name;
     }
 

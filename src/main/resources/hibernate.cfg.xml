@@ -13,7 +13,6 @@
         <property name="format_sql">true</property>
         <property name="show_sql">true</property>
         <property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
-
         <mapping class="fr.romdhani.aymen.toolios.core.orm.Address"/>
         <mapping class="fr.romdhani.aymen.toolios.core.orm.Company"/>
         <mapping class="fr.romdhani.aymen.toolios.core.orm.Product"/>
