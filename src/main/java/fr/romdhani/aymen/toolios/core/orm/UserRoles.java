@@ -8,7 +8,7 @@ import java.util.Objects;
 @Table(name = "user_roles", schema = "public")
 public class UserRoles implements Serializable {
     public enum UserRole {
-        USER("user"), EDITOR("editor"), ADMIN("admin"), MANAGER("manager");
+        USER("User"), EDITOR("Editor"), ADMIN("Admin"), MANAGER("Manager");
         private String role;
 
         UserRole(String role) {
