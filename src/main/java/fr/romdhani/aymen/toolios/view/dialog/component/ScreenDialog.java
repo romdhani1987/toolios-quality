@@ -1,5 +1,6 @@
 package fr.romdhani.aymen.toolios.view.dialog.component;
 
+import fr.romdhani.aymen.toolios.controller.utils.DatabaseUtils;
 import fr.romdhani.aymen.toolios.core.orm.Computer;
 import fr.romdhani.aymen.toolios.core.orm.Screen;
 import fr.romdhani.aymen.toolios.utils.StringUtils;
@@ -109,11 +110,10 @@ public class ScreenDialog extends JDialog {
         userPanel.add(datePicker, "growx,push, wrap");
 
         userPanel.add(computerLabel);
-        List<Computer> computers = (List<Computer>) getSession().createQuery("from Computer").list();
         Computer unknown = new Computer();
         unknown.setName("Unassigned");
         computerComboBox.addItem(unknown);
-        computers.forEach(computer -> {
+        DatabaseUtils.getInstance().getComputers().forEach(computer -> {
             computerComboBox.addItem(computer);
         });
 

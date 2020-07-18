@@ -383,6 +383,13 @@ public class DatabaseUtils {
     public List<UserRoles> getUserRoles() {
         return (List<UserRoles>) getSession().createQuery("from UserRoles").list();
     }
-
+    /**
+     * Gets the list of the computers.
+     *
+     * @return the list of computers in the database
+     */
+    public List<Computer> getComputers() {
+        return (List<Computer>) getSession().createQuery("from Computer").list();
+    }
 
 }
