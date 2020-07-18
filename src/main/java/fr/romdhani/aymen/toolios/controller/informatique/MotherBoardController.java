@@ -2,7 +2,7 @@ package fr.romdhani.aymen.toolios.controller.informatique;
 
 import fr.romdhani.aymen.toolios.core.orm.License;
 import fr.romdhani.aymen.toolios.core.service.LicenseService;
-import fr.romdhani.aymen.toolios.view.panel.informatique.LicensesPanel;
+import fr.romdhani.aymen.toolios.view.panel.component.LicensesPanel;
 
 public class MotherBoardController {
     private LicensesPanel licensesPanel;

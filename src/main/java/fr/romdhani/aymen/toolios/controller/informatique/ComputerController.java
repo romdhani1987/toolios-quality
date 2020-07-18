@@ -2,7 +2,7 @@ package fr.romdhani.aymen.toolios.controller.informatique;
 
 import fr.romdhani.aymen.toolios.core.orm.Computer;
 import fr.romdhani.aymen.toolios.core.service.ComputerService;
-import fr.romdhani.aymen.toolios.view.panel.informatique.ComputersPanel;
+import fr.romdhani.aymen.toolios.view.panel.component.ComputersPanel;
 
 public class ComputerController {
     private ComputersPanel computersPanel;

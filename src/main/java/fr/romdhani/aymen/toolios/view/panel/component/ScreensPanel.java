@@ -1,10 +1,10 @@
-package fr.romdhani.aymen.toolios.view.panel.informatique;
+package fr.romdhani.aymen.toolios.view.panel.component;
 
 import fr.romdhani.aymen.toolios.controller.informatique.ScreenController;
 import fr.romdhani.aymen.toolios.core.orm.Computer;
 import fr.romdhani.aymen.toolios.core.orm.Screen;
 import fr.romdhani.aymen.toolios.view.buttons.TooliosButton;
-import fr.romdhani.aymen.toolios.view.dialog.informatique.ScreenDialog;
+import fr.romdhani.aymen.toolios.view.dialog.component.ScreenDialog;
 import fr.romdhani.aymen.toolios.view.panel.TooliosView;
 import fr.romdhani.aymen.toolios.view.table.model.ScreenModelObject;
 import fr.romdhani.aymen.toolios.view.utils.IconResource;

@@ -10,9 +10,9 @@ import fr.romdhani.aymen.toolios.core.service.ScreenService;
 import fr.romdhani.aymen.toolios.core.service.UserAccountService;
 import fr.romdhani.aymen.toolios.view.dialog.user.ConnectionDialog;
 import fr.romdhani.aymen.toolios.view.panel.equipment.EquipementPanel;
-import fr.romdhani.aymen.toolios.view.panel.informatique.ComputersPanel;
-import fr.romdhani.aymen.toolios.view.panel.informatique.LicensesPanel;
-import fr.romdhani.aymen.toolios.view.panel.informatique.ScreensPanel;
+import fr.romdhani.aymen.toolios.view.panel.component.ComputersPanel;
+import fr.romdhani.aymen.toolios.view.panel.component.LicensesPanel;
+import fr.romdhani.aymen.toolios.view.panel.component.ScreensPanel;
 import fr.romdhani.aymen.toolios.view.panel.user.UsersPanel;
 import net.miginfocom.swing.MigLayout;
 
@@ -22,7 +22,6 @@ import java.awt.*;
 public class MainPanel extends JPanel {
     private JTabbedPane devicestabbedPane;
     private JTabbedPane requestTabbedPane;
-    private JTabbedPane projectTabbedPane;
     private JTabbedPane mainTabbedPane;
     private ComputersPanel computersPanel;
     private ScreensPanel screensPanel;
@@ -49,7 +48,6 @@ public class MainPanel extends JPanel {
 
         setLayout(new MigLayout());
         mainTabbedPane = new JTabbedPane();
-        projectTabbedPane = new JTabbedPane();
         requestTabbedPane = new JTabbedPane();
         devicestabbedPane = new JTabbedPane();
 
@@ -81,7 +79,6 @@ public class MainPanel extends JPanel {
         devicestabbedPane.add("Equipments", othersEquipementPanel);
         //Main panels and functions
         mainTabbedPane.add("Admin", devicestabbedPane);
-        mainTabbedPane.add("Projects", projectTabbedPane);
         mainTabbedPane.add("Components", new JPanel());
         mainTabbedPane.add("Interventions", new JPanel());
         mainTabbedPane.add("Requests", requestTabbedPane);

@@ -1,10 +1,9 @@
-package fr.romdhani.aymen.toolios.view.panel.informatique;
+package fr.romdhani.aymen.toolios.view.panel.component;
 
-import fr.romdhani.aymen.toolios.controller.informatique.LicenseController;
 import fr.romdhani.aymen.toolios.controller.informatique.MotherBoardController;
 import fr.romdhani.aymen.toolios.core.orm.License;
 import fr.romdhani.aymen.toolios.view.buttons.TooliosButton;
-import fr.romdhani.aymen.toolios.view.dialog.informatique.LicenseDialog;
+import fr.romdhani.aymen.toolios.view.dialog.component.LicenseDialog;
 import fr.romdhani.aymen.toolios.view.panel.TooliosView;
 import fr.romdhani.aymen.toolios.view.table.model.LicenseModelObject;
 import fr.romdhani.aymen.toolios.view.utils.IconResource;

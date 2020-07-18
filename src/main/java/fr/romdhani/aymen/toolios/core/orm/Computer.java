@@ -190,7 +190,6 @@ public class Computer implements Serializable {
 
     @Override
     public String toString() {
-        return "Computer{" +
-                " name='" + name + "'}";
+        return name;
     }
 }

@@ -1,4 +1,4 @@
-package fr.romdhani.aymen.toolios.view.dialog.informatique;
+package fr.romdhani.aymen.toolios.view.dialog.component;
 
 import fr.romdhani.aymen.toolios.core.orm.Computer;
 import fr.romdhani.aymen.toolios.core.orm.Screen;
