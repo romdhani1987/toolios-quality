@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * Computer entity
+ *
  * @author aromdhani
  */
 
@@ -39,7 +41,7 @@ public class Computer implements Serializable {
 
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "computer")
-    private List<License> licenses;
+    private Set<License> licenses = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "computer")
     private Set<Screen> screens = new HashSet<>();
@@ -128,12 +130,17 @@ public class Computer implements Serializable {
         this.os = os;
     }
 
-    public List<License> getLicenses() {
+    public Set<License> getLicenses() {
         return licenses;
     }
 
-    public void setLicenses(List<License> licenses) {
+    public void setLicenses(Set<License> licenses) {
         this.licenses = licenses;
+    }
+
+    public void addLicense(License license) {
+        license.setComputer(this);
+        licenses.add(license);
     }
 
     public Set<Screen> getScreens() {

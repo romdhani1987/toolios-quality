@@ -303,11 +303,11 @@ public class DatabaseUtils {
 
     /**
      * @param session
-     * @param functionName
+     * @param userGroupName
      * @return
      */
-    private List<UserGroup> createUserGroup(Session session, String functionName) {
-        return (List<UserGroup>) session.createCriteria(UserGroup.class).add(Restrictions.eq("name", functionName)).list();
+    private List<UserGroup> createUserGroup(Session session, String userGroupName) {
+        return (List<UserGroup>) session.createCriteria(UserGroup.class).add(Restrictions.eq("name", userGroupName)).list();
     }
 
     /**
