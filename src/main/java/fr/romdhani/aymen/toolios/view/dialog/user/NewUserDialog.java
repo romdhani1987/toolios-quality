@@ -36,7 +36,7 @@ public class NewUserDialog extends JDialog {
     private JComboBox<UserFunction> functionComboBox = new JComboBox();
     private JComboBox<UserRoles> rolesComboBox = new JComboBox();
     private JComboBox<UserGroup> groupComboBox = new JComboBox();
-    private JComboBox<Company> comapnyComboBox = new JComboBox();
+    private JComboBox<Company> companyComboBox = new JComboBox();
     private UserAccount userAccount = null;
     private Supplier<UserAccount> userAccountSupplierValid = () -> {
         return userAccount;
@@ -119,12 +119,11 @@ public class NewUserDialog extends JDialog {
         userPanel.add(countryLabel);
         userPanel.add(countryTextField, "grow,push, wrap");
         // User company
-
         userPanel.add(companyLabel);
         DatabaseUtils.getInstance().getUserCompany().forEach(company -> {
-            comapnyComboBox.addItem(company);
+            companyComboBox.addItem(company);
         });
-        userPanel.add(comapnyComboBox, "grow,push, wrap");
+        userPanel.add(companyComboBox, "grow,push, wrap");
         // User groups
         userPanel.add(groupLabel);
         DatabaseUtils.getInstance().getUserGroups().forEach(group -> {
@@ -231,7 +230,11 @@ public class NewUserDialog extends JDialog {
             adress.setCountry(country);
             userAccount.setAddress(adress);
             if (groupComboBox.getSelectedItem() != null) {
-                userAccount.setGroup((UserGroup) groupComboBox.getSelectedItem());
+                UserGroup userGroup = (UserGroup) groupComboBox.getSelectedItem();
+                if (companyComboBox.getSelectedItem() != null) {
+                    userGroup.setCompany((Company) companyComboBox.getSelectedItem());
+                }
+                userAccount.setGroup(userGroup);
             }
             if (functionComboBox.getSelectedItem() != null) {
                 userAccount.setFunction((UserFunction) functionComboBox.getSelectedItem());

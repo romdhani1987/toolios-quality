@@ -1,7 +1,7 @@
 package fr.romdhani.aymen.toolios.view.dialog.user;
 
-import fr.romdhani.aymen.toolios.core.orm.Address;
-import fr.romdhani.aymen.toolios.core.orm.UserAccount;
+import fr.romdhani.aymen.toolios.controller.utils.DatabaseUtils;
+import fr.romdhani.aymen.toolios.core.orm.*;
 import fr.romdhani.aymen.toolios.utils.StringUtils;
 import fr.romdhani.aymen.toolios.view.utils.IconResource;
 import net.miginfocom.swing.MigLayout;
@@ -33,9 +33,10 @@ public class EditUserDialog extends JDialog {
     private JTextField cityTextField = new JTextField();
     private JTextField codeTextField = new JTextField();
     private JTextField countryTextField = new JTextField();
-    private JTextField functionTextField = new JTextField();
-    private JTextField rolesTextField = new JTextField();
-    private JTextField groupTextField = new JTextField();
+    private JComboBox<UserFunction> functionComboBox = new JComboBox();
+    private JComboBox<UserRoles> rolesComboBox = new JComboBox();
+    private JComboBox<UserGroup> groupComboBox = new JComboBox();
+    private JComboBox<Company> companyComboBox = new JComboBox();
     private JLabel errorLabel;
     private UserAccount userAccount = null;
     private Supplier<UserAccount> userAccountSupplierValid = () -> {
@@ -75,8 +76,9 @@ public class EditUserDialog extends JDialog {
         JLabel codeLabel = new JLabel("Code ");
         JLabel countryLabel = new JLabel("Country ");
         JLabel functionLabel = new JLabel("Function ");
-        JLabel rolesLabel = new JLabel("Roles ");
+        JLabel rolesLabel = new JLabel("Role ");
         JLabel groupLabel = new JLabel("Group ");
+        JLabel companyLabel = new JLabel("Company ");
 
         userPanel.add(fName);
         userPanel.add(fNameTextField, "grow,push, wrap");
@@ -127,19 +129,43 @@ public class EditUserDialog extends JDialog {
         userPanel.add(countryTextField, "grow,push, wrap");
 
         userPanel.add(new JLabel(), "grow,push, wrap ");
-        //
-        userPanel.add(functionLabel);
-        userPanel.add(functionTextField, "grow,push, wrap");
-
-        userPanel.add(rolesLabel);
-        if (userAccount.getRoles() != null)
-            updateField(userAccount.getRoles().getName(), rolesTextField);
-        userPanel.add(rolesTextField, "grow,push, wrap");
-
+        // User company
+        userPanel.add(companyLabel);
+        DatabaseUtils.getInstance().getUserCompany().forEach(company -> {
+            companyComboBox.addItem(company);
+        });
+        if (userAccount != null && userAccount.getGroup() != null) {
+            companyComboBox.setSelectedItem(userAccount.getGroup().getCompany());
+        }
+        userPanel.add(companyComboBox, "grow,push, wrap");
+        // User groups
         userPanel.add(groupLabel);
-        if (userAccount.getGroup() != null)
-            updateField(userAccount.getGroup().getName(), groupTextField);
-        userPanel.add(groupTextField, "grow,push, wrap");
+        DatabaseUtils.getInstance().getUserGroups().forEach(group -> {
+            groupComboBox.addItem(group);
+        });
+        if (userAccount != null && userAccount.getGroup() != null) {
+            groupComboBox.setSelectedItem(userAccount.getGroup());
+        }
+        userPanel.add(groupComboBox, "grow,push, wrap");
+
+        // User functions
+        userPanel.add(functionLabel);
+        DatabaseUtils.getInstance().getUserFunctions().forEach(function -> {
+            functionComboBox.addItem(function);
+        });
+        if (userAccount != null && userAccount.getFunction() != null) {
+            functionComboBox.setSelectedItem(userAccount.getFunction());
+        }
+        userPanel.add(functionComboBox, "grow,push, wrap");
+        // User Roles
+        userPanel.add(rolesLabel);
+        DatabaseUtils.getInstance().getUserRoles().forEach(role -> {
+            rolesComboBox.addItem(role);
+        });
+        if (userAccount != null && userAccount.getRoles() != null) {
+            rolesComboBox.setSelectedItem(userAccount.getRoles());
+        }
+        userPanel.add(rolesComboBox, "grow,push, wrap");
 
         cancelButton.setIcon(IconResource.getImage(IconResource.ICON.CROSS));
         cancelButton.addActionListener(e -> {
@@ -186,15 +212,11 @@ public class EditUserDialog extends JDialog {
         String login = loginTextField.getText();
         String email = emailTextField.getText();
         String phone = phoneTextField.getText();
-        String creationMode = (String) creationCBox.getSelectedItem();
-
         String street = streetTextField.getText();
         String code = codeTextField.getText();
         String city = cityTextField.getText();
         String country = countryTextField.getText();
 
-        String roles = rolesTextField.getText();
-        String group = groupTextField.getText();
         if (!StringUtils.isNullOrEmpty(firstName) &&
                 !StringUtils.isNullOrEmpty(lastName) &&
                 !StringUtils.isNullOrEmpty(login) && !StringUtils.isNullOrEmpty(email)) {
@@ -203,16 +225,19 @@ public class EditUserDialog extends JDialog {
             userAccount.setLogin(login);
             userAccount.setEmail(email);
             userAccount.setPhoneNumber(phone);
-            userAccount.setCreationMode(creationMode);
+            userAccount.setCreationMode((String) creationCBox.getSelectedItem());
+
             Address adress = new Address();
             adress.setStreet(street);
             adress.setCity(city);
             adress.setCode(code);
             adress.setCountry(country);
+
             userAccount.setAddress(adress);
-            //userAccount.setCreation_mode(creationMode);
-            //userAccount.setGroup();
-            //userAccount
+            userAccount.setGroup((UserGroup) groupComboBox.getSelectedItem());
+            userAccount.setFunction((UserFunction) functionComboBox.getSelectedItem());
+            userAccount.setRoles((UserRoles) rolesComboBox.getSelectedItem());
+
             userAccountSupplierValid = () -> {
                 return (userAccount);
             };
