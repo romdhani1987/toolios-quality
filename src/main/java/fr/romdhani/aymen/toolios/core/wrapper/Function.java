@@ -18,7 +18,7 @@ public enum Function {
     SCIENTIFIC_MARKETING("Scientific Marketing"),
     SERVICE_ENGINEER("Service Engineer"),
     CUSTOMER_INSTALLATIONS("Customer Installations"),
-    MRI_APPLICATION_ENGINEER("MRI Application Enginee"),
+    MRI_APPLICATION_ENGINEER("MRI Application Engineer"),
     ELECTRONICS_TECHNICIAN("Electronics Technician"),
     SENIOR_SALES_MANAGER("Senior Sales Manager"),
     FINANCE_CONTROLLER("Finance Controller"),
