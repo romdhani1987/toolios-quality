@@ -4,6 +4,7 @@ import fr.romdhani.aymen.toolios.core.orm.*;
 import fr.romdhani.aymen.toolios.core.wrapper.CompanyEnum;
 import fr.romdhani.aymen.toolios.core.wrapper.FunctionEnum;
 import fr.romdhani.aymen.toolios.core.wrapper.GroupEnum;
+import fr.romdhani.aymen.toolios.utils.Hash;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -383,6 +384,7 @@ public class DatabaseUtils {
     public List<UserRoles> getUserRoles() {
         return (List<UserRoles>) getSession().createQuery("from UserRoles").list();
     }
+
     /**
      * Gets the list of the computers.
      *
@@ -392,4 +394,32 @@ public class DatabaseUtils {
         return (List<Computer>) getSession().createQuery("from Computer").list();
     }
 
+    /**
+     * Gets the list of the user company.
+     *
+     * @return the list of company in the database
+     */
+    private Optional<UserAccount> getDefaultAdmin(Session session, String login) {
+        return Optional.ofNullable((UserAccount) session.createCriteria(UserAccount.class).add(Restrictions.eq("login", login)).uniqueResult());
+    }
+
+    public void createDefaultUser() {
+        System.out.println("INFO- Start to create default user with login 'admin/admin'...");
+        Session session = getSession();
+        Transaction tr = session.getTransaction();
+        tr.begin();
+        if (!getDefaultAdmin(session, "admin").isPresent()) {
+            UserAccount userAccount = new UserAccount();
+            userAccount.setFirstName("admin");
+            userAccount.setLastName("admin");
+            userAccount.setLogin("admin");
+            String data = new String("admin");
+            userAccount.setPasswordHash(Hash.asIsoString(Hash.sha256(data + "toolios")));
+            userAccount.setEmail("informatique@rs2d.com");
+            userAccount.setPhoneNumber("0658881756");
+            userAccount.setCreationMode("AUTOMATIQUE");
+            session.save(userAccount);
+            tr.commit();
+        }
+    }
 }
