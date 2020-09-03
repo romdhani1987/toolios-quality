@@ -12,6 +12,11 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+/**
+ * Creates and displays the main view of toolios quality
+ *
+ * @author aromdhani
+ */
 public class TooliosQualityView extends JFrame {
 
     private TooliosMenubar menuToolbar;

@@ -49,7 +49,7 @@ public class MainPanel extends JPanel {
 
         setLayout(new MigLayout());
         mainTabbedPane = new JTabbedPane();
-        projectTabbedPane = new JTabbedPane();
+        // projectTabbedPane = new JTabbedPane();
         requestTabbedPane = new JTabbedPane();
         devicestabbedPane = new JTabbedPane();
 
@@ -77,12 +77,9 @@ public class MainPanel extends JPanel {
         devicestabbedPane.add("Computers", computersPanel);
         devicestabbedPane.add("Screens", screensPanel);
         devicestabbedPane.add("Licenses", licensesPanel);
-        devicestabbedPane.add("Motherboards", new JPanel());
         devicestabbedPane.add("Equipments", othersEquipementPanel);
         //Main panels and functions
         mainTabbedPane.add("Admin", devicestabbedPane);
-        mainTabbedPane.add("Projects", projectTabbedPane);
-        mainTabbedPane.add("Components", new JPanel());
         mainTabbedPane.add("Interventions", new JPanel());
         mainTabbedPane.add("Requests", requestTabbedPane);
         mainTabbedPane.add("Actions", new JPanel());
