@@ -15,19 +15,19 @@ public class TooliosQuality {
     public static void main(String[] args) {
         System.out.println("*** Start Toolios-Quality ***");
         try {
-            if (ConfigProperties.getInstance().isDatabaseInitialized()) {
+           // if (ConfigProperties.getInstance().isDatabaseInitialized()) {
                 DatabaseUtils.getInstance().populateRoles();
                 DatabaseUtils.getInstance().populateFunction();
                 DatabaseUtils.getInstance().createCompany();
                //DatabaseUtils.getInstance().createGroups();
-            }
+       //     }
             TooliosQualityView tooliosQualityView = new TooliosQualityView("Toolios-Quality");
             Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
             tooliosQualityView.setPreferredSize(new Dimension(1024, 800));
             tooliosQualityView.pack();
             tooliosQualityView.setLocationRelativeTo(null);
             tooliosQualityView.setVisible(true);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
